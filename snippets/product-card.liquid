@@ -1,0 +1,77 @@
+{%- doc -%}
+  Product card for grids and carousels: frame preview media (scaled on
+  hover), sold-out badge and wishlist heart. Uses a stretched
+  link over the media so no interactive element nests inside an anchor.
+
+  @param product     {product}
+  @param [media_class] {string} media box sizing (default aspect-[4/5])
+{%- enddoc -%}
+{%- liquid
+  assign media_class = media_class | default: 'aspect-[4/5]'
+  capture default_variant_id
+    render 'default-oak-variant', product: product
+  endcapture
+  assign default_variant_id = default_variant_id | strip | plus: 0
+  assign preview_variant = product.variants | where: 'id', default_variant_id | first
+  capture size_frame_slots
+    render 'size-frame-slots', product: product, variant: preview_variant
+  endcapture
+  assign size_frame_slots = size_frame_slots | strip | split: '|'
+  assign frame_val = size_frame_slots[5]
+  if size_frame_slots[1] != 'y'
+    assign frame_val = 'Rolled Canvas'
+  endif
+  assign master = product.media | where: 'alt', 'master' | first
+  if master == blank
+    assign master = product.featured_media
+  endif
+  capture aspect
+    render 'product-aspect', product: product
+  endcapture
+  assign title_parts = product.title | split: ' – '
+  assign display_title = title_parts | first
+  assign title_detail = product.title | remove_first: display_title | remove_first: ' – '
+-%}
+
+<div class="group/card relative">
+  <div class="relative w-full {{ media_class }}">
+    {%- if master != blank -%}
+      {% render 'frame-preview', master: master, aspect: aspect, frame: frame_val, alt: product.title, sizes: '(min-width: 1280px) 20vw, (min-width: 640px) 30vw, 45vw', class: 'h-full w-full transition-transform duration-500 group-hover/card:scale-[1.02]' %}
+    {%- endif -%}
+    <a href="{{ product.url }}" aria-label="{{ product.title | escape }}" class="absolute inset-0 z-[1]">
+      <span class="sr-only">{{ product.title }}</span>
+    </a>
+
+    {%- unless product.available -%}
+      <span class="pointer-events-none absolute left-3 top-3 z-[2] bg-white/85 px-2.5 py-1 font-sans text-[12px] text-black backdrop-blur-xs">
+        {{ 'products.product.sold_out' | t }}
+      </span>
+    {%- endunless -%}
+
+    <button
+      type="button"
+      data-wishlist-toggle="{{ product.handle }}"
+      data-product-id="{{ product.id }}"
+      aria-pressed="false"
+      aria-label="{{ 'products.product.save' | t: title: product.title }}"
+      class="absolute right-3 top-3 z-[2] flex h-11 w-11 items-center justify-center rounded-full bg-white/90 text-black backdrop-blur-xs transition-colors hover:bg-white"
+    >
+      {% render 'icon', name: 'heart', class: 'h-4 w-4' %}
+    </button>
+
+  </div>
+
+  <div class="mt-4 space-y-1">
+    <a href="{{ product.url }}" class="block font-serif text-[19px] leading-[1.3] text-black">
+      {{ display_title }}
+    </a>
+    {%- if title_detail != blank -%}
+      <p class="font-sans text-[14px] leading-[1.5] text-neutral-600">{{ title_detail }}</p>
+    {%- endif -%}
+    <p class="font-sans text-[16px] font-medium leading-[1.5] text-black">
+      {%- if product.compare_at_price > product.price -%}<s class="mr-1 font-normal text-neutral-400"><span data-display-money data-cents="{{ product.compare_at_price }}">{{ product.compare_at_price | money }}</span></s> {% endif -%}
+      {%- if product.price_varies -%}{{ 'products.product.from_price_html' | t: price: '' | strip_html }}{% endif -%}
+      <span data-display-money data-cents="{{ product.price }}">{{ product.price | money }}</span>
+    </p>
+  </div>
+</div>

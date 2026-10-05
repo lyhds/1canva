@@ -1,0 +1,216 @@
+{%- capture subject_handle_list -%}{%- render 'collection-subject-handles' -%}{%- endcapture -%}
+{%- assign subject_handles = subject_handle_list | strip | split: ',' -%}
+{%- paginate collection.products by 16 -%}
+  {%- liquid
+    assign active_count = 0
+    assign active_subject_handle = blank
+    assign subject_all_url = collections['all-products'].url | default: routes.all_products_collection_url
+    assign subject_redirect_url = blank
+    if subject_handles contains collection.handle
+      assign active_subject_handle = collection.handle
+      assign active_count = active_count | plus: 1
+    elsif collection.handle == 'all' or collection.handle == 'all-products'
+      for tag in current_tags
+        assign tag_prefix = tag | slice: 0, 4
+        assign subject_handle = tag | remove_first: 'col-'
+        if tag_prefix == 'col-' and subject_handles contains subject_handle
+          assign subject_redirect_url = collections[subject_handle].url
+          break
+        endif
+      endfor
+    endif
+    assign clear_all_url = collection.url
+    if active_subject_handle != blank
+      assign clear_all_url = subject_all_url
+    endif
+    for filter in collection.filters
+      if filter.type == 'price_range'
+        if filter.min_value.value or filter.max_value.value
+          assign active_count = active_count | plus: 1
+        endif
+      else
+        assign active_count = active_count | plus: filter.active_values.size
+      endif
+    endfor
+    assign sort_by = collection.sort_by | default: collection.default_sort_by
+    assign collection_heading = collection.title
+    assign collection_intro = collection.description
+    if collection.handle == 'all' or collection.handle == 'all-products'
+      assign collection_heading = 'collections.all_title' | t
+      if collection_intro == blank
+        assign collection_intro = 'collections.all_description' | t
+      endif
+    endif
+  -%}
+
+  <collection-filters data-section-id="{{ section.id }}" data-collection-url="{{ collection.url }}" data-subject-all-url="{{ subject_all_url }}" data-subject-redirect-url="{{ subject_redirect_url }}" class="block">
+    <div class="px-5 py-10 md:px-10">
+      <div class="max-w-md">
+        <h1 class="font-serif text-[32px] text-black md:text-[36px]">{{ collection_heading }}</h1>
+        {%- if collection_intro != blank -%}
+          <div class="mt-4 font-serif text-[17px] leading-[1.45] text-black rte">{{ collection_intro }}</div>
+        {%- endif -%}
+      </div>
+
+      <div class="mt-8 flex flex-wrap items-center justify-between gap-4 lg:mt-10">
+        <div class="flex items-center gap-4">
+          <div data-filters-rerender="filter-btn" class="lg:hidden">
+            <button type="button" data-filters-open class="flex h-11 items-center gap-2 border border-black px-5 font-sans text-[14px] text-black">
+              {{ 'collections.filters.title' | t }}
+              {%- if active_count > 0 -%}<span>({{ active_count }})</span>{%- endif -%}
+            </button>
+          </div>
+          <span data-filters-rerender="count" class="font-sans text-[14px] text-neutral-500">
+            {{ 'collections.results_count' | t: count: collection.products_count }}
+          </span>
+        </div>
+        <label data-filters-rerender="sort" class="flex h-11 items-center gap-2 border border-neutral-200 px-3 font-sans text-[14px] text-black">
+          <span class="text-neutral-500">{{ 'collections.sort.label' | t }}</span>
+          <select data-sort-select class="cursor-pointer bg-transparent font-sans text-[16px] text-black outline-hidden">
+            {%- for option in collection.sort_options -%}
+              {%- if option.value == 'relevance' -%}{%- continue -%}{%- endif -%}
+              <option value="{{ option.value }}" {% if option.value == sort_by %}selected{% endif %}>
+                {{ option.name }}
+              </option>
+            {%- endfor -%}
+          </select>
+        </label>
+      </div>
+
+      {%- comment -%} active filter chips {%- endcomment -%}
+      <div data-filters-rerender="chips" class="mt-4 flex flex-wrap items-center gap-2{% if active_count == 0 %} hidden{% endif %}">
+        {%- if active_count > 0 -%}
+          {%- if active_subject_handle != blank -%}
+            {%- assign subject_label_key = active_subject_handle | prepend: 'collections.subject.' -%}
+            <button type="button" data-subject-clear class="flex items-center gap-1.5 border border-neutral-200 bg-white px-3 py-1.5 font-sans text-[13px] text-black transition-colors hover:border-black">
+              {{ 'collections.subject.title' | t }}: {{ subject_label_key | t }}
+              {% render 'icon', name: 'x', class: 'h-3 w-3' %}
+            </button>
+          {%- endif -%}
+          {%- for filter in collection.filters -%}
+            {%- if filter.type == 'price_range' -%}
+              {%- if filter.min_value.value or filter.max_value.value -%}
+                <a href="{{ filter.remove_url | default: collection.url }}" data-ajax-link class="flex items-center gap-1.5 border border-neutral-200 bg-white px-3 py-1.5 font-sans text-[13px] text-black transition-colors hover:border-black">
+                  {{ filter.label }}:
+                  {%- if filter.min_value.value %} {{ filter.min_value.value | money }}{%- endif -%}
+                  {%- if filter.min_value.value and filter.max_value.value %} –{%- endif -%}
+                  {%- if filter.max_value.value %} {{ filter.max_value.value | money }}{%- endif -%}
+                  {% render 'icon', name: 'x', class: 'h-3 w-3' %}
+                </a>
+              {%- endif -%}
+            {%- else -%}
+              {%- for value in filter.active_values -%}
+                <a href="{{ value.url_to_remove | default: collection.url }}" data-ajax-link class="flex items-center gap-1.5 border border-neutral-200 bg-white px-3 py-1.5 font-sans text-[13px] text-black transition-colors hover:border-black">
+                  {{ value.label }}
+                  {% render 'icon', name: 'x', class: 'h-3 w-3' %}
+                </a>
+              {%- endfor -%}
+            {%- endif -%}
+          {%- endfor -%}
+          <a href="{{ clear_all_url }}{% if sort_by %}?sort_by={{ sort_by }}{% endif %}" data-ajax-link class="font-sans text-[13px] text-neutral-500 underline-offset-4 hover:underline">
+            {{ 'collections.filters.clear' | t }}
+          </a>
+        {%- endif -%}
+      </div>
+
+      <div class="mt-6 lg:grid lg:grid-cols-[220px_1fr] lg:gap-12">
+        {%- comment -%} desktop sidebar {%- endcomment -%}
+        <aside class="hidden lg:block">
+          <div class="lg:sticky lg:top-28">
+            <div class="flex items-center justify-between">
+              <p class="font-sans text-[14px] text-black">{{ 'collections.filters.title' | t }}</p>
+            </div>
+            <div data-filters-rerender="sidebar" class="mt-2">
+              <form data-filter-form action="{{ collection.url }}" method="get">
+                {%- if sort_by -%}<input type="hidden" name="sort_by" value="{{ sort_by }}">{%- endif -%}
+                {% render 'collection-filter-groups', subject_handles: subject_handles, active_subject_handle: active_subject_handle, subject_all_url: subject_all_url %}
+              </form>
+            </div>
+          </div>
+        </aside>
+
+        {%- comment -%} results; scroll-mt clears the 60px fixed mobile header when the pager or a filter scrolls this into view {%- endcomment -%}
+        <div data-filters-rerender="results" class="mt-8 scroll-mt-20 transition-opacity duration-300 lg:mt-0">
+          {%- if collection.products.size == 0 -%}
+            <div class="mt-16 text-center">
+              <p class="font-sans text-[14px] text-neutral-500">{{ 'collections.no_products' | t }}</p>
+              <a
+                href="{{ collection.url }}"
+                data-ajax-link
+                class="mt-6 inline-block border border-black px-8 py-3.5 font-sans text-[14px] text-black transition-colors hover:bg-black hover:text-white"
+              >
+                {{ 'collections.filters.clear' | t }}
+              </a>
+            </div>
+          {%- else -%}
+            <div class="grid grid-cols-2 gap-x-5 gap-y-10 sm:grid-cols-3 xl:grid-cols-4">
+              {%- for product in collection.products -%}
+                {% render 'product-card', product: product %}
+              {%- endfor -%}
+            </div>
+
+            {%- if paginate.pages > 1 -%}
+              <nav data-pagination class="mt-12 flex items-center justify-center gap-2 font-sans text-[14px]" aria-label="{{ 'general.pagination' | t }}">
+                {%- if paginate.previous -%}
+                  <a href="{{ paginate.previous.url }}" data-ajax-link aria-label="{{ 'general.previous' | t }}" class="flex h-8 w-8 items-center justify-center text-black transition-opacity hover:opacity-50">
+                    {% render 'icon', name: 'chevron-left', class: 'h-4 w-4' %}
+                  </a>
+                {%- endif -%}
+                {%- assign current_str = paginate.current_page | append: '' -%}
+                {%- for part in paginate.parts -%}
+                  {%- if part.is_link -%}
+                    <a href="{{ part.url }}" data-ajax-link class="flex h-8 w-8 items-center justify-center text-black transition-opacity hover:opacity-50">{{ part.title }}</a>
+                  {%- elsif part.title == current_str -%}
+                    <span class="flex h-8 w-8 items-center justify-center bg-black text-white" aria-current="page">{{ part.title }}</span>
+                  {%- else -%}
+                    <span class="flex h-8 w-8 items-center justify-center text-neutral-500">{{ part.title }}</span>
+                  {%- endif -%}
+                {%- endfor -%}
+                {%- if paginate.next -%}
+                  <a href="{{ paginate.next.url }}" data-ajax-link aria-label="{{ 'general.next' | t }}" class="flex h-8 w-8 items-center justify-center text-black transition-opacity hover:opacity-50">
+                    {% render 'icon', name: 'chevron-right', class: 'h-4 w-4' %}
+                  </a>
+                {%- endif -%}
+              </nav>
+            {%- endif -%}
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+
+    {%- comment -%} mobile filter drawer {%- endcomment -%}
+    <div data-filters-drawer class="fixed inset-0 z-[70] hidden lg:hidden" aria-hidden="true">
+      <div data-filters-scrim class="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-200"></div>
+      <div data-filters-panel class="absolute inset-y-0 right-0 flex w-[86%] max-w-sm translate-x-full flex-col bg-white shadow-xl transition-transform duration-300">
+        <div class="flex items-center justify-between border-b border-neutral-200 px-5 py-4">
+          <p class="font-sans text-[14px] text-black">{{ 'collections.filters.title' | t }}</p>
+          <button type="button" data-filters-close aria-label="{{ 'general.close' | t }}" class="-m-2 p-2 text-black transition-opacity hover:opacity-50">
+            {% render 'icon', name: 'x', class: 'h-5 w-5' %}
+          </button>
+        </div>
+        <div class="flex-1 overflow-y-auto px-5 pb-4">
+          <div data-filters-rerender="drawer-form">
+            <form data-filter-form action="{{ collection.url }}" method="get" class="mt-2">
+              {%- if sort_by -%}<input type="hidden" name="sort_by" value="{{ sort_by }}">{%- endif -%}
+              {% render 'collection-filter-groups', subject_handles: subject_handles, active_subject_handle: active_subject_handle, subject_all_url: subject_all_url %}
+            </form>
+          </div>
+        </div>
+        <div class="border-t border-neutral-200 px-5 py-4">
+          <button type="button" data-filters-done class="w-full bg-black py-3.5 font-sans text-[14px] text-white transition-opacity hover:opacity-80">
+            {{ 'collections.filters.done' | t }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </collection-filters>
+{%- endpaginate -%}
+
+<script src="{{ 'collection-filters.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "合集",
+  "settings": []
+}
+{% endschema %}

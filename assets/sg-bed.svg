@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 250" role="img" aria-label="Bed">
+  <ellipse cx="310" cy="242" rx="280" ry="8" fill="#00000012"/>
+  <rect x="14" y="0" width="592" height="130" rx="18" fill="#d8d4c9"/>
+  <rect x="30" y="108" width="560" height="76" rx="12" fill="#eceade"/>
+  <rect x="52" y="34" width="180" height="52" rx="12" fill="#f2f0e9"/>
+  <rect x="388" y="34" width="180" height="52" rx="12" fill="#f2f0e9"/>
+  <rect x="30" y="158" width="560" height="74" rx="12" fill="#e3e0d7"/>
+  <rect x="30" y="158" width="560" height="16" rx="8" fill="#c9c5b9"/>
+  <rect x="42" y="232" width="16" height="12" rx="3" fill="#9b968a"/>
+  <rect x="562" y="232" width="16" height="12" rx="3" fill="#9b968a"/>
+</svg>

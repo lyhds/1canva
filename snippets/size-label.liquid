@@ -1,0 +1,79 @@
+{%- doc -%}
+  Display Size values with inches first and centimetres second.
+  Current catalog values ("61 x 81 cm / 24 x 32 in") are reordered to
+  "24 x 32 in / 61 x 81 cm" without touching the stored option value.
+  Legacy centimetre-only values ("50 × 70 cm") keep their approximate inch
+  conversion first. Unknown labels pass through untouched.
+  @param value {string}
+{%- enddoc -%}
+{%- liquid
+  assign normalized = value | strip
+  assign segments = normalized | split: '/'
+  assign handled = false
+  if segments.size == 2
+    assign cm_part = segments[0] | strip
+    assign in_part = segments[1] | strip
+    assign cm_suffix = cm_part | slice: -2, 2
+    assign in_suffix = in_part | slice: -2, 2
+    if cm_suffix == 'cm' and in_suffix == 'in'
+      assign cm_len = cm_part.size | minus: 3
+      assign in_len = in_part.size | minus: 3
+      assign cm_dims = cm_part | slice: 0, cm_len | remove: ' ' | replace: '×', 'x'
+      assign in_dims = in_part | slice: 0, in_len | remove: ' ' | replace: '×', 'x'
+      assign cm_parts = cm_dims | split: 'x'
+      assign in_parts = in_dims | split: 'x'
+      assign valid = false
+      if cm_parts.size == 2 and in_parts.size == 2
+        assign valid = true
+        for part in cm_parts
+          assign remainder = part | remove: '0' | remove: '1' | remove: '2' | remove: '3' | remove: '4' | remove: '5' | remove: '6' | remove: '7' | remove: '8' | remove: '9' | remove_first: '.'
+          if remainder != blank
+            assign valid = false
+          endif
+        endfor
+        for part in in_parts
+          assign remainder = part | remove: '0' | remove: '1' | remove: '2' | remove: '3' | remove: '4' | remove: '5' | remove: '6' | remove: '7' | remove: '8' | remove: '9' | remove_first: '.'
+          if remainder != blank
+            assign valid = false
+          endif
+        endfor
+      endif
+      if valid
+        echo in_part | escape
+        echo ' / '
+        echo cm_part | escape
+        assign handled = true
+      endif
+    endif
+  endif
+  unless handled
+    assign lower = normalized | downcase
+    assign suffix = lower | slice: -2, 2
+    assign length = lower.size | minus: 2
+    assign dimensions = lower | slice: 0, length | replace: 'x', '×' | remove: ' '
+    assign parts = dimensions | split: '×'
+    assign width = parts[0] | plus: 0.0
+    assign height = parts[1] | plus: 0.0
+    assign valid = false
+    if suffix == 'cm' and parts.size == 2 and width > 0 and height > 0
+      assign valid = true
+      for part in parts
+        assign remainder = part | remove: '0' | remove: '1' | remove: '2' | remove: '3' | remove: '4' | remove: '5' | remove: '6' | remove: '7' | remove: '8' | remove: '9' | remove_first: '.'
+        if remainder != blank
+          assign valid = false
+        endif
+      endfor
+    endif
+    if valid
+      assign width_inches = width | divided_by: 2.54 | round: 1
+      assign height_inches = height | divided_by: 2.54 | round: 1
+      echo width_inches
+      echo ' × '
+      echo height_inches
+      echo ' in / '
+      echo value | escape
+    else
+      echo value | escape
+    endif
+  endunless
+-%}

@@ -1,0 +1,156 @@
+<script src="{{ 'cart.js' | asset_url }}" defer></script>
+
+{%- assign cart_total_text = cart.total_price | money_with_currency -%}
+<p class="sr-only" role="status" aria-live="polite" aria-atomic="true" data-cart-status></p>
+<div class="px-5 py-12 md:px-10" data-cart-section="{{ section.id }}" data-updating-text="{{ 'cart.updating' | t | escape }}" data-updated-text="{{ 'cart.updated' | t: count: cart.item_count, total: cart_total_text | escape }}">
+  <div class="grid min-w-0 gap-14 lg:grid-cols-[minmax(0,1fr)_360px]">
+    <div class="min-w-0">
+      <h1 tabindex="-1" data-cart-heading class="flex items-baseline gap-2.5 font-serif text-[32px] text-black md:text-[36px]">
+        {{ 'cart.title' | t }}
+        {%- if cart.item_count > 0 -%}
+          <span class="font-sans text-[14px] font-normal text-black">{{ cart.item_count }}</span>
+        {%- endif -%}
+      </h1>
+
+      {%- if cart.item_count == 0 -%}
+        <div class="mt-10">
+          <p class="font-sans text-[14px] text-neutral-500">{{ 'cart.empty' | t }}</p>
+          <a
+            href="{{ routes.all_products_collection_url }}"
+            class="mt-6 inline-block border border-black px-8 py-3.5 font-sans text-[14px] text-black transition-colors hover:bg-black hover:text-white"
+          >
+            {{ 'cart.continue' | t }}
+          </a>
+        </div>
+      {%- else -%}
+        {%- assign threshold = settings.free_shipping_threshold -%}
+        {%- if threshold > 0 -%}
+          {%- assign remaining = threshold | minus: cart.total_price -%}
+          <div class="mt-8">
+            {%- if remaining > 0 -%}
+              {%- capture remaining_money -%}<span data-display-money data-cents="{{ remaining }}">{{ remaining | money_with_currency }}</span>{%- endcapture -%}
+              <p class="font-sans text-[14px] text-black">
+                {{ 'cart.free_shipping_away' | t: amount: remaining_money }}
+              </p>
+              {%- assign percent = cart.total_price | times: 100 | divided_by: threshold -%}
+            {%- else -%}
+              <p class="font-sans text-[14px] text-black">{{ 'cart.free_shipping_unlocked' | t }}</p>
+              {%- assign percent = 100 -%}
+            {%- endif -%}
+            <div class="mt-3 h-[3px] w-full bg-neutral-200">
+              <div class="h-full bg-black transition-[width] duration-300" style="width: {{ percent }}%"></div>
+            </div>
+          </div>
+        {%- endif -%}
+
+        <div class="mt-10 space-y-8">
+          {%- for item in cart.items -%}
+            {%- liquid
+              capture size_frame_slots
+                render 'size-frame-slots', product: item.product, variant: item.variant
+              endcapture
+              assign size_frame_slots = size_frame_slots | strip | split: '|'
+              assign size_found = size_frame_slots[0]
+              assign frame_found = size_frame_slots[1]
+              assign size_val = size_frame_slots[4]
+              assign frame_val = size_frame_slots[5]
+              assign master = item.product.media | where: 'alt', 'master' | first
+              if master == blank
+                assign master = item.image
+              endif
+              capture aspect
+                render 'product-aspect', product: item.product
+              endcapture
+            -%}
+            <div class="flex min-w-0 gap-4 sm:gap-6" data-cart-item data-cart-key="{{ item.key | escape }}">
+              {%- if master != blank -%}
+                <a href="{{ item.url }}" class="flex-none">
+                  {% render 'frame-preview', master: master, aspect: aspect, frame: frame_val, alt: item.title, sizes: '96px', class: 'h-28 w-24' %}
+                </a>
+              {%- endif -%}
+              <div class="flex min-w-0 flex-1 flex-col items-start gap-4 sm:flex-row sm:justify-between">
+                <div class="min-w-0 space-y-1.5 [overflow-wrap:anywhere]">
+                  <a href="{{ item.url }}" data-cart-item-link class="font-sans text-[14px] text-black">{{ item.product.title }}</a>
+                  <p class="font-sans text-[14px] text-neutral-500">{{ item.product.vendor }}</p>
+                  {%- if size_found or frame_found -%}
+                    <p class="font-sans text-[14px] text-neutral-500">
+                      {%- if size_found -%}{{ size_val }}{%- endif -%}
+                      {%- if size_found and frame_found %} · {% endif -%}
+                      {%- if frame_found -%}{{ frame_val }}{%- endif -%}
+                    </p>
+                  {%- endif -%}
+                </div>
+                <div class="flex flex-none flex-col items-start gap-3 sm:items-end">
+                  <p class="font-sans text-[14px] font-medium text-black"><span data-display-money data-cents="{{ item.final_line_price }}">{{ item.final_line_price | money_with_currency }}</span></p>
+                  <div class="flex flex-wrap items-center gap-3">
+                    <div class="inline-flex h-9 items-center border border-neutral-200">
+                      <button
+                        type="button"
+                        data-cart-change="decrease"
+                        data-quantity="{{ item.quantity | minus: 1 }}"
+                        aria-label="{{ 'cart.decrease' | t }}"
+                        class="flex h-full w-9 items-center justify-center text-black transition-opacity hover:opacity-50"
+                      >
+                        {% render 'icon', name: 'minus', class: 'h-3 w-3' %}
+                      </button>
+                      <span class="w-8 text-center font-sans text-[14px] text-black">{{ item.quantity }}</span>
+                      <button
+                        type="button"
+                        data-cart-change="increase"
+                        data-quantity="{{ item.quantity | plus: 1 }}"
+                        aria-label="{{ 'cart.increase' | t }}"
+                        class="flex h-full w-9 items-center justify-center text-black transition-opacity hover:opacity-50"
+                      >
+                        {% render 'icon', name: 'plus', class: 'h-3 w-3' %}
+                      </button>
+                    </div>
+                    <button
+                      type="button"
+                      data-cart-change="remove"
+                      data-quantity="0"
+                      aria-label="{{ 'cart.remove' | t }}"
+                      class="text-black transition-opacity hover:opacity-50"
+                    >
+                      {% render 'icon', name: 'x', class: 'h-4 w-4' %}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- if cart.item_count > 0 -%}
+      <aside class="min-w-0 self-start bg-[#f5f5f5] p-6">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <span class="font-sans text-[14px] text-black">{{ 'cart.subtotal' | t }}</span>
+          <span class="font-sans text-[14px] font-medium text-black" data-display-money data-cents="{{ cart.total_price }}">
+            {{ cart.total_price | money_with_currency }}
+          </span>
+        </div>
+        <p class="mt-3 font-sans text-[13px] leading-relaxed text-neutral-500">
+          {{ 'cart.taxes_note' | t }}
+        </p>
+        <p class="mt-1 font-sans text-[13px] leading-relaxed text-neutral-500">{{ 'currency.checkout_notice' | t }}</p>
+        <form action="{{ routes.cart_url }}" method="post">
+          <button
+            type="submit"
+            name="checkout"
+            class="mt-6 flex h-[52px] w-full items-center justify-center bg-black font-sans text-[14px] text-white transition-opacity hover:opacity-80"
+          >
+            {{ 'cart.checkout' | t }}
+          </button>
+        </form>
+      </aside>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "购物车",
+  "settings": []
+}
+{% endschema %}

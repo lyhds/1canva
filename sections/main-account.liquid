@@ -1,0 +1,72 @@
+<div class="px-5 py-12 md:px-10 md:py-16">
+  <div class="flex flex-wrap items-baseline justify-between gap-4">
+    <h1 class="font-serif text-[32px] text-black md:text-[36px]">{{ 'customer.account.title' | t }}</h1>
+    <a href="{{ routes.account_logout_url }}" class="-my-2 py-2 font-sans text-[14px] text-black underline-offset-4 hover:underline">
+      {{ 'customer.account.sign_out' | t }}
+    </a>
+  </div>
+
+  <div class="mt-10 grid gap-14 lg:grid-cols-[280px_1fr]">
+    <aside class="self-start border border-neutral-200 p-6">
+      {% render 'icon', name: 'user', class: 'h-5 w-5 text-black' %}
+      <p class="mt-4 font-sans text-[14px] text-black">{{ customer.name }}</p>
+      <p class="mt-1.5 font-sans text-[14px] text-neutral-500">{{ customer.email }}</p>
+    </aside>
+
+    <div>
+      <h2 class="font-sans text-[14px] text-black">{{ 'customer.account.orders' | t }}</h2>
+      {%- paginate customer.orders by 10 -%}
+        {%- if customer.orders.size == 0 -%}
+          <div class="mt-6">
+            <p class="font-sans text-[14px] text-neutral-500">{{ 'customer.account.no_orders' | t }}</p>
+            <a href="{{ routes.all_products_collection_url }}" class="mt-6 inline-block border border-black px-8 py-3.5 font-sans text-[14px] text-black transition-colors hover:bg-black hover:text-white">
+              {{ 'cart.continue' | t }}
+            </a>
+          </div>
+        {%- else -%}
+          <div class="mt-4 divide-y divide-neutral-200 border-y border-neutral-200">
+            {%- for order in customer.orders -%}
+              <a href="{{ order.customer_url }}" class="grid grid-cols-2 items-center gap-3 py-4 font-sans text-[14px] transition-colors hover:bg-neutral-50 sm:grid-cols-4">
+                <span class="text-black">{{ order.name }}</span>
+                <span class="text-neutral-500">{{ order.created_at | date: '%b %e, %Y' }}</span>
+                <span class="text-neutral-500">{{ order.fulfillment_status_label }}</span>
+                <span class="text-black sm:text-right">{{ order.total_price | money }}</span>
+              </a>
+            {%- endfor -%}
+          </div>
+          {%- if paginate.pages > 1 -%}
+            <nav class="mt-8 flex items-center justify-center gap-2 font-sans text-[14px]" aria-label="{{ 'general.pagination' | t }}">
+              {%- assign current_str = paginate.current_page | append: '' -%}
+              {%- if paginate.previous -%}
+                <a href="{{ paginate.previous.url }}" aria-label="{{ 'general.previous' | t }}" class="flex h-8 w-8 items-center justify-center text-black transition-opacity hover:opacity-50">
+                  {% render 'icon', name: 'chevron-left', class: 'h-4 w-4' %}
+                </a>
+              {%- endif -%}
+              {%- for part in paginate.parts -%}
+                {%- if part.is_link -%}
+                  <a href="{{ part.url }}" class="flex h-8 w-8 items-center justify-center text-black transition-opacity hover:opacity-50">{{ part.title }}</a>
+                {%- elsif part.title == current_str -%}
+                  <span class="flex h-8 w-8 items-center justify-center bg-black text-white" aria-current="page">{{ part.title }}</span>
+                {%- else -%}
+                  <span class="flex h-8 w-8 items-center justify-center text-neutral-500">{{ part.title }}</span>
+                {%- endif -%}
+              {%- endfor -%}
+              {%- if paginate.next -%}
+                <a href="{{ paginate.next.url }}" aria-label="{{ 'general.next' | t }}" class="flex h-8 w-8 items-center justify-center text-black transition-opacity hover:opacity-50">
+                  {% render 'icon', name: 'chevron-right', class: 'h-4 w-4' %}
+                </a>
+              {%- endif -%}
+            </nav>
+          {%- endif -%}
+        {%- endif -%}
+      {%- endpaginate -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "账户",
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,41 @@
+{%- doc -%}
+  Resolves the Size/Frame option slots for a product (theme convention:
+  Option1 = Size, Option2 = Frame), matching option names case-insensitively.
+  Captured output is pipe-separated:
+    size_found | frame_found | size_idx | frame_idx | size_val | frame_val
+  where the flags are "y" or empty and the indexes are zero-based. Option
+  values must not contain "|".
+
+  @param product {product} required
+  @param [variant] {variant} defaults to product.selected_or_first_available_variant
+{%- enddoc -%}
+{%- liquid
+  assign size_found = false
+  assign frame_found = false
+  assign size_idx = 0
+  assign frame_idx = 1
+  for opt in product.options
+    assign opt_name = opt | downcase
+    if opt_name == 'size'
+      assign size_idx = forloop.index0
+      assign size_found = true
+    endif
+    if opt_name == 'frame'
+      assign frame_idx = forloop.index0
+      assign frame_found = true
+    endif
+  endfor
+  assign variant_ref = variant | default: product.selected_or_first_available_variant
+  assign size_val = variant_ref.options[size_idx]
+  assign frame_val = variant_ref.options[frame_idx]
+  assign slots = ''
+  if size_found
+    assign slots = slots | append: 'y'
+  endif
+  assign slots = slots | append: '|'
+  if frame_found
+    assign slots = slots | append: 'y'
+  endif
+  assign slots = slots | append: '|' | append: size_idx | append: '|' | append: frame_idx | append: '|' | append: size_val | append: '|' | append: frame_val
+  echo slots
+-%}

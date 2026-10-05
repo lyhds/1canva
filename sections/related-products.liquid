@@ -1,0 +1,34 @@
+<script src="{{ 'product-recommendations.js' | asset_url }}" defer></script>
+<script src="{{ 'slider.js' | asset_url }}" defer></script>
+
+<product-recommendations
+  data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit=8&intent=related"
+>
+  {%- if recommendations.performed? and recommendations.products_count > 0 -%}
+    <section class="px-5 pb-20 md:px-10 md:pb-24" data-recommendations-done>
+      <h2 class="font-serif text-[28px] text-black md:text-[32px]">{{ 'products.product.you_may_also_like' | t }}</h2>
+      <slider-component class="group relative mt-8 block">
+        <div data-slider-track class="scrollbar-hide flex gap-5 overflow-x-auto">
+          {%- for product in recommendations.products -%}
+            <div data-slider-item class="w-[62%] flex-none sm:w-[38%] lg:w-[23%]">
+              {% render 'product-card', product: product %}
+            </div>
+          {%- endfor -%}
+        </div>
+        <button type="button" data-slider-prev aria-label="{{ 'general.previous' | t }}" class="absolute left-3 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-black opacity-0 shadow-sm backdrop-blur-xs transition-opacity duration-200 hover:bg-white group-hover:opacity-100 lg:flex" style="display:none">
+          {% render 'icon', name: 'chevron-left', class: 'h-4 w-4' %}
+        </button>
+        <button type="button" data-slider-next aria-label="{{ 'general.next' | t }}" class="absolute right-3 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-black opacity-0 shadow-sm backdrop-blur-xs transition-opacity duration-200 hover:bg-white group-hover:opacity-100 lg:flex">
+          {% render 'icon', name: 'chevron-right', class: 'h-4 w-4' %}
+        </button>
+      </slider-component>
+    </section>
+  {%- endif -%}
+</product-recommendations>
+
+{% schema %}
+{
+  "name": "相关推荐",
+  "settings": []
+}
+{% endschema %}

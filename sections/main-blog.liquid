@@ -1,0 +1,82 @@
+{%- paginate blog.articles by 12 -%}
+  <div class="px-5 py-12 md:px-10">
+    <div class="max-w-md">
+      <h1 class="font-serif text-[32px] text-black md:text-[36px]">{{ blog.title }}</h1>
+      {%- if section.settings.intro != blank -%}
+        <p class="mt-4 font-serif text-[17px] leading-[1.45] text-black">{{ section.settings.intro }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="mt-12 grid grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+      {%- for article in blog.articles -%}
+        {%- liquid
+          assign word_count = article.content | strip_html | split: ' ' | size
+          assign reading_minutes = word_count | plus: 199 | divided_by: 200
+          assign article_label = article.tags.first | default: 'Journal'
+        -%}
+        <a href="{{ article.url }}" class="group">
+          <div class="aspect-[4/3] w-full overflow-hidden bg-[#f3f3f3]">
+            {%- if article.image -%}
+              <img
+                src="{{ article.image | image_url: width: 800 }}"
+                srcset="{{ article.image | image_url: width: 480 }} 480w, {{ article.image | image_url: width: 800 }} 800w, {{ article.image | image_url: width: 1200 }} 1200w"
+                sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                alt="{{ article.image.alt | default: article.title | escape }}"
+                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                loading="lazy"
+                width="{{ article.image.width }}"
+                height="{{ article.image.height }}"
+              >
+            {%- endif -%}
+          </div>
+          <p class="mt-4 font-mono text-[12px] uppercase tracking-[0.14em] text-neutral-500">
+            {{ article_label }} · {{ reading_minutes }} min read
+          </p>
+          <h2 class="mt-2 font-serif text-[20px] leading-snug text-black">{{ article.title }}</h2>
+          <p class="mt-2 font-sans text-[16px] leading-relaxed text-neutral-600">
+            {{ article.excerpt_or_content | strip_html | truncate: 110 }}
+          </p>
+        </a>
+      {%- endfor -%}
+    </div>
+
+    {%- if paginate.pages > 1 -%}
+      <nav class="mt-12 flex items-center justify-center gap-2 font-sans text-[14px]" aria-label="{{ 'general.pagination' | t }}">
+        {%- assign current_str = paginate.current_page | append: '' -%}
+        {%- if paginate.previous -%}
+          <a href="{{ paginate.previous.url }}" aria-label="{{ 'general.previous' | t }}" class="flex h-8 w-8 items-center justify-center text-black transition-opacity hover:opacity-50">
+            {% render 'icon', name: 'chevron-left', class: 'h-4 w-4' %}
+          </a>
+        {%- endif -%}
+        {%- for part in paginate.parts -%}
+          {%- if part.is_link -%}
+            <a href="{{ part.url }}" class="flex h-8 w-8 items-center justify-center text-black transition-opacity hover:opacity-50">{{ part.title }}</a>
+          {%- elsif part.title == current_str -%}
+            <span class="flex h-8 w-8 items-center justify-center bg-black text-white" aria-current="page">{{ part.title }}</span>
+          {%- else -%}
+            <span class="flex h-8 w-8 items-center justify-center text-neutral-500">{{ part.title }}</span>
+          {%- endif -%}
+        {%- endfor -%}
+        {%- if paginate.next -%}
+          <a href="{{ paginate.next.url }}" aria-label="{{ 'general.next' | t }}" class="flex h-8 w-8 items-center justify-center text-black transition-opacity hover:opacity-50">
+            {% render 'icon', name: 'chevron-right', class: 'h-4 w-4' %}
+          </a>
+        {%- endif -%}
+      </nav>
+    {%- endif -%}
+  </div>
+{%- endpaginate -%}
+
+{% schema %}
+{
+  "name": "博客",
+  "settings": [
+    {
+      "type": "text",
+      "id": "intro",
+      "label": "简介",
+      "default": "Studio notes on painting, framing and living with art."
+    }
+  ]
+}
+{% endschema %}

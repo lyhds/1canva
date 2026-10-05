@@ -1,0 +1,82 @@
+<script src="{{ 'slider.js' | asset_url }}" defer></script>
+
+{%- liquid
+  assign col = section.settings.collection
+  if col == blank
+    assign col = collections.frontpage
+  endif
+  if col == blank
+    assign col = collections.all
+  endif
+  assign limit = section.settings.products_to_show
+-%}
+
+{%- if col != blank and col.products.size > 0 -%}
+  <section class="py-16 md:py-24">
+    <div class="flex items-baseline justify-between px-5 md:px-10">
+      <h2 class="font-serif text-[28px] text-black md:text-[32px]">{{ section.settings.heading }}</h2>
+      {%- if section.settings.link_label != blank -%}
+        <a href="{{ col.url }}" class="font-sans text-[14px] text-black underline-offset-4 hover:underline">
+          {{ section.settings.link_label }}
+        </a>
+      {%- endif -%}
+    </div>
+
+    <slider-component class="group relative mt-8 block">
+      <div data-slider-track class="scrollbar-hide flex gap-5 overflow-x-auto px-5 md:px-10">
+        {%- for product in col.products limit: limit -%}
+          <div data-slider-item class="w-[62%] flex-none sm:w-[38%] lg:w-[23%]">
+            {% render 'product-card', product: product %}
+          </div>
+        {%- endfor -%}
+      </div>
+      <button type="button" data-slider-prev aria-label="{{ 'general.previous' | t }}" class="absolute left-3 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-black opacity-0 shadow-sm backdrop-blur-xs transition-opacity duration-200 hover:bg-white group-hover:opacity-100 lg:flex" style="display:none">
+        {% render 'icon', name: 'chevron-left', class: 'h-4 w-4' %}
+      </button>
+      <button type="button" data-slider-next aria-label="{{ 'general.next' | t }}" class="absolute right-3 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-black opacity-0 shadow-sm backdrop-blur-xs transition-opacity duration-200 hover:bg-white group-hover:opacity-100 lg:flex">
+        {% render 'icon', name: 'chevron-right', class: 'h-4 w-4' %}
+      </button>
+    </slider-component>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "精选合集",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "标题",
+      "default": "New in"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "合集",
+      "info": "未选择时依次回退到 Frontpage 合集和全部商品。"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "显示商品数",
+      "min": 4,
+      "max": 16,
+      "step": 1,
+      "default": 8
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "链接文字",
+      "info": "链接到合集页，留空则隐藏。",
+      "default": "View all"
+    }
+  ],
+  "presets": [
+    {
+      "name": "精选合集"
+    }
+  ]
+}
+{% endschema %}

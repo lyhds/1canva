@@ -1,0 +1,228 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "gallery_campaign": true,
+        "image": "",
+        "image_mobile": "shopify://shop_images/home-hero-mobile.png",
+        "image_position": "center top",
+        "image_zoom": 100,
+        "image_zoom_mobile": 100,
+        "eyebrow": "Original art, painted by hand",
+        "heading": "Art made to live with",
+        "button_label": "Discover the collection",
+        "button_link": "shopify://collections/all-products"
+      }
+    },
+    "assurance": {
+      "type": "assurance-bar",
+      "blocks": {
+        "quality": {
+          "type": "assurance",
+          "settings": {
+            "icon": "layers",
+            "text": "Hand-painted oils on Premium Cotton Canvas"
+          }
+        },
+        "made-to-order": {
+          "type": "assurance",
+          "settings": {
+            "icon": "rotate-ccw",
+            "text": "Made to order by skilled artists"
+          }
+        },
+        "framing": {
+          "type": "assurance",
+          "settings": {
+            "icon": "frame",
+            "text": "Solid wood frames, ready to hang"
+          }
+        },
+        "delivery": {
+          "type": "assurance",
+          "settings": {
+            "icon": "bag",
+            "text": "Tracked and insured delivery"
+          }
+        }
+      },
+      "block_order": [
+        "quality",
+        "made-to-order",
+        "framing",
+        "delivery"
+      ],
+      "settings": {}
+    },
+    "new-in": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "New in",
+        "collection": "all-products",
+        "products_to_show": 8,
+        "link_label": "View all"
+      }
+    },
+    "collections": {
+      "type": "collections-row",
+      "blocks": {
+        "c1": {
+          "type": "collection",
+          "settings": {
+            "title": "",
+            "collection": "abstract",
+            "image": "shopify://shop_images/home-subject-1.png",
+            "cover_asset": "subject-abstract.webp",
+            "link": ""
+          }
+        },
+        "c2": {
+          "type": "collection",
+          "settings": {
+            "title": "",
+            "collection": "landscapes",
+            "image": "shopify://shop_images/home-subject-2.png",
+            "cover_asset": "",
+            "link": ""
+          }
+        },
+        "c3": {
+          "type": "collection",
+          "settings": {
+            "title": "",
+            "collection": "botanicals",
+            "image": "shopify://shop_images/home-subject-3.png",
+            "cover_asset": "",
+            "link": ""
+          }
+        },
+        "c5": {
+          "type": "collection",
+          "settings": {
+            "title": "",
+            "collection": "figurative",
+            "image": "shopify://shop_images/home-subject-5.jpg",
+            "cover_asset": "",
+            "link": ""
+          }
+        },
+        "c4": {
+          "type": "collection",
+          "settings": {
+            "title": "",
+            "collection": "still-life",
+            "image": "shopify://shop_images/home-subject-4.png",
+            "cover_asset": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3",
+        "c5",
+        "c4"
+      ],
+      "settings": {
+        "heading": "Shop by subject"
+      }
+    },
+    "studio": {
+      "type": "image-with-text",
+      "settings": {
+        "image": "shopify://shop_images/home-our-approach.png",
+        "cover_asset": "",
+        "image_alt": "",
+        "layout": "left",
+        "eyebrow": "Our approach",
+        "heading": "Art chosen for considered spaces",
+        "text": "<p>CANVASRA began with a wall that felt unfinished. We curate hand-painted art with quiet presence — oil on Premium Cotton Canvas, honest brushwork, colours that hold the light of a room.</p><p>Every piece is painted to order, framed in solid wood and delivered ready to hang. Art chosen slowly, meant to live with you.</p>",
+        "button_label": "Read our story",
+        "button_link": "shopify://pages/our-story"
+      }
+    },
+    "compositions": {
+      "type": "compositions",
+      "blocks": {
+        "s1": {
+          "type": "slide",
+          "settings": {
+            "collection": "living-room",
+            "image": "shopify://shop_images/home-space-1.png",
+            "cover_asset": "",
+            "link_label": "Shop Living Room",
+            "link": ""
+          }
+        },
+        "s2": {
+          "type": "slide",
+          "settings": {
+            "collection": "bedroom",
+            "image": "shopify://shop_images/home-space-2.png",
+            "cover_asset": "",
+            "link_label": "Shop Bedroom",
+            "link": ""
+          }
+        },
+        "s3": {
+          "type": "slide",
+          "settings": {
+            "collection": "dining-room",
+            "image": "shopify://shop_images/home-space-3.png",
+            "cover_asset": "",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "s4": {
+          "type": "slide",
+          "settings": {
+            "collection": "entryway",
+            "image": "shopify://shop_images/home-space-4.png",
+            "cover_asset": "",
+            "link_label": "Shop Entryway",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+      ],
+      "settings": {
+        "heading": "Shop by space"
+      }
+    },
+    "editorial": {
+      "type": "editorial",
+      "settings": {
+        "heading": "Journal",
+        "blog": "journal",
+        "view_all_label": "View all journal",
+        "articles_count": 3
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "assurance",
+    "new-in",
+    "collections",
+    "studio",
+    "compositions",
+    "editorial"
+  ]
+}

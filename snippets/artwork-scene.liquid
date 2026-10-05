@@ -1,0 +1,51 @@
+{%- doc -%}
+  Front-elevation room with separately framed artwork. The room media must
+  have alt scene-room-v1 or scene-room-large-v1 and an empty wall; no baked-in artwork.
+  @param {image} room - Room background in its original ratio
+  @param {image} master - Original artwork
+  @param {string} aspect - Artwork ratio fallback
+  @param {string} frame - Selected frame
+  @param {string} alt - Accessible scene description
+  @param {string} [loading] - Image loading strategy
+  @param {boolean} [thumbnail] - Retained for compatibility with thumbnail callers
+  @param {object} [scene_layouts] - Verified frame coordinates keyed by finished-scene alt
+{%- enddoc -%}
+{%- if room.alt contains 'composed-framed-' -%}
+  {%- comment -%}The frame is painted into this scene: draw the image itself and never a second frame. The aspect-sized inner box is what makes the banner full-bleed; without it the image is fitted into the section's own ratio and stops spanning the screen. A single baked image needs no multi-image coordination, so it ships ready — the frame-preview reveal only coordinates composite scenes.{%- endcomment -%}
+  <div data-artwork-scene data-scene-ready data-scene-layout="{{ room.alt | escape }}" class="relative h-full w-full overflow-hidden" role="img" aria-label="{{ alt | escape }}">
+    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#eeece7;container-type:size">
+      <div style="position:relative;flex:none;--room-ratio:{{ room.aspect_ratio }};width:var(--scene-plane-width,min(100cqw,calc(100cqh * var(--room-ratio))));aspect-ratio:var(--room-ratio)">
+        <img src="{{ room | image_url: width: 2400 }}" srcset="{{ room | image_url: width: 800 }} 800w, {{ room | image_url: width: 1200 }} 1200w, {{ room | image_url: width: 1800 }} 1800w, {{ room | image_url: width: 2400 }} 2400w" sizes="(min-width: 1024px) 60vw, 100vw" alt="{{ alt | escape }}" width="{{ room.width }}" height="{{ room.height }}" loading="{{ loading | default: 'lazy' }}" style="display:block;width:100%;height:100%;object-fit:cover">
+      </div>
+    </div>
+  </div>
+{%- elsif room.alt contains 'composed-unframed-' -%}
+  {%- assign scene_bounds = scene_layouts[room.alt] -%}
+  {% render 'composed-scene', room: room, bounds: scene_bounds, frame: frame, alt: alt, loading: loading %}
+{%- else -%}
+{%- liquid
+  assign scene_placement = 'left:23%;top:14%;width:54%;height:44%;'
+  if room.alt == 'scene-room-desktop-v3'
+    assign scene_placement = 'left:20%;top:16%;width:60%;height:50%;'
+  elsif room.alt == 'scene-room-desktop-v2'
+    assign scene_placement = 'left:20%;top:8%;width:60%;height:78%;'
+  elsif room.alt == 'scene-room-desktop-v1'
+    assign scene_placement = 'left:28%;top:20%;width:44%;height:50%;'
+  elsif room.alt == 'scene-room-large-v2'
+    assign scene_placement = 'left:18%;top:18%;width:64%;height:44%;'
+  elsif room.alt == 'scene-room-large-v1'
+    assign scene_placement = 'left:10%;top:0%;width:80%;height:78%;'
+  endif
+-%}
+<div data-artwork-scene data-scene-layout="{{ room.alt | escape }}" class="relative h-full w-full overflow-hidden" role="img" aria-label="{{ alt | escape }}">
+  <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#eeece7;container-type:size">
+    <div style="position:relative;flex:none;--room-ratio:{{ room.aspect_ratio | default: 1 }};width:var(--scene-plane-width,min(100cqw,calc(100cqh * var(--room-ratio))));aspect-ratio:var(--room-ratio)">
+      <img src="{{ room | image_url: width: 1600 }}" alt="" width="{{ room.width }}" height="{{ room.height }}" loading="{{ loading | default: 'lazy' }}" {% if loading == 'eager' %}fetchpriority="high"{% endif %} style="display:block;width:100%;height:100%;object-fit:contain">
+      <frame-preview style="position:absolute;{{ scene_placement }}display:block">
+        {% render 'frame-preview', master: master, aspect: aspect, frame: frame, alt: '', wall: 'transparent', sizes: '45vw', loading: loading, class: 'h-full w-full' %}
+      </frame-preview>
+    </div>
+  </div>
+</div>
+
+{%- endif -%}

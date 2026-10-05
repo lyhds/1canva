@@ -1,0 +1,3502 @@
+{
+  "version": "2026-09-09-mesonart-square-v2",
+  "currency": "USD",
+  "basis": "Mesonart public list price medians; no 40% discount applied",
+  "sourceSample": {
+    "date": "2026-09-09",
+    "products": 500,
+    "includedProducts": 369,
+    "limitation": "First 500 public listings, not a random or full-store sample; currency=USD"
+  },
+  "rounding": "nearest $10 minus $0.01",
+  "rows": [
+    {
+      "key": "30x30",
+      "shortCm": 30,
+      "longCm": 30,
+      "referenceFamily": "1:1",
+      "approximateRatio": false,
+      "prices": {
+        "Rolled": "59.99",
+        "Stretched": "109.99",
+        "Framed": "119.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-extrapolation",
+          "rawUSD": 62.97,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                24
+              ],
+              "median": 260,
+              "n": 67
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-extrapolation",
+          "rawUSD": 113.34,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                24
+              ],
+              "median": 468,
+              "n": 70
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-extrapolation",
+          "rawUSD": 119.64,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                24
+              ],
+              "median": 494,
+              "n": 70
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "20x40",
+      "shortCm": 20,
+      "longCm": 40,
+      "referenceFamily": "1:2 / 2:1",
+      "approximateRatio": false,
+      "prices": {
+        "Rolled": "49.99",
+        "Stretched": "89.99",
+        "Framed": "99.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-extrapolation",
+          "rawUSD": 50.9,
+          "anchors": [
+            {
+              "inches": [
+                18,
+                36
+              ],
+              "median": 266,
+              "n": 126
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-extrapolation",
+          "rawUSD": 93.38,
+          "anchors": [
+            {
+              "inches": [
+                18,
+                36
+              ],
+              "median": 488,
+              "n": 145
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-extrapolation",
+          "rawUSD": 97.02,
+          "anchors": [
+            {
+              "inches": [
+                18,
+                36
+              ],
+              "median": 507,
+              "n": 145
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "30x40",
+      "shortCm": 30,
+      "longCm": 40,
+      "referenceFamily": "3:4 / 4:3",
+      "approximateRatio": false,
+      "prices": {
+        "Rolled": "69.99",
+        "Stretched": "129.99",
+        "Framed": "139.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-extrapolation",
+          "rawUSD": 70.72,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                32
+              ],
+              "median": 292,
+              "n": 139
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-extrapolation",
+          "rawUSD": 127.39,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                32
+              ],
+              "median": 526,
+              "n": 154
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-extrapolation",
+          "rawUSD": 130.78,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                32
+              ],
+              "median": 540,
+              "n": 154
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "40x40",
+      "shortCm": 40,
+      "longCm": 40,
+      "referenceFamily": "1:1",
+      "approximateRatio": false,
+      "prices": {
+        "Rolled": "109.99",
+        "Stretched": "199.99",
+        "Framed": "209.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-extrapolation",
+          "rawUSD": 111.94,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                24
+              ],
+              "median": 260,
+              "n": 67
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-extrapolation",
+          "rawUSD": 201.5,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                24
+              ],
+              "median": 468,
+              "n": 70
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-extrapolation",
+          "rawUSD": 212.69,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                24
+              ],
+              "median": 494,
+              "n": 70
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "40x50",
+      "shortCm": 40,
+      "longCm": 50,
+      "referenceFamily": "3:4 / 4:3",
+      "approximateRatio": true,
+      "prices": {
+        "Rolled": "119.99",
+        "Stretched": "209.99",
+        "Framed": "219.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-extrapolation",
+          "rawUSD": 117.86,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                32
+              ],
+              "median": 292,
+              "n": 139
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-extrapolation",
+          "rawUSD": 212.32,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                32
+              ],
+              "median": 526,
+              "n": 154
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-extrapolation",
+          "rawUSD": 217.97,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                32
+              ],
+              "median": 540,
+              "n": 154
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "50x50",
+      "shortCm": 50,
+      "longCm": 50,
+      "referenceFamily": "1:1",
+      "approximateRatio": false,
+      "prices": {
+        "Rolled": "169.99",
+        "Stretched": "309.99",
+        "Framed": "329.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-extrapolation",
+          "rawUSD": 174.91,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                24
+              ],
+              "median": 260,
+              "n": 67
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-extrapolation",
+          "rawUSD": 314.84,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                24
+              ],
+              "median": 468,
+              "n": 70
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-extrapolation",
+          "rawUSD": 332.34,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                24
+              ],
+              "median": 494,
+              "n": 70
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "30x60",
+      "shortCm": 30,
+      "longCm": 60,
+      "referenceFamily": "1:2 / 2:1",
+      "approximateRatio": false,
+      "prices": {
+        "Rolled": "109.99",
+        "Stretched": "209.99",
+        "Framed": "219.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-extrapolation",
+          "rawUSD": 114.53,
+          "anchors": [
+            {
+              "inches": [
+                18,
+                36
+              ],
+              "median": 266,
+              "n": 126
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-extrapolation",
+          "rawUSD": 210.11,
+          "anchors": [
+            {
+              "inches": [
+                18,
+                36
+              ],
+              "median": 488,
+              "n": 145
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-extrapolation",
+          "rawUSD": 218.29,
+          "anchors": [
+            {
+              "inches": [
+                18,
+                36
+              ],
+              "median": 507,
+              "n": 145
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "40x60",
+      "shortCm": 40,
+      "longCm": 60,
+      "referenceFamily": "2:3 / 3:2",
+      "approximateRatio": false,
+      "prices": {
+        "Rolled": "139.99",
+        "Stretched": "249.99",
+        "Framed": "259.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-extrapolation",
+          "rawUSD": 141.22,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                36
+              ],
+              "median": 328,
+              "n": 139
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-extrapolation",
+          "rawUSD": 253.17,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                36
+              ],
+              "median": 588,
+              "n": 154
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-extrapolation",
+          "rawUSD": 258.76,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                36
+              ],
+              "median": 601,
+              "n": 154
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "45x60",
+      "shortCm": 45,
+      "longCm": 60,
+      "referenceFamily": "3:4 / 4:3",
+      "approximateRatio": false,
+      "prices": {
+        "Rolled": "159.99",
+        "Stretched": "289.99",
+        "Framed": "299.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-extrapolation",
+          "rawUSD": 159.12,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                32
+              ],
+              "median": 292,
+              "n": 139
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-extrapolation",
+          "rawUSD": 286.63,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                32
+              ],
+              "median": 526,
+              "n": 154
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-extrapolation",
+          "rawUSD": 294.26,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                32
+              ],
+              "median": 540,
+              "n": 154
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "60x60",
+      "shortCm": 60,
+      "longCm": 60,
+      "referenceFamily": "1:1",
+      "approximateRatio": false,
+      "prices": {
+        "Rolled": "249.99",
+        "Stretched": "449.99",
+        "Framed": "479.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-extrapolation",
+          "rawUSD": 251.88,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                24
+              ],
+              "median": 260,
+              "n": 67
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-extrapolation",
+          "rawUSD": 453.38,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                24
+              ],
+              "median": 468,
+              "n": 70
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-extrapolation",
+          "rawUSD": 478.56,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                24
+              ],
+              "median": 494,
+              "n": 70
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "50x70",
+      "shortCm": 50,
+      "longCm": 70,
+      "referenceFamily": "3:4 / 4:3",
+      "approximateRatio": true,
+      "prices": {
+        "Rolled": "209.99",
+        "Stretched": "369.99",
+        "Framed": "379.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-extrapolation",
+          "rawUSD": 206.26,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                32
+              ],
+              "median": 292,
+              "n": 139
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-extrapolation",
+          "rawUSD": 371.56,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                32
+              ],
+              "median": 526,
+              "n": 154
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-extrapolation",
+          "rawUSD": 381.45,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                32
+              ],
+              "median": 540,
+              "n": 154
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "70x70",
+      "shortCm": 70,
+      "longCm": 70,
+      "referenceFamily": "1:1",
+      "approximateRatio": false,
+      "prices": {
+        "Rolled": "309.99",
+        "Stretched": "539.99",
+        "Framed": "569.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-interpolation",
+          "rawUSD": 306.44,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                24
+              ],
+              "median": 260,
+              "n": 67
+            },
+            {
+              "inches": [
+                30,
+                30
+              ],
+              "median": 342,
+              "n": 67
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-interpolation",
+          "rawUSD": 543.89,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                24
+              ],
+              "median": 468,
+              "n": 70
+            },
+            {
+              "inches": [
+                30,
+                30
+              ],
+              "median": 602,
+              "n": 70
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-interpolation",
+          "rawUSD": 565.93,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                24
+              ],
+              "median": 494,
+              "n": 70
+            },
+            {
+              "inches": [
+                30,
+                30
+              ],
+              "median": 621,
+              "n": 70
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "50x75",
+      "shortCm": 50,
+      "longCm": 75,
+      "referenceFamily": "2:3 / 3:2",
+      "approximateRatio": false,
+      "prices": {
+        "Rolled": "219.99",
+        "Stretched": "399.99",
+        "Framed": "409.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-extrapolation",
+          "rawUSD": 220.66,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                36
+              ],
+              "median": 328,
+              "n": 139
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-extrapolation",
+          "rawUSD": 395.57,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                36
+              ],
+              "median": 588,
+              "n": 154
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-extrapolation",
+          "rawUSD": 404.32,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                36
+              ],
+              "median": 601,
+              "n": 154
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "40x80",
+      "shortCm": 40,
+      "longCm": 80,
+      "referenceFamily": "1:2 / 2:1",
+      "approximateRatio": false,
+      "prices": {
+        "Rolled": "199.99",
+        "Stretched": "369.99",
+        "Framed": "389.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-extrapolation",
+          "rawUSD": 203.61,
+          "anchors": [
+            {
+              "inches": [
+                18,
+                36
+              ],
+              "median": 266,
+              "n": 126
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-extrapolation",
+          "rawUSD": 373.53,
+          "anchors": [
+            {
+              "inches": [
+                18,
+                36
+              ],
+              "median": 488,
+              "n": 145
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-extrapolation",
+          "rawUSD": 388.07,
+          "anchors": [
+            {
+              "inches": [
+                18,
+                36
+              ],
+              "median": 507,
+              "n": 145
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "60x80",
+      "shortCm": 60,
+      "longCm": 80,
+      "referenceFamily": "3:4 / 4:3",
+      "approximateRatio": false,
+      "prices": {
+        "Rolled": "279.99",
+        "Stretched": "509.99",
+        "Framed": "519.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-extrapolation",
+          "rawUSD": 282.88,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                32
+              ],
+              "median": 292,
+              "n": 139
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-extrapolation",
+          "rawUSD": 509.56,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                32
+              ],
+              "median": 526,
+              "n": 154
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-extrapolation",
+          "rawUSD": 523.13,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                32
+              ],
+              "median": 540,
+              "n": 154
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "80x80",
+      "shortCm": 80,
+      "longCm": 80,
+      "referenceFamily": "1:1",
+      "approximateRatio": false,
+      "prices": {
+        "Rolled": "379.99",
+        "Stretched": "659.99",
+        "Framed": "679.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-interpolation",
+          "rawUSD": 376.87,
+          "anchors": [
+            {
+              "inches": [
+                30,
+                30
+              ],
+              "median": 342,
+              "n": 67
+            },
+            {
+              "inches": [
+                32,
+                32
+              ],
+              "median": 389,
+              "n": 67
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-interpolation",
+          "rawUSD": 656.16,
+          "anchors": [
+            {
+              "inches": [
+                30,
+                30
+              ],
+              "median": 602,
+              "n": 70
+            },
+            {
+              "inches": [
+                32,
+                32
+              ],
+              "median": 675,
+              "n": 70
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-interpolation",
+          "rawUSD": 684.81,
+          "anchors": [
+            {
+              "inches": [
+                30,
+                30
+              ],
+              "median": 621,
+              "n": 70
+            },
+            {
+              "inches": [
+                32,
+                32
+              ],
+              "median": 707,
+              "n": 70
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "60x90",
+      "shortCm": 60,
+      "longCm": 90,
+      "referenceFamily": "2:3 / 3:2",
+      "approximateRatio": false,
+      "prices": {
+        "Rolled": "319.99",
+        "Stretched": "569.99",
+        "Framed": "579.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-extrapolation",
+          "rawUSD": 317.75,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                36
+              ],
+              "median": 328,
+              "n": 139
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-extrapolation",
+          "rawUSD": 569.63,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                36
+              ],
+              "median": 588,
+              "n": 154
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-extrapolation",
+          "rawUSD": 582.22,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                36
+              ],
+              "median": 601,
+              "n": 154
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "50x100",
+      "shortCm": 50,
+      "longCm": 100,
+      "referenceFamily": "1:2 / 2:1",
+      "approximateRatio": false,
+      "prices": {
+        "Rolled": "309.99",
+        "Stretched": "569.99",
+        "Framed": "589.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-interpolation",
+          "rawUSD": 307.07,
+          "anchors": [
+            {
+              "inches": [
+                18,
+                36
+              ],
+              "median": 266,
+              "n": 126
+            },
+            {
+              "inches": [
+                24,
+                48
+              ],
+              "median": 429,
+              "n": 126
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-interpolation",
+          "rawUSD": 566.62,
+          "anchors": [
+            {
+              "inches": [
+                18,
+                36
+              ],
+              "median": 488,
+              "n": 145
+            },
+            {
+              "inches": [
+                24,
+                48
+              ],
+              "median": 800,
+              "n": 145
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-interpolation",
+          "rawUSD": 587.38,
+          "anchors": [
+            {
+              "inches": [
+                18,
+                36
+              ],
+              "median": 507,
+              "n": 145
+            },
+            {
+              "inches": [
+                24,
+                48
+              ],
+              "median": 826,
+              "n": 145
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "70x100",
+      "shortCm": 70,
+      "longCm": 100,
+      "referenceFamily": "2:3 / 3:2",
+      "approximateRatio": true,
+      "prices": {
+        "Rolled": "399.99",
+        "Stretched": "729.99",
+        "Framed": "759.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-interpolation",
+          "rawUSD": 403.97,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                36
+              ],
+              "median": 328,
+              "n": 139
+            },
+            {
+              "inches": [
+                32,
+                48
+              ],
+              "median": 559,
+              "n": 139
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-interpolation",
+          "rawUSD": 734.68,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                36
+              ],
+              "median": 588,
+              "n": 154
+            },
+            {
+              "inches": [
+                32,
+                48
+              ],
+              "median": 1034,
+              "n": 154
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-interpolation",
+          "rawUSD": 755.9,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                36
+              ],
+              "median": 601,
+              "n": 154
+            },
+            {
+              "inches": [
+                32,
+                48
+              ],
+              "median": 1072,
+              "n": 154
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "75x100",
+      "shortCm": 75,
+      "longCm": 100,
+      "referenceFamily": "3:4 / 4:3",
+      "approximateRatio": false,
+      "prices": {
+        "Rolled": "429.99",
+        "Stretched": "749.99",
+        "Framed": "779.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-interpolation",
+          "rawUSD": 434.46,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                32
+              ],
+              "median": 292,
+              "n": 139
+            },
+            {
+              "inches": [
+                30,
+                40
+              ],
+              "median": 448,
+              "n": 139
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-interpolation",
+          "rawUSD": 752.47,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                32
+              ],
+              "median": 526,
+              "n": 154
+            },
+            {
+              "inches": [
+                30,
+                40
+              ],
+              "median": 774,
+              "n": 154
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-interpolation",
+          "rawUSD": 782.91,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                32
+              ],
+              "median": 540,
+              "n": 154
+            },
+            {
+              "inches": [
+                30,
+                40
+              ],
+              "median": 806,
+              "n": 154
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "100x100",
+      "shortCm": 100,
+      "longCm": 100,
+      "referenceFamily": "1:1",
+      "approximateRatio": false,
+      "prices": {
+        "Rolled": "569.99",
+        "Stretched": "989.99",
+        "Framed": "1019.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-interpolation",
+          "rawUSD": 567.9,
+          "anchors": [
+            {
+              "inches": [
+                36,
+                36
+              ],
+              "median": 481,
+              "n": 67
+            },
+            {
+              "inches": [
+                40,
+                40
+              ],
+              "median": 585,
+              "n": 67
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-interpolation",
+          "rawUSD": 986.21,
+          "anchors": [
+            {
+              "inches": [
+                36,
+                36
+              ],
+              "median": 845,
+              "n": 70
+            },
+            {
+              "inches": [
+                40,
+                40
+              ],
+              "median": 1014,
+              "n": 70
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-interpolation",
+          "rawUSD": 1023.07,
+          "anchors": [
+            {
+              "inches": [
+                36,
+                36
+              ],
+              "median": 871,
+              "n": 70
+            },
+            {
+              "inches": [
+                40,
+                40
+              ],
+              "median": 1053,
+              "n": 70
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "60x120",
+      "shortCm": 60,
+      "longCm": 120,
+      "referenceFamily": "1:2 / 2:1",
+      "approximateRatio": false,
+      "prices": {
+        "Rolled": "419.99",
+        "Stretched": "779.99",
+        "Framed": "799.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-interpolation",
+          "rawUSD": 417.36,
+          "anchors": [
+            {
+              "inches": [
+                18,
+                36
+              ],
+              "median": 266,
+              "n": 126
+            },
+            {
+              "inches": [
+                24,
+                48
+              ],
+              "median": 429,
+              "n": 126
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-interpolation",
+          "rawUSD": 777.72,
+          "anchors": [
+            {
+              "inches": [
+                18,
+                36
+              ],
+              "median": 488,
+              "n": 145
+            },
+            {
+              "inches": [
+                24,
+                48
+              ],
+              "median": 800,
+              "n": 145
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-interpolation",
+          "rawUSD": 803.22,
+          "anchors": [
+            {
+              "inches": [
+                18,
+                36
+              ],
+              "median": 507,
+              "n": 145
+            },
+            {
+              "inches": [
+                24,
+                48
+              ],
+              "median": 826,
+              "n": 145
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "80x120",
+      "shortCm": 80,
+      "longCm": 120,
+      "referenceFamily": "2:3 / 3:2",
+      "approximateRatio": false,
+      "prices": {
+        "Rolled": "539.99",
+        "Stretched": "999.99",
+        "Framed": "1039.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-interpolation",
+          "rawUSD": 542.5,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                36
+              ],
+              "median": 328,
+              "n": 139
+            },
+            {
+              "inches": [
+                32,
+                48
+              ],
+              "median": 559,
+              "n": 139
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-interpolation",
+          "rawUSD": 1002.14,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                36
+              ],
+              "median": 588,
+              "n": 154
+            },
+            {
+              "inches": [
+                32,
+                48
+              ],
+              "median": 1034,
+              "n": 154
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-interpolation",
+          "rawUSD": 1038.36,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                36
+              ],
+              "median": 601,
+              "n": 154
+            },
+            {
+              "inches": [
+                32,
+                48
+              ],
+              "median": 1072,
+              "n": 154
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "90x120",
+      "shortCm": 90,
+      "longCm": 120,
+      "referenceFamily": "3:4 / 4:3",
+      "approximateRatio": false,
+      "prices": {
+        "Rolled": "609.99",
+        "Stretched": "1109.99",
+        "Framed": "1149.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-interpolation",
+          "rawUSD": 606,
+          "anchors": [
+            {
+              "inches": [
+                30,
+                40
+              ],
+              "median": 448,
+              "n": 139
+            },
+            {
+              "inches": [
+                36,
+                48
+              ],
+              "median": 624,
+              "n": 139
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-interpolation",
+          "rawUSD": 1106.16,
+          "anchors": [
+            {
+              "inches": [
+                30,
+                40
+              ],
+              "median": 774,
+              "n": 154
+            },
+            {
+              "inches": [
+                36,
+                48
+              ],
+              "median": 1144,
+              "n": 154
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-interpolation",
+          "rawUSD": 1150.73,
+          "anchors": [
+            {
+              "inches": [
+                30,
+                40
+              ],
+              "median": 806,
+              "n": 154
+            },
+            {
+              "inches": [
+                36,
+                48
+              ],
+              "median": 1190,
+              "n": 154
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "120x120",
+      "shortCm": 120,
+      "longCm": 120,
+      "referenceFamily": "1:1",
+      "approximateRatio": false,
+      "prices": {
+        "Rolled": "789.99",
+        "Stretched": "1459.99",
+        "Framed": "1499.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-interpolation",
+          "rawUSD": 793.28,
+          "anchors": [
+            {
+              "inches": [
+                44,
+                44
+              ],
+              "median": 741,
+              "n": 67
+            },
+            {
+              "inches": [
+                48,
+                48
+              ],
+              "median": 806,
+              "n": 67
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-interpolation",
+          "rawUSD": 1456.85,
+          "anchors": [
+            {
+              "inches": [
+                44,
+                44
+              ],
+              "median": 1300,
+              "n": 70
+            },
+            {
+              "inches": [
+                48,
+                48
+              ],
+              "median": 1495,
+              "n": 70
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-interpolation",
+          "rawUSD": 1500.94,
+          "anchors": [
+            {
+              "inches": [
+                44,
+                44
+              ],
+              "median": 1365,
+              "n": 70
+            },
+            {
+              "inches": [
+                48,
+                48
+              ],
+              "median": 1534,
+              "n": 70
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "75x150",
+      "shortCm": 75,
+      "longCm": 150,
+      "referenceFamily": "1:2 / 2:1",
+      "approximateRatio": false,
+      "prices": {
+        "Rolled": "629.99",
+        "Stretched": "1159.99",
+        "Framed": "1189.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-interpolation",
+          "rawUSD": 625.34,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                48
+              ],
+              "median": 429,
+              "n": 126
+            },
+            {
+              "inches": [
+                30,
+                60
+              ],
+              "median": 644,
+              "n": 126
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-interpolation",
+          "rawUSD": 1161.63,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                48
+              ],
+              "median": 800,
+              "n": 145
+            },
+            {
+              "inches": [
+                30,
+                60
+              ],
+              "median": 1196,
+              "n": 145
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-interpolation",
+          "rawUSD": 1193.11,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                48
+              ],
+              "median": 826,
+              "n": 145
+            },
+            {
+              "inches": [
+                30,
+                60
+              ],
+              "median": 1228,
+              "n": 145
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "100x150",
+      "shortCm": 100,
+      "longCm": 150,
+      "referenceFamily": "2:3 / 3:2",
+      "approximateRatio": false,
+      "prices": {
+        "Rolled": "809.99",
+        "Stretched": "1499.99",
+        "Framed": "1549.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-interpolation",
+          "rawUSD": 808.48,
+          "anchors": [
+            {
+              "inches": [
+                36,
+                54
+              ],
+              "median": 689,
+              "n": 139
+            },
+            {
+              "inches": [
+                40,
+                60
+              ],
+              "median": 832,
+              "n": 139
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-interpolation",
+          "rawUSD": 1499.96,
+          "anchors": [
+            {
+              "inches": [
+                36,
+                54
+              ],
+              "median": 1261,
+              "n": 154
+            },
+            {
+              "inches": [
+                40,
+                60
+              ],
+              "median": 1547,
+              "n": 154
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-interpolation",
+          "rawUSD": 1546.11,
+          "anchors": [
+            {
+              "inches": [
+                36,
+                54
+              ],
+              "median": 1313,
+              "n": 154
+            },
+            {
+              "inches": [
+                40,
+                60
+              ],
+              "median": 1592,
+              "n": 154
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "150x150",
+      "shortCm": 150,
+      "longCm": 150,
+      "referenceFamily": "1:1",
+      "approximateRatio": false,
+      "prices": {
+        "Rolled": "1119.99",
+        "Stretched": "2149.99",
+        "Framed": "2199.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-interpolation",
+          "rawUSD": 1123.65,
+          "anchors": [
+            {
+              "inches": [
+                55,
+                55
+              ],
+              "median": 1040,
+              "n": 67
+            },
+            {
+              "inches": [
+                60,
+                60
+              ],
+              "median": 1144,
+              "n": 67
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-interpolation",
+          "rawUSD": 2151.76,
+          "anchors": [
+            {
+              "inches": [
+                55,
+                55
+              ],
+              "median": 1937,
+              "n": 70
+            },
+            {
+              "inches": [
+                60,
+                60
+              ],
+              "median": 2204,
+              "n": 70
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-interpolation",
+          "rawUSD": 2195.59,
+          "anchors": [
+            {
+              "inches": [
+                55,
+                55
+              ],
+              "median": 1976,
+              "n": 70
+            },
+            {
+              "inches": [
+                60,
+                60
+              ],
+              "median": 2249,
+              "n": 70
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "80x160",
+      "shortCm": 80,
+      "longCm": 160,
+      "referenceFamily": "1:2 / 2:1",
+      "approximateRatio": false,
+      "prices": {
+        "Rolled": "699.99",
+        "Stretched": "1309.99",
+        "Framed": "1339.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-interpolation",
+          "rawUSD": 701.15,
+          "anchors": [
+            {
+              "inches": [
+                30,
+                60
+              ],
+              "median": 644,
+              "n": 126
+            },
+            {
+              "inches": [
+                36,
+                72
+              ],
+              "median": 890,
+              "n": 126
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-interpolation",
+          "rawUSD": 1306.12,
+          "anchors": [
+            {
+              "inches": [
+                30,
+                60
+              ],
+              "median": 1196,
+              "n": 145
+            },
+            {
+              "inches": [
+                36,
+                72
+              ],
+              "median": 1670,
+              "n": 145
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-interpolation",
+          "rawUSD": 1339.98,
+          "anchors": [
+            {
+              "inches": [
+                30,
+                60
+              ],
+              "median": 1228,
+              "n": 145
+            },
+            {
+              "inches": [
+                36,
+                72
+              ],
+              "median": 1710,
+              "n": 145
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "120x160",
+      "shortCm": 120,
+      "longCm": 160,
+      "referenceFamily": "3:4 / 4:3",
+      "approximateRatio": false,
+      "prices": {
+        "Rolled": "1019.99",
+        "Stretched": "1889.99",
+        "Framed": "1939.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-interpolation",
+          "rawUSD": 1015.27,
+          "anchors": [
+            {
+              "inches": [
+                40,
+                54
+              ],
+              "median": 754,
+              "n": 139
+            },
+            {
+              "inches": [
+                48,
+                64
+              ],
+              "median": 1046,
+              "n": 139
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-interpolation",
+          "rawUSD": 1892.53,
+          "anchors": [
+            {
+              "inches": [
+                40,
+                54
+              ],
+              "median": 1404,
+              "n": 154
+            },
+            {
+              "inches": [
+                48,
+                64
+              ],
+              "median": 1950,
+              "n": 154
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-interpolation",
+          "rawUSD": 1937.79,
+          "anchors": [
+            {
+              "inches": [
+                40,
+                54
+              ],
+              "median": 1443,
+              "n": 154
+            },
+            {
+              "inches": [
+                48,
+                64
+              ],
+              "median": 1996,
+              "n": 154
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "90x180",
+      "shortCm": 90,
+      "longCm": 180,
+      "referenceFamily": "1:2 / 2:1",
+      "approximateRatio": false,
+      "prices": {
+        "Rolled": "859.99",
+        "Stretched": "1619.99",
+        "Framed": "1659.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-interpolation",
+          "rawUSD": 864.84,
+          "anchors": [
+            {
+              "inches": [
+                30,
+                60
+              ],
+              "median": 644,
+              "n": 126
+            },
+            {
+              "inches": [
+                36,
+                72
+              ],
+              "median": 890,
+              "n": 126
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-interpolation",
+          "rawUSD": 1621.53,
+          "anchors": [
+            {
+              "inches": [
+                30,
+                60
+              ],
+              "median": 1196,
+              "n": 145
+            },
+            {
+              "inches": [
+                36,
+                72
+              ],
+              "median": 1670,
+              "n": 145
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-interpolation",
+          "rawUSD": 1660.71,
+          "anchors": [
+            {
+              "inches": [
+                30,
+                60
+              ],
+              "median": 1228,
+              "n": 145
+            },
+            {
+              "inches": [
+                36,
+                72
+              ],
+              "median": 1710,
+              "n": 145
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "120x180",
+      "shortCm": 120,
+      "longCm": 180,
+      "referenceFamily": "2:3 / 3:2",
+      "approximateRatio": false,
+      "prices": {
+        "Rolled": "1079.99",
+        "Stretched": "2069.99",
+        "Framed": "2109.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-interpolation",
+          "rawUSD": 1077.08,
+          "anchors": [
+            {
+              "inches": [
+                40,
+                60
+              ],
+              "median": 832,
+              "n": 139
+            },
+            {
+              "inches": [
+                48,
+                72
+              ],
+              "median": 1105,
+              "n": 139
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-interpolation",
+          "rawUSD": 2072.17,
+          "anchors": [
+            {
+              "inches": [
+                40,
+                60
+              ],
+              "median": 1547,
+              "n": 154
+            },
+            {
+              "inches": [
+                48,
+                72
+              ],
+              "median": 2132,
+              "n": 154
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-interpolation",
+          "rawUSD": 2105.5,
+          "anchors": [
+            {
+              "inches": [
+                40,
+                60
+              ],
+              "median": 1592,
+              "n": 154
+            },
+            {
+              "inches": [
+                48,
+                72
+              ],
+              "median": 2164,
+              "n": 154
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "180x180",
+      "shortCm": 180,
+      "longCm": 180,
+      "referenceFamily": "1:1",
+      "approximateRatio": false,
+      "prices": {
+        "Rolled": "1579.99",
+        "Stretched": "2999.99",
+        "Framed": "3069.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-interpolation",
+          "rawUSD": 1575.81,
+          "anchors": [
+            {
+              "inches": [
+                60,
+                60
+              ],
+              "median": 1144,
+              "n": 67
+            },
+            {
+              "inches": [
+                72,
+                72
+              ],
+              "median": 1625,
+              "n": 67
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-interpolation",
+          "rawUSD": 2997.6,
+          "anchors": [
+            {
+              "inches": [
+                60,
+                60
+              ],
+              "median": 2204,
+              "n": 70
+            },
+            {
+              "inches": [
+                72,
+                72
+              ],
+              "median": 3088,
+              "n": 70
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-interpolation",
+          "rawUSD": 3072.22,
+          "anchors": [
+            {
+              "inches": [
+                60,
+                60
+              ],
+              "median": 2249,
+              "n": 70
+            },
+            {
+              "inches": [
+                72,
+                72
+              ],
+              "median": 3166,
+              "n": 70
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "100x200",
+      "shortCm": 100,
+      "longCm": 200,
+      "referenceFamily": "1:2 / 2:1",
+      "approximateRatio": false,
+      "prices": {
+        "Rolled": "1049.99",
+        "Stretched": "1969.99",
+        "Framed": "2009.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-interpolation",
+          "rawUSD": 1047.92,
+          "anchors": [
+            {
+              "inches": [
+                36,
+                72
+              ],
+              "median": 890,
+              "n": 126
+            },
+            {
+              "inches": [
+                40,
+                80
+              ],
+              "median": 1079,
+              "n": 126
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-interpolation",
+          "rawUSD": 1969.12,
+          "anchors": [
+            {
+              "inches": [
+                36,
+                72
+              ],
+              "median": 1670,
+              "n": 145
+            },
+            {
+              "inches": [
+                40,
+                80
+              ],
+              "median": 2028,
+              "n": 145
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-interpolation",
+          "rawUSD": 2014.14,
+          "anchors": [
+            {
+              "inches": [
+                36,
+                72
+              ],
+              "median": 1710,
+              "n": 145
+            },
+            {
+              "inches": [
+                40,
+                80
+              ],
+              "median": 2074,
+              "n": 145
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "150x200",
+      "shortCm": 150,
+      "longCm": 200,
+      "referenceFamily": "3:4 / 4:3",
+      "approximateRatio": false,
+      "prices": {
+        "Rolled": "1449.99",
+        "Stretched": "2769.99",
+        "Framed": "2839.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-interpolation",
+          "rawUSD": 1452.24,
+          "anchors": [
+            {
+              "inches": [
+                54,
+                72
+              ],
+              "median": 1235,
+              "n": 139
+            },
+            {
+              "inches": [
+                60,
+                80
+              ],
+              "median": 1495,
+              "n": 139
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-interpolation",
+          "rawUSD": 2767.89,
+          "anchors": [
+            {
+              "inches": [
+                54,
+                72
+              ],
+              "median": 2366,
+              "n": 154
+            },
+            {
+              "inches": [
+                60,
+                80
+              ],
+              "median": 2847,
+              "n": 154
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-interpolation",
+          "rawUSD": 2840.63,
+          "anchors": [
+            {
+              "inches": [
+                54,
+                72
+              ],
+              "median": 2412,
+              "n": 154
+            },
+            {
+              "inches": [
+                60,
+                80
+              ],
+              "median": 2925,
+              "n": 154
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "140x210",
+      "shortCm": 140,
+      "longCm": 210,
+      "referenceFamily": "2:3 / 3:2",
+      "approximateRatio": false,
+      "prices": {
+        "Rolled": "1439.99",
+        "Stretched": "2769.99",
+        "Framed": "2829.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-extrapolation",
+          "rawUSD": 1439.11,
+          "anchors": [
+            {
+              "inches": [
+                53,
+                80
+              ],
+              "median": 1339,
+              "n": 139
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-extrapolation",
+          "rawUSD": 2772.9,
+          "anchors": [
+            {
+              "inches": [
+                53,
+                80
+              ],
+              "median": 2580,
+              "n": 154
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-extrapolation",
+          "rawUSD": 2828.78,
+          "anchors": [
+            {
+              "inches": [
+                53,
+                80
+              ],
+              "median": 2632,
+              "n": 154
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "120x240",
+      "shortCm": 120,
+      "longCm": 240,
+      "referenceFamily": "1:2 / 2:1",
+      "approximateRatio": false,
+      "prices": {
+        "Rolled": "1399.99",
+        "Stretched": "2689.99",
+        "Framed": "2749.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-interpolation",
+          "rawUSD": 1398.64,
+          "anchors": [
+            {
+              "inches": [
+                45,
+                90
+              ],
+              "median": 1274,
+              "n": 126
+            },
+            {
+              "inches": [
+                50,
+                100
+              ],
+              "median": 1560,
+              "n": 126
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-interpolation",
+          "rawUSD": 2689.28,
+          "anchors": [
+            {
+              "inches": [
+                45,
+                90
+              ],
+              "median": 2457,
+              "n": 145
+            },
+            {
+              "inches": [
+                50,
+                100
+              ],
+              "median": 2990,
+              "n": 145
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-interpolation",
+          "rawUSD": 2750,
+          "anchors": [
+            {
+              "inches": [
+                45,
+                90
+              ],
+              "median": 2509,
+              "n": 145
+            },
+            {
+              "inches": [
+                50,
+                100
+              ],
+              "median": 3062,
+              "n": 145
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "160x240",
+      "shortCm": 160,
+      "longCm": 240,
+      "referenceFamily": "2:3 / 3:2",
+      "approximateRatio": false,
+      "prices": {
+        "Rolled": "1879.99",
+        "Stretched": "3619.99",
+        "Framed": "3689.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-extrapolation",
+          "rawUSD": 1879.66,
+          "anchors": [
+            {
+              "inches": [
+                53,
+                80
+              ],
+              "median": 1339,
+              "n": 139
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-extrapolation",
+          "rawUSD": 3621.74,
+          "anchors": [
+            {
+              "inches": [
+                53,
+                80
+              ],
+              "median": 2580,
+              "n": 154
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-extrapolation",
+          "rawUSD": 3694.74,
+          "anchors": [
+            {
+              "inches": [
+                53,
+                80
+              ],
+              "median": 2632,
+              "n": 154
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "180x240",
+      "shortCm": 180,
+      "longCm": 240,
+      "referenceFamily": "3:4 / 4:3",
+      "approximateRatio": false,
+      "prices": {
+        "Rolled": "1809.99",
+        "Stretched": "3699.99",
+        "Framed": "3769.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-interpolation",
+          "rawUSD": 1814.51,
+          "anchors": [
+            {
+              "inches": [
+                60,
+                80
+              ],
+              "median": 1495,
+              "n": 139
+            },
+            {
+              "inches": [
+                75,
+                100
+              ],
+              "median": 1950,
+              "n": 139
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-interpolation",
+          "rawUSD": 3695.99,
+          "anchors": [
+            {
+              "inches": [
+                60,
+                80
+              ],
+              "median": 2847,
+              "n": 154
+            },
+            {
+              "inches": [
+                75,
+                100
+              ],
+              "median": 4056,
+              "n": 154
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-interpolation",
+          "rawUSD": 3773.99,
+          "anchors": [
+            {
+              "inches": [
+                60,
+                80
+              ],
+              "median": 2925,
+              "n": 154
+            },
+            {
+              "inches": [
+                75,
+                100
+              ],
+              "median": 4134,
+              "n": 154
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "61x61",
+      "shortCm": 61,
+      "longCm": 61,
+      "referenceFamily": "1:1",
+      "approximateRatio": false,
+      "prices": {
+        "Rolled": "259.99",
+        "Stretched": "469.99",
+        "Framed": "489.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-interpolation",
+          "rawUSD": 260.19,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                24
+              ],
+              "median": 260,
+              "n": 67
+            },
+            {
+              "inches": [
+                30,
+                30
+              ],
+              "median": 342,
+              "n": 67
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-interpolation",
+          "rawUSD": 468.31,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                24
+              ],
+              "median": 468,
+              "n": 70
+            },
+            {
+              "inches": [
+                30,
+                30
+              ],
+              "median": 602,
+              "n": 70
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-interpolation",
+          "rawUSD": 494.3,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                24
+              ],
+              "median": 494,
+              "n": 70
+            },
+            {
+              "inches": [
+                30,
+                30
+              ],
+              "median": 621,
+              "n": 70
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "76x76",
+      "shortCm": 76,
+      "longCm": 76,
+      "referenceFamily": "1:1",
+      "approximateRatio": false,
+      "prices": {
+        "Rolled": "339.99",
+        "Stretched": "599.99",
+        "Framed": "619.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-interpolation",
+          "rawUSD": 340.81,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                24
+              ],
+              "median": 260,
+              "n": 67
+            },
+            {
+              "inches": [
+                30,
+                30
+              ],
+              "median": 342,
+              "n": 67
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-interpolation",
+          "rawUSD": 600.05,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                24
+              ],
+              "median": 468,
+              "n": 70
+            },
+            {
+              "inches": [
+                30,
+                30
+              ],
+              "median": 602,
+              "n": 70
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-interpolation",
+          "rawUSD": 619.15,
+          "anchors": [
+            {
+              "inches": [
+                24,
+                24
+              ],
+              "median": 494,
+              "n": 70
+            },
+            {
+              "inches": [
+                30,
+                30
+              ],
+              "median": 621,
+              "n": 70
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "81x81",
+      "shortCm": 81,
+      "longCm": 81,
+      "referenceFamily": "1:1",
+      "approximateRatio": false,
+      "prices": {
+        "Rolled": "389.99",
+        "Stretched": "669.99",
+        "Framed": "699.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-interpolation",
+          "rawUSD": 386.33,
+          "anchors": [
+            {
+              "inches": [
+                30,
+                30
+              ],
+              "median": 342,
+              "n": 67
+            },
+            {
+              "inches": [
+                32,
+                32
+              ],
+              "median": 389,
+              "n": 67
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-interpolation",
+          "rawUSD": 670.85,
+          "anchors": [
+            {
+              "inches": [
+                30,
+                30
+              ],
+              "median": 602,
+              "n": 70
+            },
+            {
+              "inches": [
+                32,
+                32
+              ],
+              "median": 675,
+              "n": 70
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-interpolation",
+          "rawUSD": 702.12,
+          "anchors": [
+            {
+              "inches": [
+                30,
+                30
+              ],
+              "median": 621,
+              "n": 70
+            },
+            {
+              "inches": [
+                32,
+                32
+              ],
+              "median": 707,
+              "n": 70
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "91x91",
+      "shortCm": 91,
+      "longCm": 91,
+      "referenceFamily": "1:1",
+      "approximateRatio": false,
+      "prices": {
+        "Rolled": "479.99",
+        "Stretched": "839.99",
+        "Framed": "859.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-interpolation",
+          "rawUSD": 476.79,
+          "anchors": [
+            {
+              "inches": [
+                32,
+                32
+              ],
+              "median": 389,
+              "n": 67
+            },
+            {
+              "inches": [
+                36,
+                36
+              ],
+              "median": 481,
+              "n": 67
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-interpolation",
+          "rawUSD": 837.22,
+          "anchors": [
+            {
+              "inches": [
+                32,
+                32
+              ],
+              "median": 675,
+              "n": 70
+            },
+            {
+              "inches": [
+                36,
+                36
+              ],
+              "median": 845,
+              "n": 70
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-interpolation",
+          "rawUSD": 863.5,
+          "anchors": [
+            {
+              "inches": [
+                32,
+                32
+              ],
+              "median": 707,
+              "n": 70
+            },
+            {
+              "inches": [
+                36,
+                36
+              ],
+              "median": 871,
+              "n": 70
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "102x102",
+      "shortCm": 102,
+      "longCm": 102,
+      "referenceFamily": "1:1",
+      "approximateRatio": false,
+      "prices": {
+        "Rolled": "589.99",
+        "Stretched": "1019.99",
+        "Framed": "1059.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-interpolation",
+          "rawUSD": 590.86,
+          "anchors": [
+            {
+              "inches": [
+                40,
+                40
+              ],
+              "median": 585,
+              "n": 67
+            },
+            {
+              "inches": [
+                44,
+                44
+              ],
+              "median": 741,
+              "n": 67
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-interpolation",
+          "rawUSD": 1024.74,
+          "anchors": [
+            {
+              "inches": [
+                40,
+                40
+              ],
+              "median": 1014,
+              "n": 70
+            },
+            {
+              "inches": [
+                44,
+                44
+              ],
+              "median": 1300,
+              "n": 70
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-interpolation",
+          "rawUSD": 1064.72,
+          "anchors": [
+            {
+              "inches": [
+                40,
+                40
+              ],
+              "median": 1053,
+              "n": 70
+            },
+            {
+              "inches": [
+                44,
+                44
+              ],
+              "median": 1365,
+              "n": 70
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "112x112",
+      "shortCm": 112,
+      "longCm": 112,
+      "referenceFamily": "1:1",
+      "approximateRatio": false,
+      "prices": {
+        "Rolled": "739.99",
+        "Stretched": "1299.99",
+        "Framed": "1369.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-interpolation",
+          "rawUSD": 742.47,
+          "anchors": [
+            {
+              "inches": [
+                44,
+                44
+              ],
+              "median": 741,
+              "n": 67
+            },
+            {
+              "inches": [
+                48,
+                48
+              ],
+              "median": 806,
+              "n": 67
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-interpolation",
+          "rawUSD": 1304.41,
+          "anchors": [
+            {
+              "inches": [
+                44,
+                44
+              ],
+              "median": 1300,
+              "n": 70
+            },
+            {
+              "inches": [
+                48,
+                48
+              ],
+              "median": 1495,
+              "n": 70
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-interpolation",
+          "rawUSD": 1368.82,
+          "anchors": [
+            {
+              "inches": [
+                44,
+                44
+              ],
+              "median": 1365,
+              "n": 70
+            },
+            {
+              "inches": [
+                48,
+                48
+              ],
+              "median": 1534,
+              "n": 70
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "122x122",
+      "shortCm": 122,
+      "longCm": 122,
+      "referenceFamily": "1:1",
+      "approximateRatio": false,
+      "prices": {
+        "Rolled": "809.99",
+        "Stretched": "1499.99",
+        "Framed": "1539.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-interpolation",
+          "rawUSD": 806.98,
+          "anchors": [
+            {
+              "inches": [
+                48,
+                48
+              ],
+              "median": 806,
+              "n": 67
+            },
+            {
+              "inches": [
+                55,
+                55
+              ],
+              "median": 1040,
+              "n": 67
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-interpolation",
+          "rawUSD": 1496.85,
+          "anchors": [
+            {
+              "inches": [
+                48,
+                48
+              ],
+              "median": 1495,
+              "n": 70
+            },
+            {
+              "inches": [
+                55,
+                55
+              ],
+              "median": 1937,
+              "n": 70
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-interpolation",
+          "rawUSD": 1535.85,
+          "anchors": [
+            {
+              "inches": [
+                48,
+                48
+              ],
+              "median": 1534,
+              "n": 70
+            },
+            {
+              "inches": [
+                55,
+                55
+              ],
+              "median": 1976,
+              "n": 70
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "140x140",
+      "shortCm": 140,
+      "longCm": 140,
+      "referenceFamily": "1:1",
+      "approximateRatio": false,
+      "prices": {
+        "Rolled": "1039.99",
+        "Stretched": "1939.99",
+        "Framed": "1979.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-interpolation",
+          "rawUSD": 1042.35,
+          "anchors": [
+            {
+              "inches": [
+                55,
+                55
+              ],
+              "median": 1040,
+              "n": 67
+            },
+            {
+              "inches": [
+                60,
+                60
+              ],
+              "median": 1144,
+              "n": 67
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-interpolation",
+          "rawUSD": 1943.04,
+          "anchors": [
+            {
+              "inches": [
+                55,
+                55
+              ],
+              "median": 1937,
+              "n": 70
+            },
+            {
+              "inches": [
+                60,
+                60
+              ],
+              "median": 2204,
+              "n": 70
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-interpolation",
+          "rawUSD": 1982.18,
+          "anchors": [
+            {
+              "inches": [
+                55,
+                55
+              ],
+              "median": 1976,
+              "n": 70
+            },
+            {
+              "inches": [
+                60,
+                60
+              ],
+              "median": 2249,
+              "n": 70
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "153x153",
+      "shortCm": 153,
+      "longCm": 153,
+      "referenceFamily": "1:1",
+      "approximateRatio": false,
+      "prices": {
+        "Rolled": "1149.99",
+        "Stretched": "2219.99",
+        "Framed": "2269.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-interpolation",
+          "rawUSD": 1152.62,
+          "anchors": [
+            {
+              "inches": [
+                60,
+                60
+              ],
+              "median": 1144,
+              "n": 67
+            },
+            {
+              "inches": [
+                72,
+                72
+              ],
+              "median": 1625,
+              "n": 67
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-interpolation",
+          "rawUSD": 2219.85,
+          "anchors": [
+            {
+              "inches": [
+                60,
+                60
+              ],
+              "median": 2204,
+              "n": 70
+            },
+            {
+              "inches": [
+                72,
+                72
+              ],
+              "median": 3088,
+              "n": 70
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-interpolation",
+          "rawUSD": 2265.44,
+          "anchors": [
+            {
+              "inches": [
+                60,
+                60
+              ],
+              "median": 2249,
+              "n": 70
+            },
+            {
+              "inches": [
+                72,
+                72
+              ],
+              "median": 3166,
+              "n": 70
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "183x183",
+      "shortCm": 183,
+      "longCm": 183,
+      "referenceFamily": "1:1",
+      "approximateRatio": false,
+      "prices": {
+        "Rolled": "1629.99",
+        "Stretched": "3089.99",
+        "Framed": "3169.99"
+      },
+      "evidence": {
+        "Rolled": {
+          "method": "area-extrapolation",
+          "rawUSD": 1627.13,
+          "anchors": [
+            {
+              "inches": [
+                72,
+                72
+              ],
+              "median": 1625,
+              "n": 67
+            }
+          ]
+        },
+        "Stretched": {
+          "method": "area-extrapolation",
+          "rawUSD": 3092.05,
+          "anchors": [
+            {
+              "inches": [
+                72,
+                72
+              ],
+              "median": 3088,
+              "n": 70
+            }
+          ]
+        },
+        "Framed": {
+          "method": "area-extrapolation",
+          "rawUSD": 3170.16,
+          "anchors": [
+            {
+              "inches": [
+                72,
+                72
+              ],
+              "median": 3166,
+              "n": 70
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

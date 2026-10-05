@@ -1,0 +1,24 @@
+{%- doc -%}
+  Returns a rolled variant ID only when the size has no other delivery options.
+  @param {product} product - Product to inspect
+  @param {string} size - Exact size option value
+  @param {number} size_idx - Zero-based size position
+  @param {number} frame_idx - Zero-based frame position
+{%- enddoc -%}
+{%- liquid
+  assign rolled = nil
+  assign other_finish = false
+  for candidate in product.variants
+    if candidate.options[size_idx] == size
+      assign finish = candidate.options[frame_idx] | downcase
+      if finish == 'rolled canvas'
+        assign rolled = candidate
+      else
+        assign other_finish = true
+      endif
+    endif
+  endfor
+  if rolled and other_finish == false
+    echo rolled.id
+  endif
+-%}

@@ -1,0 +1,37 @@
+{%- doc -%}
+  Finished room with baked unframed artwork. Add only frame rails; never a second master.
+  @param {image} room - Finished scene
+  @param {object} bounds - Verified normalized artwork edges from custom.scene_layouts
+  @param {string} frame - Selected delivery/finish
+  @param {string} alt - Accessible description
+  @param {string} [loading] - Image loading strategy
+{%- enddoc -%}
+{%- comment -%}Float-frame aliases resolve through snippets/frame-key.liquid.{%- endcomment -%}
+{%- liquid
+  assign frame_key = 'none'
+  capture frame_key
+    render 'frame-key', frame: frame
+  endcapture
+  assign frame_key = frame_key | strip | default: 'none'
+  assign art_width = bounds.right | minus: bounds.left | times: 100
+  assign art_height = bounds.bottom | minus: bounds.top | times: 100
+  assign rail_width = art_width | times: 0.015
+  assign frame_tex = 'frame-' | append: frame_key | append: '.webp'
+-%}
+<div data-artwork-scene data-composed-scene data-scene-layout="{{ room.alt | escape }}" class="relative h-full w-full overflow-hidden" role="img" aria-label="{{ alt | escape }}">
+  <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#eeece7;container-type:size">
+    <div style="position:relative;flex:none;--room-ratio:{{ room.aspect_ratio }};width:var(--scene-plane-width,min(100cqw,calc(100cqh * var(--room-ratio))));aspect-ratio:var(--room-ratio)">
+      <img src="{{ room | image_url: width: 2400 }}" alt="" width="{{ room.width }}" height="{{ room.height }}" loading="{{ loading | default: 'lazy' }}" style="display:block;width:100%;height:100%">
+      {%- if bounds.profile == 'composed-frames-v1' -%}
+        <frame-preview data-composed-frame style="position:absolute;inset:0;display:block;--art-left:{{ bounds.left | times: 100 }}%;--art-top:{{ bounds.top | times: 100 }}%;--art-width:{{ art_width }}%;--art-height:{{ art_height }}%;--composed-rail:{{ rail_width }}cqw">
+          <div data-frame-mount style="position:absolute;inset:0;container-type:size"
+            data-tex-oak="{{ 'frame-oak.webp' | asset_url }}" data-tex-black="{{ 'frame-black.webp' | asset_url }}"
+            data-tex-walnut="{{ 'frame-walnut.webp' | asset_url }}" data-tex-white="{{ 'frame-white.webp' | asset_url }}"
+            data-tex-gold="{{ 'frame-gold.webp' | asset_url }}" data-tex-silver="{{ 'frame-silver.webp' | asset_url }}">
+            <div class="frame-box" data-frame-box data-frame="{{ frame_key }}" aria-hidden="true" style="{% unless frame_key == 'none' %}--frame-tex:url('{{ frame_tex | asset_url }}');{% endunless %}"></div>
+          </div>
+        </frame-preview>
+      {%- endif -%}
+    </div>
+  </div>
+</div>

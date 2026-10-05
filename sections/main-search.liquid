@@ -1,0 +1,81 @@
+<div class="px-5 py-12 md:px-10">
+  <h1 class="font-serif text-[32px] text-black md:text-[36px]">
+    {%- if search.performed -%}
+      {{ 'search.results_for' | t: terms: search.terms }}
+    {%- else -%}
+      {{ 'search.title' | t }}
+    {%- endif -%}
+  </h1>
+
+  <form action="{{ routes.search_url }}" method="get" class="mt-8 flex max-w-md items-center gap-4 border-b border-black pb-3">
+    {% render 'icon', name: 'search', class: 'h-[18px] w-[18px] flex-none text-black' %}
+    <input
+      type="search"
+      name="q"
+      value="{{ search.terms | escape }}"
+      placeholder="{{ 'search.placeholder' | t }}"
+      aria-label="{{ 'search.placeholder' | t }}"
+      class="w-full bg-transparent font-sans text-[16px] text-black outline-hidden placeholder:text-neutral-500 md:text-[16px]"
+    >
+    <input type="hidden" name="type" value="product">
+    <button type="submit" aria-label="{{ 'search.submit' | t }}" class="-m-2 p-2 text-black transition-opacity hover:opacity-50">
+      {% render 'icon', name: 'arrow-right', class: 'h-4 w-4' %}
+    </button>
+  </form>
+
+  {%- if search.performed -%}
+    {%- paginate search.results by 16 -%}
+      {%- if search.results_count == 0 -%}
+        <div class="mt-16">
+          <p class="font-sans text-[14px] text-neutral-500">{{ 'search.no_results' | t }} &#8220;{{ search.terms }}&#8221;.</p>
+          <a href="{{ routes.all_products_collection_url }}" class="mt-6 inline-block border border-black px-8 py-3.5 font-sans text-[14px] text-black transition-colors hover:bg-black hover:text-white">
+            {{ 'cart.continue' | t }}
+          </a>
+        </div>
+      {%- else -%}
+        <p class="mt-8 font-sans text-[14px] text-neutral-500">
+          {{ 'collections.results_count' | t: count: search.results_count }}
+        </p>
+        <div class="mt-6 grid grid-cols-2 gap-x-5 gap-y-10 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+          {%- for item in search.results -%}
+            {%- if item.object_type == 'product' -%}
+              {% render 'product-card', product: item %}
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+
+        {%- if paginate.pages > 1 -%}
+          <nav class="mt-12 flex items-center justify-center gap-2 font-sans text-[14px]" aria-label="{{ 'general.pagination' | t }}">
+            {%- assign current_str = paginate.current_page | append: '' -%}
+            {%- if paginate.previous -%}
+              <a href="{{ paginate.previous.url }}" aria-label="{{ 'general.previous' | t }}" class="flex h-8 w-8 items-center justify-center text-black transition-opacity hover:opacity-50">
+                {% render 'icon', name: 'chevron-left', class: 'h-4 w-4' %}
+              </a>
+            {%- endif -%}
+            {%- for part in paginate.parts -%}
+              {%- if part.is_link -%}
+                <a href="{{ part.url }}" class="flex h-8 w-8 items-center justify-center text-black transition-opacity hover:opacity-50">{{ part.title }}</a>
+              {%- elsif part.title == current_str -%}
+                <span class="flex h-8 w-8 items-center justify-center bg-black text-white" aria-current="page">{{ part.title }}</span>
+              {%- else -%}
+                <span class="flex h-8 w-8 items-center justify-center text-neutral-500">{{ part.title }}</span>
+              {%- endif -%}
+            {%- endfor -%}
+            {%- if paginate.next -%}
+              <a href="{{ paginate.next.url }}" aria-label="{{ 'general.next' | t }}" class="flex h-8 w-8 items-center justify-center text-black transition-opacity hover:opacity-50">
+                {% render 'icon', name: 'chevron-right', class: 'h-4 w-4' %}
+              </a>
+            {%- endif -%}
+          </nav>
+        {%- endif -%}
+      {%- endif -%}
+    {%- endpaginate -%}
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "搜索结果",
+  "settings": []
+}
+{% endschema %}

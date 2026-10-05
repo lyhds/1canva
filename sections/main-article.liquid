@@ -1,0 +1,41 @@
+<article class="px-5 py-12 md:px-10 md:py-16">
+  <div class="mx-auto max-w-2xl">
+    <a href="{{ blog.url }}" class="inline-flex items-center gap-2 font-sans text-[14px] text-black underline-offset-4 hover:underline">
+      {% render 'icon', name: 'chevron-left', class: 'h-3.5 w-3.5' %}
+      {{ 'blog.back' | t }}
+    </a>
+
+    {%- liquid
+      assign word_count = article.content | strip_html | split: ' ' | size
+      assign reading_minutes = word_count | plus: 199 | divided_by: 200
+      assign article_label = article.tags.first | default: 'Journal'
+    -%}
+    <p class="mt-8 font-mono text-[12px] uppercase tracking-[0.14em] text-neutral-500">
+      {{ article_label }} · {{ reading_minutes }} min read
+    </p>
+    <h1 class="mt-3 font-serif text-[32px] leading-[1.2] text-black md:text-[40px]">{{ article.title }}</h1>
+
+    {%- if article.image -%}
+      <img
+        src="{{ article.image | image_url: width: 1400 }}"
+        srcset="{{ article.image | image_url: width: 640 }} 640w, {{ article.image | image_url: width: 960 }} 960w, {{ article.image | image_url: width: 1400 }} 1400w"
+        sizes="(min-width: 768px) 672px, calc(100vw - 2.5rem)"
+        alt="{{ article.image.alt | default: article.title | escape }}"
+        class="mt-8 w-full bg-[#f3f3f3]"
+        width="{{ article.image.width }}"
+        height="{{ article.image.height }}"
+      >
+    {%- endif -%}
+
+    <div class="rte mt-10 font-serif text-[17px] leading-[1.7] text-black">
+      {{ article.content }}
+    </div>
+  </div>
+</article>
+
+{% schema %}
+{
+  "name": "文章",
+  "settings": []
+}
+{% endschema %}

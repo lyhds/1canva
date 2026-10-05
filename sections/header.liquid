@@ -1,0 +1,274 @@
+{%- liquid
+  assign menu = section.settings.menu
+  assign brand_name = settings.brand_name | default: 'CANVASRA'
+  assign wishlist_page = settings.wishlist_page | default: pages['wishlist']
+-%}
+
+<script src="{{ 'wishlist.js' | asset_url }}" defer></script>
+<script src="{{ 'header.js' | asset_url }}" defer></script>
+<script src="{{ 'predictive-search.js' | asset_url }}" defer></script>
+
+<mobile-drawer data-page-type="{{ request.page_type }}" data-home-tone-desktop="{{ section.settings.home_tone_desktop | default: 'dark' }}" data-home-tone-mobile="{{ section.settings.home_tone_mobile | default: 'dark' }}">
+  {%- if request.page_type == 'index' and section.settings.home_notice != blank -%}
+    <div data-header-notice>{% if section.settings.home_notice_link != blank %}<a href="{{ section.settings.home_notice_link }}">{{ section.settings.home_notice | escape }}</a>{% else %}<span>{{ section.settings.home_notice | escape }}</span>{% endif %}</div>
+  {%- endif -%}
+  <header data-site-header class="sticky top-0 z-50 border-b border-neutral-200 bg-white">
+    <div class="header-bar relative flex h-16 items-center justify-between px-5 md:px-10">
+      <div class="header-start flex min-w-0 items-center gap-4">
+        <button
+          type="button"
+          data-drawer-open
+          data-mobile-menu-toggle
+          aria-controls="HeaderMenu-{{ section.id }}"
+          aria-expanded="false"
+          aria-label="{{ 'header.menu' | t }}"
+          class="-ml-1 p-1 text-black transition-opacity hover:opacity-50 xl:hidden"
+        >
+          <span data-menu-icon>{% render 'icon', name: 'menu', class: 'h-5 w-5' %}</span><span data-close-icon>{% render 'icon', name: 'x', class: 'h-5 w-5' %}</span>
+        </button>
+        <button type="button" data-search-open class="header-mobile-search" aria-label="{{ 'header.search' | t }}">{% render 'icon', name: 'search', class: 'h-[18px] w-[18px]' %}</button>
+        <a data-header-logo href="{{ routes.root_url }}" class="whitespace-nowrap">
+          <span class="site-wordmark">{{ brand_name }}</span>
+        </a>
+      </div>
+
+      <nav class="header-desktop-nav hidden xl:flex" aria-label="{{ 'header.menu' | t }}">
+        {%- for link in menu.links -%}
+          {%- if link.links != blank -%}
+            <div data-desktop-menu>
+              <button type="button" data-desktop-menu-toggle aria-expanded="false" aria-controls="DesktopMenu-{{ section.id }}-{{ forloop.index }}">{{ link.title | escape }} {% render 'icon', name: 'chevron-down', class: 'h-3 w-3' %}</button>
+              <div id="DesktopMenu-{{ section.id }}-{{ forloop.index }}" data-desktop-menu-panel hidden>
+                <div class="desktop-menu-inner">
+                  <a class="desktop-menu-overview" href="{{ link.url }}">{{ link.title | escape }} &rarr;</a>
+                  <div class="desktop-menu-columns">
+                    {%- for child in link.links -%}
+                      <div class="desktop-menu-column">
+                        <a class="desktop-menu-heading" href="{{ child.url }}">{{ child.title | escape }}</a>
+                        {%- if child.links != blank -%}
+                          <ul>
+                            {%- for grandchild in child.links -%}
+                              <li><a href="{{ grandchild.url }}">{{ grandchild.title | escape }}</a></li>
+                            {%- endfor -%}
+                          </ul>
+                        {%- endif -%}
+                      </div>
+                    {%- endfor -%}
+                  </div>
+                </div>
+              </div>
+            </div>
+          {%- else -%}
+            <a href="{{ link.url }}">{{ link.title | escape }}</a>
+          {%- endif -%}
+        {%- endfor -%}
+      </nav>
+
+      <div class="header-tools flex items-center gap-3 sm:gap-5">
+        {%- if settings.enable_display_currency -%}
+          <display-currency-selector class="hidden xl:block">
+            <label for="HeaderCurrency-{{ section.id }}" class="sr-only">{{ 'currency.display_label' | t }}</label>
+            <div class="relative">
+              <select
+                id="HeaderCurrency-{{ section.id }}"
+                data-display-currency-select
+                aria-label="{{ 'currency.display_label' | t }}"
+                class="h-9 w-[72px] appearance-none bg-transparent pl-2 pr-6 font-sans text-[16px] text-black outline-hidden transition-opacity hover:opacity-60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+              >
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+                <option value="GBP">GBP</option>
+                <option value="CAD">CAD</option>
+                <option value="SGD">SGD</option>
+                <option value="AUD">AUD</option>
+                <option value="CNY">CNY</option>
+                <option value="HKD">HKD</option>
+                <option value="ILS">ILS</option>
+                <option value="JPY">JPY</option>
+                <option value="NZD">NZD</option>
+              </select>
+              {% render 'icon', name: 'chevron-down', class: 'pointer-events-none absolute right-1.5 top-1/2 h-3 w-3 -translate-y-1/2' %}
+            </div>
+          </display-currency-selector>
+        {%- endif -%}
+        <button
+          type="button"
+          data-search-open
+          aria-label="{{ 'header.search' | t }}"
+          class="hidden text-black transition-opacity hover:opacity-50 xl:block"
+        >
+          {% render 'icon', name: 'search', class: 'h-[18px] w-[18px]' %}
+        </button>
+        <a href="{{ routes.account_url }}" data-header-account aria-label="{{ 'header.account' | t }}" class="hidden text-black transition-opacity hover:opacity-50 sm:block">
+          {% render 'icon', name: 'user', class: 'h-[18px] w-[18px]' %}
+        </a>
+        {%- if wishlist_page != blank -%}
+          <a href="{{ wishlist_page.url }}" aria-label="{{ 'header.wishlist' | t }}" class="relative hidden text-black xl:block transition-opacity hover:opacity-50">
+            {% render 'icon', name: 'heart', class: 'h-[18px] w-[18px]' %}
+            <span data-wishlist-count hidden class="absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center rounded-full bg-black font-sans text-[10px] text-white"></span>
+          </a>
+        {%- endif -%}
+        <a href="{{ routes.cart_url }}" data-cart-drawer-open aria-label="{{ 'header.cart' | t }}" class="relative text-black transition-opacity hover:opacity-50">
+          <span class="header-cart-icon">
+          {% render 'icon', name: 'bag', class: 'h-[18px] w-[18px]' %}
+          <span
+            data-cart-count
+            class="header-cart-count rounded-full bg-black font-sans text-[10px] text-white"
+            {% if cart.item_count == 0 %}hidden{% endif %}
+          >
+            {{ cart.item_count }}
+          </span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  {%- comment -%} mobile drawer; panel geometry (full width below the 60px header on
+       small screens, 400px with its own heading on desktop) lives in
+       src/theme.css under mobile-drawer [data-drawer-panel] {%- endcomment -%}
+  <div data-drawer-overlay class="invisible fixed inset-0 z-[60] bg-black/40 opacity-0 transition-opacity duration-300 xl:hidden"></div>
+  <div
+    id="HeaderMenu-{{ section.id }}"
+    role="dialog" aria-modal="true" aria-label="{{ 'header.menu' | t }}" inert
+    data-drawer-panel
+    class="invisible fixed inset-y-0 left-0 z-[61] flex h-full -translate-x-full flex-col bg-white transition-[transform,visibility] duration-300 xl:hidden"
+  >
+    <div class="header-menu-heading flex h-16 flex-none items-center justify-between border-b border-neutral-100 px-5">
+      <span class="site-wordmark">{{ brand_name }}</span>
+      <button type="button" data-drawer-close aria-label="{{ 'header.close_menu' | t }}" class="-m-2 p-2 text-black transition-opacity hover:opacity-50">
+        {% render 'icon', name: 'x', class: 'h-5 w-5' %}
+      </button>
+    </div>
+    <button type="button" data-search-open data-drawer-close class="flex flex-none items-center gap-2 border-b border-neutral-100 px-5 py-4 text-left font-sans text-[14px] text-black">
+      {% render 'icon', name: 'search', class: 'h-[18px] w-[18px]' %}
+      {{ 'header.search' | t }}
+    </button>
+    <nav data-menu-links class="flex-1 overflow-y-auto px-5 py-2" aria-label="{{ 'header.menu' | t }}">
+      {%- for link in menu.links -%}
+        {%- if link.links != blank -%}
+          <details data-menu-group="{{ forloop.index0 }}" class="border-b border-neutral-100">
+            <summary class="flex cursor-pointer list-none items-center justify-between py-3.5 font-sans text-[14px] text-black [&::-webkit-details-marker]:hidden">
+              {{ link.title }}
+              {% render 'icon', name: 'chevron-down', class: 'h-3.5 w-3.5 transition-transform duration-200 open:rotate-180' %}
+            </summary>
+            <div class="pb-2 pl-4">
+              <a href="{{ link.url }}" class="block py-3 font-sans text-[14px]">{{ link.title }} &rarr;</a>
+              {%- for column in link.links -%}
+                {%- if column.links != blank -%}
+                  <details class="border-b border-neutral-100 last:border-b-0">
+                    <summary class="flex cursor-pointer list-none items-center justify-between py-3 font-sans text-[14px] text-black [&::-webkit-details-marker]:hidden">
+                      {{ column.title }}
+                      {% render 'icon', name: 'chevron-down', class: 'h-3 w-3 transition-transform duration-200 open:rotate-180' %}
+                    </summary>
+                    <div class="flex flex-col pb-3 pl-4">
+                      {%- for sub in column.links -%}
+                        <a href="{{ sub.url }}" class="py-2 font-sans text-[14px] text-neutral-600 transition-opacity hover:opacity-50">
+                          {{ sub.title }}
+                        </a>
+                      {%- endfor -%}
+                    </div>
+                  </details>
+                {%- else -%}
+                  <a href="{{ column.url }}" class="block border-b border-neutral-100 py-3 font-sans text-[14px] text-black transition-opacity hover:opacity-50 last:border-b-0">
+                    {{ column.title }}
+                  </a>
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+          </details>
+        {%- else -%}
+          <a href="{{ link.url }}" class="block border-b border-neutral-100 py-3.5 font-sans text-[14px] text-black transition-opacity hover:opacity-50">
+            {{ link.title }}
+          </a>
+        {%- endif -%}
+      {%- endfor -%}
+    </nav>
+    {%- if settings.enable_display_currency -%}
+      <display-currency-selector class="block border-t border-neutral-100 px-5 py-4 xl:hidden">
+        <label for="DrawerCurrency-{{ section.id }}" class="mb-2 block font-sans text-[13px] text-neutral-500">{{ 'currency.display_label' | t }}</label>
+        <div class="relative">
+          <select
+            id="DrawerCurrency-{{ section.id }}"
+            data-display-currency-select
+            class="h-11 w-full appearance-none border border-neutral-200 bg-white px-3 pr-10 font-sans text-[16px] text-black outline-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+          >
+            <option value="USD">USD — US Dollar</option>
+            <option value="EUR">EUR — Euro</option>
+            <option value="GBP">GBP — British Pound</option>
+            <option value="CAD">CAD — Canadian Dollar</option>
+            <option value="SGD">SGD — Singapore Dollar</option>
+            <option value="AUD">AUD — Australian Dollar</option>
+            <option value="CNY">CNY — Chinese Yuan</option>
+            <option value="HKD">HKD — Hong Kong Dollar</option>
+            <option value="ILS">ILS — Israeli New Shekel</option>
+            <option value="JPY">JPY — Japanese Yen</option>
+            <option value="NZD">NZD — New Zealand Dollar</option>
+          </select>
+          {% render 'icon', name: 'chevron-down', class: 'pointer-events-none absolute right-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2' %}
+        </div>
+        <p class="mt-2 font-sans text-[12px] leading-relaxed text-neutral-500">{{ 'currency.reference_notice' | t }}</p>
+      </display-currency-selector>
+    {%- endif -%}
+    <div class="grid {% if wishlist_page != blank %}grid-cols-2{% else %}grid-cols-1{% endif %} border-t border-neutral-100">
+      <a href="{{ routes.account_url }}" class="flex items-center gap-2 {% if wishlist_page != blank %}border-r{% endif %} border-neutral-100 px-5 py-4 font-sans text-[14px] text-black">
+        {% render 'icon', name: 'user', class: 'h-4 w-4' %}
+        {{ 'header.account' | t }}
+      </a>
+      {%- if wishlist_page != blank -%}
+        <a href="{{ wishlist_page.url }}" class="flex items-center gap-2 px-5 py-4 font-sans text-[14px] text-black">
+          {% render 'icon', name: 'heart', class: 'h-4 w-4' %}
+          {{ 'header.wishlist' | t }}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</mobile-drawer>
+
+{%- comment -%} predictive search overlay {%- endcomment -%}
+<predictive-search
+  class="fixed inset-0 z-[90] hidden overflow-y-auto bg-white"
+  data-hint="{{ 'search.hint' | t }}"
+  data-empty="{{ 'search.no_results' | t }}"
+  data-error="{{ 'search.error' | t }}"
+  data-view-all="{{ 'search.view_all' | t }}"
+  data-from-price="{{ 'products.product.from_price_html' | t: price: '__PRICE__' | escape }}"
+  role="dialog"
+  aria-modal="true"
+  aria-label="{{ 'header.search' | t }}"
+>
+  <div class="flex h-16 items-center gap-4 border-b border-neutral-200 px-5 md:px-10">
+    {%- comment -%} Mobile puts the close control first and the magnifier last; desktop keeps the original order. {%- endcomment -%}
+    <button type="button" data-search-close aria-label="{{ 'search.close' | t }}" class="order-1 -m-2 p-2 text-black transition-opacity hover:opacity-50 md:order-3">
+      {% render 'icon', name: 'x', class: 'h-5 w-5' %}
+    </button>
+    <input
+      type="search"
+      placeholder="{{ 'search.placeholder' | t }}"
+      aria-label="{{ 'search.placeholder' | t }}"
+      class="order-2 h-full flex-1 font-sans text-[16px] text-black outline-hidden placeholder:text-neutral-500 md:text-[16px]"
+    >
+    {% render 'icon', name: 'search', class: 'order-3 h-[18px] w-[18px] flex-none text-black md:order-1' %}
+  </div>
+  <div class="px-5 py-8 md:px-10" data-search-results>
+    <p class="font-sans text-[14px] text-neutral-500">{{ 'search.hint' | t }}</p>
+  </div>
+</predictive-search>
+
+{% schema %}
+{
+  "name": "页头",
+  "settings": [
+    {"type":"select","id":"home_tone_desktop","label":"首页顶部文字颜色（PC）","info":"适用于 768px 及以上的横幅；仅影响页面顶部透明页头。","default":"dark","options":[{"value":"dark","label":"深色（搭配浅色图片）"},{"value":"light","label":"浅色（搭配深色图片）"}]},
+    {"type":"select","id":"home_tone_mobile","label":"首页顶部文字颜色（移动端）","info":"适用于 768px 以下的横幅；滚动和展开菜单后仍使用深色文字。","default":"dark","options":[{"value":"dark","label":"深色（搭配浅色图片）"},{"value":"light","label":"浅色（搭配深色图片）"}]},
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "菜单",
+      "default": "main-menu",
+      "info": "沿用多级菜单；桌面独立分类下拉，手机全屏展开。"
+    },
+    {"type":"text","id":"home_notice","label":"首页顶部提示（留空隐藏）"},
+    {"type":"url","id":"home_notice_link","label":"首页提示链接"}
+  ]
+}
+{% endschema %}

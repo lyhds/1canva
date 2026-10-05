@@ -1,0 +1,119 @@
+{%- liquid
+  assign craft = product.metafields.custom.craftsmanship
+  if craft == blank
+    assign craft = shop.metafields.custom.craftsmanship
+  endif
+-%}
+
+<section class="border-t border-neutral-100 px-5 py-16 md:px-10 md:py-24">
+  <div class="lg:mx-auto lg:max-w-[1400px]">
+    <div class="max-w-2xl">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="font-mono text-[12px] text-black">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      <h2 class="mt-4 font-serif text-[28px] leading-[1.2] text-black md:text-[32px]">{{ section.settings.heading }}</h2>
+      {%- if craft != blank -%}
+        <div class="rte mt-4 font-serif text-[17px] leading-[1.5] text-black">{{ craft | metafield_tag }}</div>
+      {%- endif -%}
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="mt-12 flex flex-col gap-14 md:mt-16 md:gap-20">
+        {%- for block in section.blocks -%}
+          <div class="grid items-center gap-8 md:grid-cols-2 md:gap-14 {% if block.settings.layout == 'right' %}md:[&>*:first-child]:order-2{% endif %}" {{ block.shopify_attributes }}>
+            <div class="aspect-[4/3] w-full overflow-hidden bg-[#f3f3f3]">
+              {%- if block.settings.image -%}
+                <img
+                  src="{{ block.settings.image | image_url: width: 1200 }}"
+                  alt="{{ block.settings.image.alt | escape }}"
+                  class="h-full w-full object-cover"
+                  loading="lazy"
+                  width="{{ block.settings.image.width }}"
+                  height="{{ block.settings.image.height }}"
+                >
+              {%- else -%}
+                {{ 'image' | placeholder_svg_tag: 'h-full w-full bg-neutral-100' }}
+              {%- endif -%}
+            </div>
+            <div>
+              <h3 class="font-serif text-[22px] leading-[1.3] text-black md:text-[24px]">{{ block.settings.heading }}</h3>
+              {%- if block.settings.text != blank -%}
+                <div class="rte mt-3 max-w-md font-sans text-[16px] leading-[1.75] text-neutral-600">{{ block.settings.text }}</div>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "工匠精神",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "眉题",
+      "default": "Craftsmanship"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "标题",
+      "default": "Hand-painted, from first stroke to last"
+    },
+    {
+      "type": "paragraph",
+      "content": "标题下方的引言取自 metafield custom.craftsmanship（商品级优先，店铺级兜底）。"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "图文行",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "图片",
+          "info": "建议约 4:3 横版：画室场景、笔触特写、装裱过程等。"
+        },
+        {
+          "type": "select",
+          "id": "layout",
+          "label": "图片位置",
+          "default": "left",
+          "options": [
+            { "value": "left", "label": "左" },
+            { "value": "right", "label": "右" }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "标题",
+          "default": "Painted by hand"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "正文",
+          "default": "<p>Every piece begins as a blank Premium Cotton Canvas. Our artists sketch, layer and refine each painting in oils over several days.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "工匠精神",
+      "blocks": [
+        { "type": "row" },
+        { "type": "row", "settings": { "layout": "right" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,60 @@
+<section class="px-5 py-16 md:px-10 md:py-24">
+  <div class="mx-auto max-w-xl text-center">
+    <h2 class="font-serif text-[28px] text-black md:text-[32px]">{{ section.settings.heading }}</h2>
+    {%- if section.settings.text != blank -%}
+      <p class="mt-4 font-serif text-[17px] leading-[1.5] text-black">{{ section.settings.text }}</p>
+    {%- endif -%}
+    {%- form 'customer' -%}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      {%- if form.posted_successfully? -%}
+        <p class="mt-8 font-sans text-[14px] text-black">{{ 'footer.newsletter_success' | t }}</p>
+      {%- else -%}
+        <div class="mx-auto mt-8 flex max-w-md items-center gap-3">
+          <input
+            type="email"
+            name="contact[email]"
+            required
+            autocomplete="email"
+            placeholder="{{ 'footer.newsletter_placeholder' | t }}"
+            aria-label="{{ 'footer.newsletter_placeholder' | t }}"
+            class="h-[56px] flex-1 border border-neutral-300 px-5 font-sans text-[16px] text-black outline-hidden placeholder:text-neutral-500 focus:border-black md:text-[16px]"
+          >
+          <button
+            type="submit"
+            class="h-[56px] flex-none bg-black px-7 font-sans text-[14px] text-white transition-opacity hover:opacity-80"
+          >
+            {{ 'footer.newsletter_submit' | t }}
+          </button>
+        </div>
+        {%- if form.errors -%}
+          <p class="mt-3 font-sans text-[13px] text-black/70">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>
+        {%- endif -%}
+      {%- endif -%}
+    {%- endform -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "邮件订阅",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "标题",
+      "default": "Sign up for updates"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "正文",
+      "default": "New paintings, studio stories and subscriber-only offers — once a month, no noise."
+    }
+  ],
+  "presets": [
+    {
+      "name": "邮件订阅"
+    }
+  ]
+}
+{% endschema %}

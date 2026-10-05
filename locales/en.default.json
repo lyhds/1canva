@@ -1,0 +1,276 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "general": {
+    "page": "Page {{ page }}",
+    "skip_to_content": "Skip to content",
+    "close": "Close",
+    "previous": "Previous",
+    "next": "Next",
+    "pagination": "Pagination",
+    "home": "Home",
+    "breadcrumb": "Breadcrumb"
+  },
+  "collections": {
+    "all_title": "All Paintings",
+    "all_description": "Hand-painted oil paintings, made to order and framed in solid wood. Explore by subject, style or the feeling you want to bring into a room.",
+    "subject": {
+      "title": "Subject",
+      "all": "All subjects",
+      "abstract": "Abstract",
+      "landscapes": "Landscapes",
+      "botanicals": "Botanicals",
+      "still-life": "Still life",
+      "figurative": "Figurative",
+      "coastal": "Coastal",
+      "architecture": "Architecture",
+      "animals": "Animals"
+    },
+    "list_title": "Collections",
+    "list_intro": "Browse by subject, style, mood and space — curated oil paintings for modern collectors.",
+    "works_count": "{{ count }} works",
+    "results_count": "{{ count }} items",
+    "no_products": "No paintings match these filters.",
+    "filters": {
+      "title": "Filters",
+      "clear": "Clear all",
+      "from": "Price from",
+      "to": "Price to",
+      "apply": "Apply price filter",
+      "done": "Done"
+    },
+    "sort": {
+      "label": "Sort by"
+    }
+  },
+  "header": {
+    "paintings": "Paintings",
+    "menu": "Menu",
+    "close_menu": "Close menu",
+    "search": "Search",
+    "account": "Account",
+    "cart": "Cart",
+    "wishlist": "Wishlist"
+  },
+  "search": {
+    "title": "Search",
+    "placeholder": "Search paintings",
+    "hint": "Try “coastal”, “still life” or “abstract”.",
+    "no_results": "No results for",
+    "error": "Search is temporarily unavailable. Please try again.",
+    "view_all": "View all results",
+    "close": "Close search",
+    "submit": "Search",
+    "results_for": "Results for “{{ terms }}”"
+  },
+  "cart": {
+    "title": "Cart",
+    "empty": "Your cart is empty.",
+    "continue": "Continue shopping",
+    "subtotal": "Subtotal",
+    "taxes_note": "Complimentary insured shipping. Duties and taxes are included.",
+    "view_cart": "View cart",
+    "checkout": "Check out",
+    "decrease": "Decrease quantity",
+    "increase": "Increase quantity",
+    "remove": "Remove item",
+    "updating": "Updating your cart…",
+    "updated": "Cart updated. Item count: {{ count }}. Total {{ total }}.",
+    "free_shipping_away": "You're {{ amount }} away from free shipping",
+    "free_shipping_unlocked": "You've unlocked free shipping"
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to cart",
+      "sold_out": "Sold out",
+      "unavailable": "Unavailable",
+      "from_price_html": "From {{ price }}",
+      "save": "Save {{ title }} to wishlist",
+      "size": "Size",
+      "size_guide": "Size guide",
+      "size_guide_note": "Need another size? We paint custom dimensions to order — see our Custom painting page.",
+      "sg_heading": "Find your size",
+      "sg_help": "How to use this preview",
+      "sg_subtitle": "See how your artwork will look in proportion to your space.",
+      "sg_furniture": "Furniture",
+      "sg_furn_sofa": "Sofa",
+      "sg_furn_bed": "Bed",
+      "sg_furn_console": "Console",
+      "sg_furn_wall": "Wall",
+      "sg_width": "Furniture width",
+      "sg_height_wall": "Wall height",
+      "sg_wall_dimensions": "Wall: {{ dimensions }}",
+      "sg_taller": "Taller than this wall",
+      "sg_sofa_reference": "Starting reference: 84 in sofa. Enter the full width of your sofa.",
+      "sg_bed_reference": "Starting reference: 60 in Queen mattress width. Enter your full headboard width for a closer comparison.",
+      "sg_console_reference": "Starting reference: 48 in console. Enter the full width of your console.",
+      "sg_wall_reference": "Starting reference: 10 ft wide × 8 ft high. Enter your usable wall dimensions.",
+      "sg_width_wall": "Wall width",
+      "sg_size": "Artwork size",
+      "sg_use": "Use this size",
+      "sg_unavailable": "This size is unavailable with your current options.",
+      "sg_increase": "Increase width",
+      "sg_decrease": "Decrease width",
+      "sg_caption": "{{ percent }}% of {{ furniture }} width",
+      "sg_units": "Measurements",
+      "sg_cm": "Centimeters",
+      "sg_inches": "Inches",
+      "sg_width_range": "Enter {{ min }}–{{ max }} {{ unit }}.",
+      "sg_advice_heading": "A starting point for your space",
+      "sg_rule": "For a balanced arrangement, try artwork around 60–75% of your furniture width.",
+      "sg_suggestion_advice": "The suggested size is available with your current options. Preview it before you decide.",
+      "sg_no_suggestion": "No available standard size falls in this range with your current options. Compare other sizes or ask about a custom size.",
+      "sg_wall_advice": "Enter the usable wall width and height. Artwork is centered within this area; both dimensions use the same scale. Frame rails are illustrative, not measured finished dimensions.",
+      "sg_preview_suggestion": "Preview {{ size }}",
+      "sg_suggested": "Suggested",
+      "sg_wider": "Wider than this space",
+      "sg_empty": "A scale preview is not available for these product options.",
+      "sg_outline": "Size outline only",
+      "sg_outline_toggle": "Show size outline only",
+      "sg_outline_help": "If the image includes a room or an existing frame, switch to outline mode to compare the artwork dimensions.",
+      "sg_outline_note": "This product does not yet have a dedicated artwork image. The outline shows the selected dimensions; see the product photos for appearance.",
+      "sg_measurement_note": "A styling guide, not a fit guarantee. Sizes are artwork width × height; framing adds to the outer dimensions. Frames are illustrative and inch measurements are approximate.",
+      "sg_custom_prompt": "Need a different size?",
+      "sg_custom_link": "Ask about a custom size.",
+      "frame": "Frame style",
+      "quantity": "Quantity",
+      "details": "Painting details",
+      "canvas_line": "Hand-painted in oils on Premium Cotton Canvas",
+      "framed_note": "framed",
+      "open_viewer": "Open image viewer",
+      "zoom_in": "Zoom in",
+      "artwork_detail": "artwork detail",
+      "on_wall": "on wall",
+      "show_image": "Show image {{ index }}",
+      "previous_image": "Previous image",
+      "next_image": "Next image",
+      "you_may_also_like": "You may also like",
+      "select_size": "Select size",
+      "select_frame": "Select frame",
+      "rolled_only": "Rolled only",
+      "rolled_only_notice": "This size is offered as Rolled Canvas only — supplied unmounted, without stretcher bars or an outer frame.",
+      "scene_disclaimer": "Room visualization · Not to scale · Rolled canvas requires mounting",
+      "rolled_delivery": "Unstretched canvas · Ships rolled in a tube",
+      "stretched_delivery": "Canvas on stretcher bars · Ready to hang",
+      "framed_delivery": "Stretched canvas + outer float frame",
+      "delivery_step_order": "Order placed",
+      "delivery_today": "Today",
+      "delivery_step_complete": "Painting completed",
+      "delivery_step_shipped": "Shipped",
+      "delivery_tracking": "Tracking sent",
+      "delivery_step_arrival": "Estimated delivery"
+    },
+    "reviews": {
+      "count": "{{ count }} reviews",
+      "verified": "Verified buyer"
+    }
+  },
+  "footer": {
+    "tagline": "Store for hand-painted oil paintings",
+    "newsletter": "Sign up for updates",
+    "newsletter_placeholder": "Email address",
+    "newsletter_submit": "Sign up",
+    "newsletter_success": "Thank you — you're on the list."
+  },
+  "sections": {
+    "announcement": "Announcement",
+    "editorial": {
+      "placeholder_title": "Article title"
+    }
+  },
+  "contact": {
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "send": "Send",
+    "success": "Thanks — we'll get back to you within one working day."
+  },
+  "blog": {
+    "back": "Back to journal"
+  },
+  "404": {
+    "title": "Page not found",
+    "text": "The page you're looking for doesn't exist or has moved."
+  },
+  "wishlist": {
+    "empty": "Your wishlist is empty. Tap the heart on any painting to save it here.",
+    "discover": "Discover paintings",
+    "loading": "Loading your saved paintings…",
+    "error": "Some paintings could not be loaded. Your saved items are still here.",
+    "unavailable": "This saved painting is no longer available.",
+    "retry": "Try again",
+    "remove": "Remove from wishlist"
+  },
+  "currency": {
+    "display_label": "Display currency",
+    "reference_notice": "Local prices are estimates for reference. All orders are charged in USD at checkout.",
+    "checkout_notice": "Checkout and payment are processed in USD."
+  },
+  "password_page": {
+    "opening_soon": "Opening soon",
+    "intro": "Enter the store password to continue.",
+    "password": "Store password",
+    "wrong_password": "That password didn't match. Please try again.",
+    "enter": "Enter"
+  },
+  "gift_card": {
+    "title": "Gift card",
+    "balance": "Balance remaining: {{ balance }}",
+    "expired": "This gift card has expired.",
+    "expires": "Expires {{ date }}",
+    "print": "Print",
+    "continue": "Continue shopping"
+  },
+  "customer": {
+    "email": "Email",
+    "password": "Password",
+    "name": "Name",
+    "login": {
+      "title": "Sign in",
+      "intro": "Sign in to view your orders and check out faster.",
+      "submit": "Sign in",
+      "forgot": "Forgot your password?",
+      "recover_submit": "Reset password",
+      "recover_success": "We've sent you an email with a link to reset your password.",
+      "no_account": "No account yet?",
+      "create": "Create one"
+    },
+    "register": {
+      "title": "Create account",
+      "intro": "One account for orders, tracking and early access to new paintings.",
+      "submit": "Create account",
+      "have_account": "Already have an account?"
+    },
+    "account": {
+      "title": "Account",
+      "sign_out": "Sign out",
+      "orders": "Orders",
+      "no_orders": "You haven't placed any orders yet."
+    },
+    "order": {
+      "back": "Back to account",
+      "placed": "Placed on {{ date }}",
+      "subtotal": "Subtotal",
+      "shipping": "Shipping",
+      "tax": "Tax",
+      "total": "Total"
+    },
+    "reset": {
+      "title": "Reset your password",
+      "confirm": "Confirm password",
+      "submit": "Reset password"
+    },
+    "activate": {
+      "title": "Activate your account",
+      "intro": "Choose a password to activate your account.",
+      "submit": "Activate account"
+    }
+  }
+}

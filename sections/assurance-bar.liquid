@@ -1,0 +1,93 @@
+{%- if section.blocks.size > 0 -%}
+  <section class="px-3 md:px-6">
+    <div class="grid grid-cols-2 gap-x-6 gap-y-10 border-y border-neutral-100 py-10 md:flex md:items-center md:justify-between md:py-12">
+      {%- for block in section.blocks -%}
+        <div class="flex items-start gap-3.5" {{ block.shopify_attributes }}>
+          {% render 'icon', name: block.settings.icon, class: 'h-5 w-5 flex-none text-black' %}
+          <p class="font-sans text-[14px] leading-[1.6] text-black">{{ block.settings.text }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "保障条",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "assurance",
+      "name": "保障项",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "图标",
+          "default": "shield-check",
+          "options": [
+            {
+              "value": "shield-check",
+              "label": "品质"
+            },
+            {
+              "value": "rotate-ccw",
+              "label": "手工绘制"
+            },
+            {
+              "value": "frame",
+              "label": "装裱"
+            },
+            {
+              "value": "layers",
+              "label": "肌理"
+            },
+            {
+              "value": "bag",
+              "label": "物流"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "正文",
+          "default": "Museum-quality oils on Premium Cotton Canvas"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "保障条",
+      "blocks": [
+        {
+          "type": "assurance"
+        },
+        {
+          "type": "assurance",
+          "settings": {
+            "icon": "rotate-ccw",
+            "text": "Hand-painted to order"
+          }
+        },
+        {
+          "type": "assurance",
+          "settings": {
+            "icon": "frame",
+            "text": "Expert framing service"
+          }
+        },
+        {
+          "type": "assurance",
+          "settings": {
+            "icon": "bag",
+            "text": "Tracked, insured shipping"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,34 @@
+<div class="px-5 py-16 md:px-10 md:py-24">
+  <div class="mx-auto max-w-sm">
+    <h1 class="font-serif text-[32px] text-black">{{ 'customer.activate.title' | t }}</h1>
+    <p class="mt-4 font-serif text-[17px] leading-[1.5] text-black">{{ 'customer.activate.intro' | t }}</p>
+
+    {%- form 'activate_customer_password', class: 'mt-8 space-y-5' -%}
+      {%- if form.errors -%}
+        <ul class="space-y-1 border border-neutral-200 bg-neutral-50 p-4 font-sans text-[14px] text-black">
+          {%- for field in form.errors -%}
+            <li>{{ form.errors.translated_fields[field] | capitalize }} {{ form.errors.messages[field] }}</li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+      <div>
+        <label for="activate-password" class="mb-2 block font-sans text-[14px] text-black">{{ 'customer.password' | t }}</label>
+        <input id="activate-password" type="password" name="customer[password]" required autocomplete="new-password" class="h-12 w-full border border-neutral-300 bg-white px-4 font-sans text-[16px] text-black outline-hidden focus:border-black md:text-[16px]">
+      </div>
+      <div>
+        <label for="activate-password-confirm" class="mb-2 block font-sans text-[14px] text-black">{{ 'customer.reset.confirm' | t }}</label>
+        <input id="activate-password-confirm" type="password" name="customer[password_confirmation]" required autocomplete="new-password" class="h-12 w-full border border-neutral-300 bg-white px-4 font-sans text-[16px] text-black outline-hidden focus:border-black md:text-[16px]">
+      </div>
+      <button type="submit" class="h-[52px] w-full bg-black font-sans text-[14px] text-white transition-opacity hover:opacity-80">
+        {{ 'customer.activate.submit' | t }}
+      </button>
+    {%- endform -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "激活账户",
+  "settings": []
+}
+{% endschema %}

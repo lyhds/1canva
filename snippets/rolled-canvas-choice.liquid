@@ -1,0 +1,19 @@
+{%- liquid
+  assign has_rolled = false
+  for variant in product.variants
+    if variant.options[frame_idx] == 'Rolled Canvas'
+      assign has_rolled = true
+      if variant.options[size_idx] == size_val
+        assign rolled_variant = variant
+      endif
+    endif
+  endfor
+-%}
+{%- if has_rolled -%}
+  <button type="button" class="rolled-choice" data-rolled-choice data-option-button data-option-name="Frame" data-option-value="Rolled Canvas" aria-pressed="{% if frame_val == 'Rolled Canvas' %}true{% else %}false{% endif %}" {% unless rolled_variant.available %}disabled{% endunless %}>
+    <span class="rolled-choice-radio" aria-hidden="true"></span>
+    <img src="{{ 'rolled-canvas-photo.webp' | asset_url }}" alt="" width="56" height="56" class="rolled-choice-image">
+    <span class="rolled-choice-copy"><span data-rolled-title>Prefer rolled canvas?</span><small>Canvas only · Requires stretching</small></span>
+    <span class="rolled-choice-cost"><span data-rolled-price>{% if rolled_variant %}<span data-display-money data-cents="{{ rolled_variant.price }}">{{ rolled_variant.price | money }}</span>{% else %}Unavailable{% endif %}</span><small data-rolled-selected></small></span>
+  </button>
+{%- endif -%}

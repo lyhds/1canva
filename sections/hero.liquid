@@ -1,0 +1,148 @@
+<section data-home-hero class="px-3 pt-3 md:px-6 md:pt-4">
+  {%- if section.settings.gallery_campaign -%}
+    <h1 class="sr-only">CANVASRA — Art worth living with</h1>
+    <a href="{{ section.settings.button_link | default: routes.all_products_collection_url }}" aria-label="Shop the collection — 40% off" class="block">
+      <picture>
+        <source media="(max-width: 767px)" srcset="{{ 'home-gallery-mobile.webp' | asset_url }}" width="1122" height="940">
+        <img src="{{ 'home-gallery-desktop.webp' | asset_url }}" alt="CANVASRA — Art worth living with. 40% off. A sunlit gallery wall of framed and textured paintings." width="1774" height="560" class="block w-full" style="height:auto" fetchpriority="high">
+      </picture>
+    </a>
+  {%- else -%}
+  <div class="relative">
+    {%- assign hero_desktop = section.settings.image -%}
+    {%- assign hero_mobile = section.settings.image_mobile -%}
+    {%- assign hero_img = hero_desktop | default: hero_mobile -%}
+    {%- if hero_img -%}
+      <picture class="home-hero-media" style="--hero-zoom-desktop: {{ section.settings.image_zoom | default: 100 | divided_by: 100.0 }}; --hero-zoom-mobile: {{ section.settings.image_zoom_mobile | default: 100 | divided_by: 100.0 }}; --hero-image-position: {{ section.settings.image_position | default: 'center center' }};">
+        {%- if hero_mobile -%}
+          <source
+            media="(max-width: 767px)"
+            srcset="{{ hero_mobile | image_url: width: 900 }} 900w, {{ hero_mobile | image_url: width: 1600 }} 1600w"
+          >
+        {%- endif -%}
+        <img
+          src="{{ hero_img | image_url: width: 2400 }}"
+          srcset="{{ hero_img | image_url: width: 1200 }} 1200w, {{ hero_img | image_url: width: 2400 }} 2400w"
+          sizes="100vw"
+          alt="{{ hero_img.alt | escape }}"
+          class="h-[55vh] w-full object-cover md:h-[72vh]"
+          style="object-position: {{ section.settings.image_position | default: 'center center' }};"
+          fetchpriority="high"
+          width="{{ hero_img.width }}"
+          height="{{ hero_img.height }}"
+        >
+      </picture>
+    {%- else -%}
+      {{ 'image' | placeholder_svg_tag: 'h-[55vh] w-full bg-neutral-100 object-cover md:h-[72vh]' }}
+    {%- endif -%}
+    <div class="bg-[#f6f1e9] px-6 py-7 md:absolute md:bottom-10 md:left-10 md:max-w-[410px] md:bg-[#f6f1e9]/90 md:px-8 md:py-8 md:backdrop-blur-sm">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="font-sans text-[11px] font-medium uppercase tracking-[0.18em] text-neutral-700">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h1 class="mt-3 max-w-[12ch] font-serif text-[32px] leading-[1.08] text-black md:text-[38px]">
+          {{ section.settings.heading }}
+        </h1>
+      {%- endif -%}
+      {%- if section.settings.button_label != blank -%}
+        <a
+          href="{{ section.settings.button_link | default: routes.all_products_collection_url }}"
+          class="mt-6 inline-flex items-center gap-2 border-b border-black pb-1 font-sans text-[14px] font-medium text-black transition-opacity hover:opacity-55"
+        >
+          <span>{{ section.settings.button_label }}</span>
+          <span aria-hidden="true">&rarr;</span>
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "首屏横幅",
+  "settings": [
+    { "type": "checkbox", "id": "gallery_campaign", "label": "显示画廊促销横幅", "default": false },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "横幅图片",
+      "info": "单张通栏横幅，建议使用宽幅横版图（如 21:9 或更宽）。"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "移动端横幅图片",
+      "info": "单独给移动端（<768px）上传竖版或方版图，建议 4:5 或 3:4；不上传则移动端沿用横幅图片。"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "图片焦点位置",
+      "info": "图片被裁切时保留哪一部分：横幅较高、图片放不下时，选“顶部优先”可显示图片上沿。桌面端与移动端横幅共用此设置。",
+      "default": "center center",
+      "options": [
+        { "value": "center top", "label": "顶部优先" },
+        { "value": "center center", "label": "居中（默认）" },
+        { "value": "center bottom", "label": "底部优先" },
+        { "value": "left top", "label": "左上" },
+        { "value": "right top", "label": "右上" },
+        { "value": "left center", "label": "左侧" },
+        { "value": "right center", "label": "右侧" },
+        { "value": "left bottom", "label": "左下" },
+        { "value": "right bottom", "label": "右下" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "image_zoom",
+      "label": "桌面图片缩放",
+      "info": "100% 保持原构图。适当放大可移开导航后方的深色物体；图片边缘会被裁切，文字位置不变。",
+      "min": 100,
+      "max": 150,
+      "step": 1,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "image_zoom_mobile",
+      "label": "移动端图片缩放",
+      "info": "独立控制小于 768px 的屏幕。缩放以图片焦点位置为中心。",
+      "min": 100,
+      "max": 150,
+      "step": 1,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "眉题",
+      "default": "Original art, painted by hand"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "标题",
+      "default": "Art made to live with"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "按钮文字",
+      "default": "Discover the collection"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "按钮链接"
+    }
+  ],
+  "presets": [
+    {
+      "name": "首屏横幅"
+    }
+  ]
+}
+{% endschema %}

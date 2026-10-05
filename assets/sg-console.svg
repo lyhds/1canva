@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 220" role="img" aria-label="Console table">
+  <ellipse cx="240" cy="212" rx="215" ry="8" fill="#00000012"/>
+  <rect x="20" y="34" width="440" height="126" rx="10" fill="#e3e0d7"/>
+  <rect x="20" y="34" width="440" height="14" rx="7" fill="#d8d4c9"/>
+  <line x1="240" y1="56" x2="240" y2="156" stroke="#c9c5b9" stroke-width="4"/>
+  <circle cx="216" cy="96" r="6" fill="#9b968a"/>
+  <circle cx="264" cy="96" r="6" fill="#9b968a"/>
+  <rect x="40" y="160" width="12" height="48" rx="4" fill="#9b968a"/>
+  <rect x="428" y="160" width="12" height="48" rx="4" fill="#9b968a"/>
+</svg>

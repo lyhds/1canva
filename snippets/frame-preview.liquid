@@ -1,0 +1,91 @@
+{%- doc -%}
+  Layered framing preview (wall + artwork + photoreal nine-slice wood
+  frame). The frame is a border-image drawn on a dedicated content-box
+  around the master image: the artwork box keeps the master's true aspect
+  ratio and contain-fits the mount via container-query units, while the
+  rails live fully outside the art — the artwork is never cropped and the
+  frame always hugs the artwork edge regardless of the mount's shape.
+
+  @param master  {image}  artwork image object (alt "master" media, or fallback)
+  @param aspect  {string} ratio fallback when master has no dimensions
+                 (34 | 23 | square | 43 | 32 | 21, plus legacy portrait | landscape)
+  @param frame   {string} frame delivery option
+  @param alt     {string}
+  @param class   {string} outer box classes (must give the mount a definite size)
+  @param [wall]    {string} wall color behind the framed print
+  @param [sizes]   {string} responsive image sizes hint
+  @param [loading] {string} lazy | eager
+  @param [fetchpriority] {string} auto | high | low
+{%- enddoc -%}
+{%- comment -%}Float-frame aliases resolve through snippets/frame-key.liquid.{%- endcomment -%}
+{%- liquid
+  assign wall = wall | default: '#eef0ec'
+  assign frame_key = 'none'
+  capture frame_key
+    render 'frame-key', frame: frame
+  endcapture
+  assign frame_key = frame_key | strip | default: 'none'
+  case aspect
+    when '34'
+      assign fallback_ar = 0.75
+    when '23'
+      assign fallback_ar = 0.6667
+    when 'square'
+      assign fallback_ar = 1.0
+    when '43'
+      assign fallback_ar = 1.3333
+    when '32'
+      assign fallback_ar = 1.5
+    when '21'
+      assign fallback_ar = 2.0
+    when 'portrait'
+      assign fallback_ar = 0.8
+    when 'landscape'
+      assign fallback_ar = 1.5
+    else
+      assign fallback_ar = 1.0
+  endcase
+  if master.width and master.height and master.height > 0
+    assign ar = master.width | times: 1.0 | divided_by: master.height
+  else
+    assign ar = fallback_ar
+  endif
+  unless frame_key == 'none'
+    assign frame_tex = 'frame-' | append: frame_key | append: '.webp' | asset_url
+  endunless
+  assign sizes = sizes | default: '100vw'
+  assign loading = loading | default: 'lazy'
+  assign fetchpriority = fetchpriority | default: 'auto'
+-%}
+<div
+  class="frame-mount relative flex items-center justify-center overflow-hidden {{ class }}"
+  style="background: {{ wall }};"
+  data-frame-mount
+  data-tex-oak="{{ 'frame-oak.webp' | asset_url }}"
+  data-tex-black="{{ 'frame-black.webp' | asset_url }}"
+  data-tex-walnut="{{ 'frame-walnut.webp' | asset_url }}"
+  data-tex-white="{{ 'frame-white.webp' | asset_url }}"
+  data-tex-gold="{{ 'frame-gold.webp' | asset_url }}"
+  data-tex-silver="{{ 'frame-silver.webp' | asset_url }}"
+>
+  <div
+    class="frame-box"
+    data-frame-box
+    data-frame="{{ frame_key }}"
+    {% if alt != blank %}role="img" aria-label="{{ alt | escape }}"{% else %}aria-hidden="true"{% endif %}
+    style="--ar: {{ ar }};{% if frame_tex %} --frame-tex: url('{{ frame_tex }}');{% endif %}"
+  >
+    <img
+      src="{{ master | image_url: width: 960 }}"
+      srcset="{{ master | image_url: width: 320 }} 320w, {{ master | image_url: width: 480 }} 480w, {{ master | image_url: width: 720 }} 720w, {{ master | image_url: width: 960 }} 960w, {{ master | image_url: width: 1200 }} 1200w, {{ master | image_url: width: 1600 }} 1600w"
+      sizes="{{ sizes }}"
+      alt=""
+      class="frame-art-image"
+      loading="{{ loading }}"
+      decoding="async"
+      fetchpriority="{{ fetchpriority }}"
+      width="{{ master.width }}"
+      height="{{ master.height }}"
+    >
+  </div>
+</div>

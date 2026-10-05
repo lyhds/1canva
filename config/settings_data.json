@@ -1,0 +1,51 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "current": {
+    "sections": {
+      "announcement-bar": {
+        "type": "announcement-bar",
+        "settings": {
+          "text": "Hand-painted to order — complimentary insured shipping"
+        }
+      },
+      "header": {
+        "type": "header",
+        "settings": {
+          "home_tone_mobile": "light",
+          "menu": "main-menu"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "tagline": "Curated art for considered spaces",
+          "services_heading": "Customer services",
+          "services_menu": "footer",
+          "explore_heading": "Explore",
+          "explore_handles": "all-products,new-arrivals,best-sellers,oversized-art",
+          "about_heading": "About",
+          "about_handles": "our-story,our-approach,materials-craft",
+          "blog_handle": "journal",
+          "contact_heading": "Contact",
+          "email_label": "Email",
+          "email": "service@canvasra.com",
+          "phone": "",
+          "phone_label": "Tel",
+          "address": "",
+          "address_label": "Address",
+          "hours": "",
+          "newsletter_heading": "Sign up for updates"
+        }
+      }
+    },
+    "content_for_index": []
+  }
+}

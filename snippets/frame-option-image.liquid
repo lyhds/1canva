@@ -1,0 +1,33 @@
+{%- doc -%}
+  Shared canvas delivery and frame-corner thumbnail filename. Float-frame
+  aliases resolve through the shared frame-key snippet.
+  @param {string} frame - Frame option value
+{%- enddoc -%}
+{%- liquid
+  assign frame_key = ''
+  capture frame_key
+    render 'frame-key', frame: frame
+  endcapture
+  assign frame_key = frame_key | strip
+  case frame_key
+    when 'oak'
+      echo 'oak-frame-option.webp'
+    when 'black'
+      echo 'black-frame-option.webp'
+    when 'walnut'
+      echo 'walnut-frame-option.webp'
+    when 'white'
+      echo 'white-frame-option.webp'
+    when 'gold'
+      echo 'gold-frame-option.webp'
+    when 'silver'
+      echo 'silver-frame-option.webp'
+    else
+      case frame
+        when 'Rolled Canvas'
+          echo 'rolled-canvas-photo.webp'
+        when 'Stretched Canvas'
+          echo 'stretched-canvas-photo.webp'
+      endcase
+  endcase
+-%}

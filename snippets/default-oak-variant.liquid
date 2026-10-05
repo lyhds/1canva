@@ -1,0 +1,27 @@
+{%- doc -%}
+  Returns the first available Oak variant ID, or the normal fallback ID.
+  @param {product} product - Product whose default is being resolved
+{%- enddoc -%}
+{%- comment -%}Oak aliases resolve through snippets/frame-key.liquid.{%- endcomment -%}
+{%- liquid
+  assign default_variant = product.selected_or_first_available_variant
+  for option in product.options_with_values
+    assign option_name = option.name | downcase
+    if option_name == 'frame'
+      assign frame_index = forloop.index0
+      for candidate in product.variants
+        assign finish_key = ''
+        capture finish_key
+          render 'frame-key', frame: candidate.options[frame_index]
+        endcapture
+        assign finish_key = finish_key | strip
+        if candidate.available and finish_key == 'oak'
+          assign default_variant = candidate
+          break
+        endif
+      endfor
+      break
+    endif
+  endfor
+  echo default_variant.id
+-%}

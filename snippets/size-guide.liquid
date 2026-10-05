@@ -1,0 +1,236 @@
+{%- doc -%}
+  Real Scale Visualizer (the "Size guide" modal on the PDP): the artwork is
+  drawn above a furniture silhouette at true physical proportion — the user
+  enters a furniture width in cm or inches; canonical cm measurements keep
+  the artwork:furniture ratio unchanged when switching display units. Sizes are the product's real Size
+  option values ("50 × 70 cm"); USE THIS SIZE syncs the choice back to the
+  PDP variant picker. Rendered via {% render 'size-guide', product: product %};
+  triggers are the existing [data-modal-open="size-guide-..."] buttons.
+
+  @param product {product}
+{%- enddoc -%}
+{%- liquid
+  assign master = product.media | where: 'alt', 'master' | first
+  assign scale_image_available = false
+  if master != blank
+    assign scale_image_available = true
+  else
+    assign master = product.featured_media
+  endif
+  capture size_frame_slots
+    render 'size-frame-slots', product: product
+  endcapture
+  assign size_frame_slots = size_frame_slots | strip | split: '|'
+  assign size_idx = size_frame_slots[2] | plus: 0
+  assign frame_idx = size_frame_slots[3] | plus: 0
+  assign size_val = size_frame_slots[4]
+  assign frame_val = size_frame_slots[5]
+  assign art_src = master | image_url: width: 960
+  assign custom_page = pages['custom-painting']
+  if custom_page == blank
+    assign custom_page = pages['contact']
+  endif
+  assign sg_enabled = true
+  assign sg_flag = product.metafields.custom.size_guide_enabled.value
+  if sg_flag == false
+    assign sg_enabled = false
+  endif
+-%}
+{%- if sg_enabled -%}
+  {%- capture sg_sizes -%}
+    [{%- for option in product.options_with_values -%}
+      {%- assign opt_name = option.name | downcase -%}
+      {%- if opt_name == 'size' -%}
+        {%- for value in option.values -%}
+          {%- liquid
+            assign metric = value | downcase | split: '/' | first | strip
+            assign unit = metric | slice: -2, 2
+            assign dimension_length = metric.size | minus: 2
+            assign dimensions = metric | slice: 0, dimension_length | replace: 'x', '×' | remove: ' '
+            assign parts = dimensions | split: '×'
+            assign w = 0
+            assign h = 0
+            if unit == 'cm' and parts.size == 2
+              assign valid_dimensions = true
+              for part in parts
+                assign remainder = part | remove: '0' | remove: '1' | remove: '2' | remove: '3' | remove: '4' | remove: '5' | remove: '6' | remove: '7' | remove: '8' | remove: '9' | remove_first: '.'
+                if remainder != blank or part == blank
+                  assign valid_dimensions = false
+                endif
+              endfor
+              if valid_dimensions
+                assign w = parts[0] | plus: 0.0
+                assign h = parts[1] | plus: 0.0
+              endif
+            endif
+          -%}
+          {"value": {{ value | json }}, "w": {{ w }}, "h": {{ h }}}
+          {%- unless forloop.last %},{% endunless -%}
+        {%- endfor -%}
+      {%- endif -%}
+    {%- endfor -%}]
+  {%- endcapture -%}
+  {%- capture sg_variants -%}
+    [{%- for v in product.variants -%}
+      {"options": {{ v.options | json }}, "available": {{ v.available }}, "id": {{ v.id }}, "price": {{ v.price }}, "priceLabel": {{ v.price | money_with_currency | strip_html | json }}}
+      {%- unless forloop.last %},{% endunless -%}
+    {%- endfor -%}]
+  {%- endcapture -%}
+
+  <size-guide-modal id="size-guide-{{ product.id }}" class="sg-modal fixed inset-0 z-[80] hidden items-stretch justify-center bg-black/40 md:items-center md:p-6" role="dialog" aria-modal="true" aria-label="{{ 'products.product.size_guide' | t }}" data-size-guide>
+    <div class="sg-panel relative flex w-full max-w-[1000px] flex-col overflow-hidden bg-white">
+      <div class="flex flex-none items-center justify-between gap-3 border-b border-neutral-200 px-5 py-3 md:px-8">
+        <h2 class="font-serif text-[24px] leading-[1.2] text-black">{{ 'products.product.sg_heading' | t }}</h2>
+        <button type="button" data-modal-close aria-label="{{ 'general.close' | t }}" class="flex h-11 w-11 flex-none items-center justify-center text-black transition-opacity hover:opacity-50">
+          {% render 'icon', name: 'x', class: 'h-5 w-5' %}
+        </button>
+      </div>
+
+      <div class="sg-body min-h-0 flex-1 overflow-y-auto">
+        <div class="sg-stage-wrap relative bg-[#eef0ec]">
+          <div class="sg-stage relative mx-auto w-full" data-sg-stage>
+            <div class="sg-world absolute left-0 top-0 h-[700px] w-[1000px] origin-top-left" data-sg-world>
+              <div class="sg-floor absolute inset-x-0 bottom-0 h-px"></div>
+              <div class="sg-wall absolute" hidden data-sg-wall></div>
+              <img data-sg-furniture class="sg-furniture absolute" alt="" width="640" height="260" hidden>
+              <div class="sg-art absolute" data-sg-art hidden>
+                <img data-sg-art-img class="sg-art-img" alt="{{ product.title | escape }}" width="{{ master.width | default: 800 }}" height="{{ master.height | default: 1000 }}">
+              </div>
+            </div>
+          </div>
+          <p class="sg-caption w-full flex-none bg-white/80 px-3 py-2 text-center font-sans text-[13px] text-neutral-600" data-sg-caption></p>
+        </div>
+
+        <div class="sg-controls flex min-w-0 flex-col gap-5 px-5 py-6 md:px-8">
+          <div class="sg-size-selector">
+            <p class="font-sans text-[14px] text-black">{{ 'products.product.sg_size' | t }}</p>
+            <div class="sg-pills mt-2.5 grid grid-cols-2 gap-2" role="group" aria-label="{{ 'products.product.sg_size' | t }}" data-sg-sizes></div>
+            <p class="mt-2 hidden font-sans text-[14px] leading-[1.6] text-neutral-600" data-sg-empty>{{ 'products.product.sg_empty' | t }}</p>
+          </div>
+          <div>
+            <p class="font-sans text-[14px] text-black">{{ 'products.product.sg_furniture' | t }}</p>
+            <div class="sg-pills mt-2.5 flex flex-wrap gap-2" role="group" aria-label="{{ 'products.product.sg_furniture' | t }}" data-sg-furniture-picker>
+              <button type="button" data-sg-scene="sofa" aria-pressed="true" class="sg-pill">{{ 'products.product.sg_furn_sofa' | t }}</button>
+              <button type="button" data-sg-scene="bed" aria-pressed="false" class="sg-pill">{{ 'products.product.sg_furn_bed' | t }}</button>
+              <button type="button" data-sg-scene="console" aria-pressed="false" class="sg-pill">{{ 'products.product.sg_furn_console' | t }}</button>
+              <button type="button" data-sg-scene="wall" aria-pressed="false" class="sg-pill">{{ 'products.product.sg_furn_wall' | t }}</button>
+            </div>
+          </div>
+          <div>
+            <div class="flex items-center justify-between gap-3">
+              <label for="sg-width-{{ product.id }}" class="font-sans text-[14px] text-black" data-sg-width-label>{{ 'products.product.sg_width' | t }} · cm</label>
+              <div class="flex flex-none gap-2" role="group" aria-label="{{ 'products.product.sg_units' | t }}" data-sg-units>
+                <button type="button" data-sg-unit="in" aria-pressed="true" aria-label="{{ 'products.product.sg_inches' | t }}" class="sg-pill">in</button>
+                <button type="button" data-sg-unit="cm" aria-pressed="false" aria-label="{{ 'products.product.sg_cm' | t }}" class="sg-pill">cm</button>
+              </div>
+            </div>
+            <div class="mt-2.5 flex h-11 items-stretch border border-neutral-300">
+              <button type="button" data-sg-step="-1" aria-label="{{ 'products.product.sg_decrease' | t }}" class="w-11 flex-none font-sans text-[14px] text-black transition-colors hover:bg-neutral-100 disabled:opacity-30">−</button>
+              <input id="sg-width-{{ product.id }}" type="number" inputmode="decimal" min="60" max="600" step="0.01" data-sg-width aria-describedby="sg-width-secondary-{{ product.id }} sg-width-hint-{{ product.id }}" class="w-full min-w-0 border-x border-neutral-300 bg-white text-center font-sans text-[16px] text-black outline-hidden" value="213.36">
+              <button type="button" data-sg-step="1" aria-label="{{ 'products.product.sg_increase' | t }}" class="w-11 flex-none font-sans text-[14px] text-black transition-colors hover:bg-neutral-100 disabled:opacity-30">+</button>
+            </div>
+            <div class="mt-2 flex flex-wrap justify-between gap-x-3 gap-y-1 font-sans text-[13px] text-neutral-500">
+              <p id="sg-width-secondary-{{ product.id }}" data-sg-width-secondary></p>
+              <p id="sg-width-hint-{{ product.id }}" data-sg-width-hint></p>
+            </div>
+          </div>
+          <p class="font-sans text-[13px] text-neutral-500" data-sg-reference></p>
+          <div data-sg-height-group hidden>
+            <label for="sg-height-{{ product.id }}" class="font-sans text-[14px] text-black" data-sg-height-label>{{ 'products.product.sg_height_wall' | t }}</label>
+            <input id="sg-height-{{ product.id }}" type="number" inputmode="decimal" min="60" max="600" step="0.01" value="243.84" data-sg-height aria-describedby="sg-height-secondary-{{ product.id }} sg-width-hint-{{ product.id }}" class="mt-2.5 h-11 w-full border border-neutral-300 bg-white text-center font-sans text-[16px] text-black">
+            <p id="sg-height-secondary-{{ product.id }}" class="mt-2 font-sans text-[13px] text-neutral-500" data-sg-height-secondary></p>
+          </div>
+          <div class="border border-neutral-200 bg-[#f7f5f0] p-4">
+            <p class="font-sans text-[14px] font-medium text-black">{{ 'products.product.sg_advice_heading' | t }}</p>
+            <p class="mt-2 font-sans text-[14px] leading-[1.6] text-neutral-600" data-sg-advice></p>
+            <button type="button" data-sg-suggest class="mt-3 text-left font-sans text-[14px] text-black underline underline-offset-4" hidden></button>
+          </div>
+          <details class="sg-help">
+            <summary class="cursor-pointer font-sans text-[14px] text-black">{{ 'products.product.sg_help' | t }}</summary>
+            <div class="mt-3 space-y-3">
+          {%- if scale_image_available -%}
+            <div>
+              <button type="button" data-sg-outline aria-pressed="false" class="sg-pill">{{ 'products.product.sg_outline_toggle' | t }}</button>
+              <p class="mt-2 font-sans text-[13px] leading-[1.6] text-neutral-500">{{ 'products.product.sg_outline_help' | t }}</p>
+            </div>
+          {%- else -%}
+            <p class="font-sans text-[14px] leading-[1.6] text-neutral-600">{{ 'products.product.sg_outline_note' | t }}</p>
+          {%- endif -%}
+          <p class="font-sans text-[13px] leading-[1.6] text-neutral-500">{{ 'products.product.sg_measurement_note' | t }}</p>
+            </div>
+          </details>
+          {%- if custom_page != blank -%}
+            <p class="font-sans text-[14px] leading-[1.6] text-neutral-600">{{ 'products.product.sg_custom_prompt' | t }} <a href="{{ custom_page.url }}" class="text-black underline underline-offset-4">{{ 'products.product.sg_custom_link' | t }}</a></p>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <div class="sg-footer flex flex-none flex-col gap-3 border-t border-neutral-200 bg-white px-5 py-4 sm:flex-row sm:items-center md:px-8">
+        <div class="min-w-0 flex-1" aria-live="polite" aria-atomic="true">
+          <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+            <p class="font-sans text-[16px] font-medium text-black" data-sg-selected></p>
+            <p class="font-sans text-[18px] font-medium text-black" data-sg-price></p>
+          </div>
+          <p class="mt-1 flex flex-wrap gap-x-3 font-sans text-[13px] text-neutral-500"><span data-sg-secondary></span><span data-sg-frame></span></p>
+          <p class="mt-1 hidden font-sans text-[13px] text-neutral-600" data-sg-unavailable>{{ 'products.product.sg_unavailable' | t }}</p>
+          <p class="mt-1 font-sans text-[13px] text-neutral-600" data-sg-rolled-only hidden>{{ 'products.product.rolled_only_notice' | t }}</p>
+        </div>
+        <button type="button" data-sg-apply class="w-full flex-none bg-black px-6 py-3.5 font-sans text-[15px] font-medium text-white transition-opacity hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-30 sm:w-auto" disabled>
+          {{ 'products.product.sg_use' | t }}
+        </button>
+      </div>
+    </div>
+
+    <script type="application/json" data-size-guide-data>
+      {
+        "sizes": {{ sg_sizes }},
+        "variants": {{ sg_variants }},
+        "sizeIndex": {{ size_idx }},
+        "frameIndex": {{ frame_idx }},
+        "currentSize": {{ size_val | json }},
+        "currentFrame": {{ frame_val | json }},
+        "currentOptions": {{ product.selected_or_first_available_variant.options | json }},
+        "locale": {{ request.locale.iso_code | default: 'en' | json }},
+        "artSrc": {{ art_src | json }},
+        "scaleImageAvailable": {{ scale_image_available | json }},
+        "textures": {
+          "oak": {{ 'frame-oak.webp' | asset_url | json }},
+          "black": {{ 'frame-black.webp' | asset_url | json }},
+          "walnut": {{ 'frame-walnut.webp' | asset_url | json }}
+        },
+        "furniture": {
+          "sofa": {{ 'sg-sofa.svg' | asset_url | json }},
+          "bed": {{ 'sg-bed.svg' | asset_url | json }},
+          "console": {{ 'sg-console.svg' | asset_url | json }}
+        },
+        "i18n": {
+          "caption": {{ 'products.product.sg_caption' | t: percent: '__PERCENT__', furniture: '__FURNITURE__' | json }},
+          "width": {{ 'products.product.sg_width' | t | json }},
+          "wallHeight": {{ 'products.product.sg_height_wall' | t | json }},
+          "wallDimensions": {{ 'products.product.sg_wall_dimensions' | t: dimensions: '__DIMENSIONS__' | json }},
+          "taller": {{ 'products.product.sg_taller' | t | json }},
+          "sofaReference": {{ 'products.product.sg_sofa_reference' | t | json }},
+          "bedReference": {{ 'products.product.sg_bed_reference' | t | json }},
+          "consoleReference": {{ 'products.product.sg_console_reference' | t | json }},
+          "wallReference": {{ 'products.product.sg_wall_reference' | t | json }},
+          "wallWidth": {{ 'products.product.sg_width_wall' | t | json }},
+          "widthRange": {{ 'products.product.sg_width_range' | t: min: '__MIN__', max: '__MAX__', unit: '__UNIT__' | json }},
+          "rule": {{ 'products.product.sg_rule' | t | json }},
+          "suggestionAdvice": {{ 'products.product.sg_suggestion_advice' | t | json }},
+          "noSuggestion": {{ 'products.product.sg_no_suggestion' | t | json }},
+          "wallAdvice": {{ 'products.product.sg_wall_advice' | t | json }},
+          "previewSuggestion": {{ 'products.product.sg_preview_suggestion' | t: size: '__SIZE__' | json }},
+          "suggested": {{ 'products.product.sg_suggested' | t | json }},
+          "unavailableShort": {{ 'products.product.unavailable' | t | json }},
+          "empty": {{ 'products.product.sg_empty' | t | json }},
+          "wider": {{ 'products.product.sg_wider' | t | json }},
+          "outline": {{ 'products.product.sg_outline' | t | json }},
+          "sofa": {{ 'products.product.sg_furn_sofa' | t | json }},
+          "bed": {{ 'products.product.sg_furn_bed' | t | json }},
+          "console": {{ 'products.product.sg_furn_console' | t | json }},
+          "wall": {{ 'products.product.sg_furn_wall' | t | json }}
+        }
+      }
+    </script>
+  </size-guide-modal>
+{%- endif -%}

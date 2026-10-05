@@ -1,0 +1,10 @@
+{
+  "root": "scene-references",
+  "extensions": [
+    ".jpg",
+    ".jpeg",
+    ".png",
+    ".webp"
+  ],
+  "recursive": true
+}

@@ -1,0 +1,107 @@
+{%- comment -%}
+  Product reviews backed by the no-app review system:
+  metaobject "review" entries referenced by the product metafield custom.reviews.
+  Renders nothing when the product has no reviews.
+{%- endcomment -%}
+{%- liquid
+  assign reviews = blank
+  if settings.enable_customer_reviews
+    assign reviews = product.metafields.custom.reviews.value
+  endif
+  assign r_count = 0
+  assign r_sum = 0
+  if reviews != blank
+    for r in reviews
+      if r.rating
+        assign r_count = r_count | plus: 1
+        assign r_sum = r_sum | plus: r.rating
+      endif
+    endfor
+  endif
+-%}
+{%- if r_count > 0 -%}
+  {%- assign r_avg = r_sum | times: 1.0 | divided_by: r_count | round: 1 -%}
+  <section id="reviews" class="scroll-mt-24 border-t border-neutral-100 px-5 py-16 md:px-10 md:py-24">
+    <div class="lg:mx-auto lg:max-w-[1400px]">
+      <h2 class="font-serif text-[28px] text-black md:text-[32px]">{{ section.settings.heading }}</h2>
+
+      {%- comment -%} summary: average + histogram {%- endcomment -%}
+      <div class="mt-8 flex flex-col gap-8 md:flex-row md:items-end md:gap-16">
+        <div class="flex items-end gap-4">
+          {%- assign r_frac = r_avg | modulo: 1 -%}
+          <p class="font-serif text-[52px] leading-none text-black">
+            {%- if r_frac == 0 -%}{{ r_avg | round }}{%- else -%}{{ r_avg }}{%- endif -%}
+          </p>
+          <div class="pb-1">
+            {% render 'stars', rating: r_avg, size: 16 %}
+            <p class="mt-1.5 font-sans text-[14px] text-neutral-500">{{ 'products.reviews.count' | t: count: r_count }}</p>
+          </div>
+        </div>
+        <div class="w-full max-w-xs space-y-1.5">
+          {%- for i in (1..5) -%}
+            {%- assign star = 6 | minus: i -%}
+            {%- assign n = 0 -%}
+            {%- for r in reviews -%}
+              {%- if r.rating == star -%}{%- assign n = n | plus: 1 -%}{%- endif -%}
+            {%- endfor -%}
+            {%- assign pct = n | times: 100.0 | divided_by: r_count | round: 1 -%}
+            <div class="flex items-center gap-3 font-sans text-[13px] text-neutral-500">
+              <span class="w-6 flex-none text-right">{{ star }} ★</span>
+              <span class="h-1.5 flex-1 overflow-hidden rounded-full bg-neutral-200">
+                <span class="block h-full bg-black" style="width: {{ pct }}%"></span>
+              </span>
+              <span class="w-6 flex-none">{{ n }}</span>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+
+      {%- comment -%} review cards {%- endcomment -%}
+      <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {%- for r in reviews -%}
+          <article class="flex flex-col border border-neutral-100 p-6">
+            {%- if r.photo != blank -%}
+              <img
+                src="{{ r.photo | image_url: width: 800 }}"
+                alt="{{ r.photo.alt | default: product.title | escape }}"
+                class="mb-5 aspect-[4/3] w-full bg-[#f3f3f3] object-cover"
+                loading="lazy"
+                width="800"
+                height="600"
+              >
+            {%- endif -%}
+            {% render 'stars', rating: r.rating, size: 13 %}
+            {%- if r.title != blank -%}
+              <h3 class="mt-4 font-serif text-[17px] leading-[1.4] text-black">{{ r.title }}</h3>
+            {%- endif -%}
+            {%- if r.body != blank -%}
+              <blockquote class="mt-2 flex-1 font-sans text-[16px] leading-[1.75] text-neutral-600">{{ r.body }}</blockquote>
+            {%- endif -%}
+            <p class="mt-5 font-sans text-[14px] text-neutral-500">
+              {{ r.author }} · {{ r.date | date: '%b %-d, %Y' }}
+              {%- if r.verified -%}
+                · <span class="text-black">{{ 'products.reviews.verified' | t }}</span>
+              {%- endif -%}
+            </p>
+          </article>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "商品评价",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "标题",
+      "default": "Customer reviews",
+      "info": "数据来自商品 metafield custom.reviews。只有在主题设置中明确开启已核实评价后才渲染。"
+    }
+  ],
+  "presets": [{ "name": "商品评价" }]
+}
+{% endschema %}

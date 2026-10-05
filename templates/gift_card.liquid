@@ -1,0 +1,36 @@
+<div class="flex min-h-screen flex-col items-center justify-center px-5 py-16 text-center">
+  <p class="font-mono text-[12px] uppercase tracking-[0.14em] text-neutral-500">{{ settings.brand_name | default: 'CANVASRA' }}</p>
+  <h1 class="mt-4 font-serif text-[36px] text-black md:text-[44px]">{{ 'gift_card.title' | t }}</h1>
+
+  <div class="mt-10 w-full max-w-sm border border-neutral-200 p-8">
+    <p class="font-serif text-[28px] text-black">{{ gift_card.initial_value | money }}</p>
+    {%- if gift_card.balance != gift_card.initial_value -%}
+      <p class="mt-2 font-mono text-[12px] text-neutral-500">
+        {{ 'gift_card.balance' | t: balance: gift_card.balance | money }}
+      </p>
+    {%- endif -%}
+    <p class="mt-6 border border-dashed border-neutral-300 px-4 py-3 font-mono text-[16px] tracking-[0.2em] text-black">
+      {{ gift_card.code | format_code }}
+    </p>
+    {%- if gift_card.expired -%}
+      <p class="mt-4 font-mono text-[12px] text-neutral-500">{{ 'gift_card.expired' | t }}</p>
+    {%- elsif gift_card.expires_on -%}
+      <p class="mt-4 font-mono text-[12px] text-neutral-500">
+        {{ 'gift_card.expires' | t: date: gift_card.expires_on | date: '%B %e, %Y' }}
+      </p>
+    {%- endif -%}
+  </div>
+
+  <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+    <button
+      type="button"
+      onclick="window.print()"
+      class="border border-black px-8 py-3.5 font-mono text-[12px] text-black transition-colors hover:bg-black hover:text-white"
+    >
+      {{ 'gift_card.print' | t }}
+    </button>
+    <a href="{{ shop.url }}" class="bg-black px-8 py-3.5 font-mono text-[12px] text-white transition-opacity hover:opacity-80">
+      {{ 'gift_card.continue' | t }}
+    </a>
+  </div>
+</div>

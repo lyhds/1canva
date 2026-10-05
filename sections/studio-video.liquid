@@ -1,0 +1,75 @@
+{%- if section.settings.video -%}
+<section class="grid items-center gap-10 px-5 py-16 md:grid-cols-2 md:gap-16 md:px-10 md:py-24">
+  <div>
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="font-mono text-[12px] text-black">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+    <h2 class="mt-4 font-serif text-[28px] text-black md:text-[32px]">{{ section.settings.heading }}</h2>
+    {%- if section.settings.text != blank -%}
+      <div class="mt-4 max-w-sm font-serif text-[17px] leading-[1.5] text-black rte">{{ section.settings.text }}</div>
+    {%- endif -%}
+    {%- if section.settings.button_label != blank -%}
+      <a
+        href="{{ section.settings.button_link | default: routes.all_products_collection_url }}"
+        class="mt-6 inline-block border border-black px-7 py-3.5 font-sans text-[14px] text-black transition-colors hover:bg-black hover:text-white"
+      >
+        {{ section.settings.button_label }}
+      </a>
+    {%- endif -%}
+  </div>
+
+  <div class="aspect-video w-full overflow-hidden bg-black">
+    {{
+      section.settings.video
+      | video_tag: autoplay: true, loop: true, muted: true, controls: false, playsinline: true, class: 'h-full w-full object-cover', preload: 'metadata'
+    }}
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "工作室视频",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "眉题",
+      "default": "Framing service"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "标题",
+      "default": "Get your painting ready to hang"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "正文",
+      "default": "<p>We offer a professional framing service with a selection of bespoke wooden frames to choose from.</p>"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "视频",
+      "info": "以静音循环、无控件的方式作背景播放，建议使用 20 秒以内的横版短片。"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "按钮文字"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "按钮链接"
+    }
+  ],
+  "presets": [
+    {
+      "name": "工作室视频"
+    }
+  ]
+}
+{% endschema %}

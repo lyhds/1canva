@@ -1,0 +1,25 @@
+{
+  "name": "canvasra-theme",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "packageManager": "pnpm@11.25.0",
+  "scripts": {
+    "studio": "node scripts/product-studio/server.js",
+    "canvasra": "node scripts/ochre-workflow.js",
+    "css": "tailwindcss -i src/theme.css -o assets/theme.css --minify",
+    "css:watch": "tailwindcss -i src/theme.css -o assets/theme.css --watch",
+    "dev": "shopify theme dev --host 0.0.0.0",
+    "check": "shopify theme check",
+    "test": "node --test scripts/*.test.js",
+    "verify": "pnpm check && pnpm test",
+    "preview:shopping": "node scripts/preview-shopping.js"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "linkedom": "^0.18.13",
+    "liquidjs": "^10.29.0",
+    "playwright": "^1.63.0",
+    "sharp": "^0.35.4"
+  }
+}

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 260" role="img" aria-label="Sofa">
+  <ellipse cx="320" cy="250" rx="290" ry="9" fill="#00000012"/>
+  <rect x="40" y="8" width="560" height="140" rx="26" fill="#e3e0d7"/>
+  <rect x="0" y="46" width="86" height="184" rx="30" fill="#d8d4c9"/>
+  <rect x="554" y="46" width="86" height="184" rx="30" fill="#d8d4c9"/>
+  <rect x="76" y="136" width="488" height="94" rx="14" fill="#dad6cb"/>
+  <rect x="88" y="120" width="228" height="76" rx="14" fill="#eceade"/>
+  <rect x="324" y="120" width="228" height="76" rx="14" fill="#eceade"/>
+  <rect x="88" y="196" width="464" height="6" rx="3" fill="#c9c5b9"/>
+  <rect x="60" y="230" width="18" height="22" rx="4" fill="#9b968a"/>
+  <rect x="562" y="230" width="18" height="22" rx="4" fill="#9b968a"/>
+</svg>

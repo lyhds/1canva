@@ -1,0 +1,69 @@
+{%- if section.blocks.size > 0 -%}
+  <section class="px-5 pb-16 md:px-10 md:pb-24">
+    <div class="grid gap-10 lg:grid-cols-[1fr_1.6fr] lg:gap-16">
+      <h2 class="max-w-xs font-serif text-[28px] leading-[1.2] text-black md:text-[32px]">{{ section.settings.heading }}</h2>
+      <div>
+        {%- for block in section.blocks -%}
+          <details class="border-b border-neutral-100 first:border-t" {{ block.shopify_attributes }}>
+            <summary class="flex cursor-pointer list-none items-center justify-between py-6 font-sans text-[14px] text-black [&::-webkit-details-marker]:hidden">
+              {{ block.settings.question }}
+              {% render 'icon', name: 'chevron-down', class: 'h-3.5 w-3.5 flex-none transition-transform duration-200 open:rotate-180' %}
+            </summary>
+            <div class="pb-6 font-sans text-[16px] leading-[1.75] text-neutral-600 rte">
+              {{ block.settings.answer }}
+            </div>
+          </details>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "常见问题",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "标题",
+      "default": "Questions, answered"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "问题",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "问题",
+          "default": "Question"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "答案"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "常见问题",
+      "blocks": [
+        {
+          "type": "question"
+        },
+        {
+          "type": "question"
+        },
+        {
+          "type": "question"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

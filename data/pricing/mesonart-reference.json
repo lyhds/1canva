@@ -1,0 +1,2154 @@
+{
+  "date": "2026-09-09T07:51:56.895Z",
+  "sampleProducts": 500,
+  "includedProducts": 369,
+  "rawVariants": 37919,
+  "includedVariants": 26717,
+  "excluded": {
+    "set-or-special": 6089,
+    "other-ratio": 5099,
+    "other-framing": 4,
+    "unavailable-or-zero": 10
+  },
+  "summary": [
+    {
+      "family": "1:1",
+      "inches": [
+        24,
+        24
+      ],
+      "cm": [
+        61,
+        61
+      ],
+      "type": "Framed",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca150",
+        "https://www.mesonart.com/products/neutral-painting-lca145",
+        "https://www.mesonart.com/products/neutral-painting-lca139"
+      ],
+      "n": 70,
+      "min": 494,
+      "median": 494,
+      "max": 582,
+      "q1": 494,
+      "q3": 494
+    },
+    {
+      "family": "1:1",
+      "inches": [
+        24,
+        24
+      ],
+      "cm": [
+        61,
+        61
+      ],
+      "type": "Rolled",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca150",
+        "https://www.mesonart.com/products/neutral-painting-lca145",
+        "https://www.mesonart.com/products/neutral-painting-lca139"
+      ],
+      "n": 67,
+      "min": 260,
+      "median": 260,
+      "max": 260,
+      "q1": 260,
+      "q3": 260
+    },
+    {
+      "family": "1:1",
+      "inches": [
+        24,
+        24
+      ],
+      "cm": [
+        61,
+        61
+      ],
+      "type": "Stretched",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca150",
+        "https://www.mesonart.com/products/neutral-painting-lca145",
+        "https://www.mesonart.com/products/neutral-painting-lca139"
+      ],
+      "n": 70,
+      "min": 468,
+      "median": 468,
+      "max": 552,
+      "q1": 468,
+      "q3": 468
+    },
+    {
+      "family": "1:1",
+      "inches": [
+        30,
+        30
+      ],
+      "cm": [
+        76,
+        76
+      ],
+      "type": "Framed",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca150",
+        "https://www.mesonart.com/products/neutral-painting-lca145",
+        "https://www.mesonart.com/products/neutral-painting-lca139"
+      ],
+      "n": 70,
+      "min": 621,
+      "median": 621,
+      "max": 733,
+      "q1": 621,
+      "q3": 621
+    },
+    {
+      "family": "1:1",
+      "inches": [
+        30,
+        30
+      ],
+      "cm": [
+        76,
+        76
+      ],
+      "type": "Rolled",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca150",
+        "https://www.mesonart.com/products/neutral-painting-lca145",
+        "https://www.mesonart.com/products/neutral-painting-lca139"
+      ],
+      "n": 67,
+      "min": 342,
+      "median": 342,
+      "max": 342,
+      "q1": 342,
+      "q3": 342
+    },
+    {
+      "family": "1:1",
+      "inches": [
+        30,
+        30
+      ],
+      "cm": [
+        76,
+        76
+      ],
+      "type": "Stretched",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca150",
+        "https://www.mesonart.com/products/neutral-painting-lca145",
+        "https://www.mesonart.com/products/neutral-painting-lca139"
+      ],
+      "n": 70,
+      "min": 602,
+      "median": 602,
+      "max": 709,
+      "q1": 602,
+      "q3": 602
+    },
+    {
+      "family": "1:1",
+      "inches": [
+        32,
+        32
+      ],
+      "cm": [
+        81,
+        81
+      ],
+      "type": "Framed",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca150",
+        "https://www.mesonart.com/products/neutral-painting-lca145",
+        "https://www.mesonart.com/products/neutral-painting-lca139"
+      ],
+      "n": 70,
+      "min": 707,
+      "median": 707,
+      "max": 834,
+      "q1": 707,
+      "q3": 707
+    },
+    {
+      "family": "1:1",
+      "inches": [
+        32,
+        32
+      ],
+      "cm": [
+        81,
+        81
+      ],
+      "type": "Rolled",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca150",
+        "https://www.mesonart.com/products/neutral-painting-lca145",
+        "https://www.mesonart.com/products/neutral-painting-lca139"
+      ],
+      "n": 67,
+      "min": 389,
+      "median": 389,
+      "max": 389,
+      "q1": 389,
+      "q3": 389
+    },
+    {
+      "family": "1:1",
+      "inches": [
+        32,
+        32
+      ],
+      "cm": [
+        81,
+        81
+      ],
+      "type": "Stretched",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca150",
+        "https://www.mesonart.com/products/neutral-painting-lca145",
+        "https://www.mesonart.com/products/neutral-painting-lca139"
+      ],
+      "n": 70,
+      "min": 675,
+      "median": 675,
+      "max": 795,
+      "q1": 675,
+      "q3": 675
+    },
+    {
+      "family": "1:1",
+      "inches": [
+        36,
+        36
+      ],
+      "cm": [
+        91,
+        91
+      ],
+      "type": "Framed",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca150",
+        "https://www.mesonart.com/products/neutral-painting-lca145",
+        "https://www.mesonart.com/products/neutral-painting-lca139"
+      ],
+      "n": 70,
+      "min": 871,
+      "median": 871,
+      "max": 1026,
+      "q1": 871,
+      "q3": 871
+    },
+    {
+      "family": "1:1",
+      "inches": [
+        36,
+        36
+      ],
+      "cm": [
+        91,
+        91
+      ],
+      "type": "Rolled",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca150",
+        "https://www.mesonart.com/products/neutral-painting-lca145",
+        "https://www.mesonart.com/products/neutral-painting-lca139"
+      ],
+      "n": 67,
+      "min": 481,
+      "median": 481,
+      "max": 481,
+      "q1": 481,
+      "q3": 481
+    },
+    {
+      "family": "1:1",
+      "inches": [
+        36,
+        36
+      ],
+      "cm": [
+        91,
+        91
+      ],
+      "type": "Stretched",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca150",
+        "https://www.mesonart.com/products/neutral-painting-lca145",
+        "https://www.mesonart.com/products/neutral-painting-lca139"
+      ],
+      "n": 70,
+      "min": 845,
+      "median": 845,
+      "max": 996,
+      "q1": 845,
+      "q3": 845
+    },
+    {
+      "family": "1:1",
+      "inches": [
+        40,
+        40
+      ],
+      "cm": [
+        102,
+        102
+      ],
+      "type": "Framed",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca150",
+        "https://www.mesonart.com/products/neutral-painting-lca145",
+        "https://www.mesonart.com/products/neutral-painting-lca139"
+      ],
+      "n": 70,
+      "min": 1053,
+      "median": 1053,
+      "max": 1241,
+      "q1": 1053,
+      "q3": 1053
+    },
+    {
+      "family": "1:1",
+      "inches": [
+        40,
+        40
+      ],
+      "cm": [
+        102,
+        102
+      ],
+      "type": "Rolled",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca150",
+        "https://www.mesonart.com/products/neutral-painting-lca145",
+        "https://www.mesonart.com/products/neutral-painting-lca139"
+      ],
+      "n": 67,
+      "min": 585,
+      "median": 585,
+      "max": 585,
+      "q1": 585,
+      "q3": 585
+    },
+    {
+      "family": "1:1",
+      "inches": [
+        40,
+        40
+      ],
+      "cm": [
+        102,
+        102
+      ],
+      "type": "Stretched",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca150",
+        "https://www.mesonart.com/products/neutral-painting-lca145",
+        "https://www.mesonart.com/products/neutral-painting-lca139"
+      ],
+      "n": 70,
+      "min": 1014,
+      "median": 1014,
+      "max": 1195,
+      "q1": 1014,
+      "q3": 1014
+    },
+    {
+      "family": "1:1",
+      "inches": [
+        44,
+        44
+      ],
+      "cm": [
+        112,
+        112
+      ],
+      "type": "Framed",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca150",
+        "https://www.mesonart.com/products/neutral-painting-lca145",
+        "https://www.mesonart.com/products/neutral-painting-lca139"
+      ],
+      "n": 70,
+      "min": 1365,
+      "median": 1365,
+      "max": 1609,
+      "q1": 1365,
+      "q3": 1365
+    },
+    {
+      "family": "1:1",
+      "inches": [
+        44,
+        44
+      ],
+      "cm": [
+        112,
+        112
+      ],
+      "type": "Rolled",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca150",
+        "https://www.mesonart.com/products/neutral-painting-lca145",
+        "https://www.mesonart.com/products/neutral-painting-lca139"
+      ],
+      "n": 67,
+      "min": 741,
+      "median": 741,
+      "max": 741,
+      "q1": 741,
+      "q3": 741
+    },
+    {
+      "family": "1:1",
+      "inches": [
+        44,
+        44
+      ],
+      "cm": [
+        112,
+        112
+      ],
+      "type": "Stretched",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca150",
+        "https://www.mesonart.com/products/neutral-painting-lca145",
+        "https://www.mesonart.com/products/neutral-painting-lca139"
+      ],
+      "n": 70,
+      "min": 1300,
+      "median": 1300,
+      "max": 1532,
+      "q1": 1300,
+      "q3": 1300
+    },
+    {
+      "family": "1:1",
+      "inches": [
+        48,
+        48
+      ],
+      "cm": [
+        122,
+        122
+      ],
+      "type": "Framed",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca150",
+        "https://www.mesonart.com/products/neutral-painting-lca145",
+        "https://www.mesonart.com/products/neutral-painting-lca139"
+      ],
+      "n": 70,
+      "min": 1534,
+      "median": 1534,
+      "max": 1808,
+      "q1": 1534,
+      "q3": 1534
+    },
+    {
+      "family": "1:1",
+      "inches": [
+        48,
+        48
+      ],
+      "cm": [
+        122,
+        122
+      ],
+      "type": "Rolled",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca150",
+        "https://www.mesonart.com/products/neutral-painting-lca145",
+        "https://www.mesonart.com/products/neutral-painting-lca139"
+      ],
+      "n": 67,
+      "min": 806,
+      "median": 806,
+      "max": 806,
+      "q1": 806,
+      "q3": 806
+    },
+    {
+      "family": "1:1",
+      "inches": [
+        48,
+        48
+      ],
+      "cm": [
+        122,
+        122
+      ],
+      "type": "Stretched",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca150",
+        "https://www.mesonart.com/products/neutral-painting-lca145",
+        "https://www.mesonart.com/products/neutral-painting-lca139"
+      ],
+      "n": 70,
+      "min": 1495,
+      "median": 1495,
+      "max": 1762,
+      "q1": 1495,
+      "q3": 1495
+    },
+    {
+      "family": "1:1",
+      "inches": [
+        55,
+        55
+      ],
+      "cm": [
+        140,
+        140
+      ],
+      "type": "Framed",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca150",
+        "https://www.mesonart.com/products/neutral-painting-lca145",
+        "https://www.mesonart.com/products/neutral-painting-lca139"
+      ],
+      "n": 70,
+      "min": 1976,
+      "median": 1976,
+      "max": 2329,
+      "q1": 1976,
+      "q3": 1976
+    },
+    {
+      "family": "1:1",
+      "inches": [
+        55,
+        55
+      ],
+      "cm": [
+        140,
+        140
+      ],
+      "type": "Rolled",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca150",
+        "https://www.mesonart.com/products/neutral-painting-lca145",
+        "https://www.mesonart.com/products/neutral-painting-lca139"
+      ],
+      "n": 67,
+      "min": 1040,
+      "median": 1040,
+      "max": 1040,
+      "q1": 1040,
+      "q3": 1040
+    },
+    {
+      "family": "1:1",
+      "inches": [
+        55,
+        55
+      ],
+      "cm": [
+        140,
+        140
+      ],
+      "type": "Stretched",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca150",
+        "https://www.mesonart.com/products/neutral-painting-lca145",
+        "https://www.mesonart.com/products/neutral-painting-lca139"
+      ],
+      "n": 70,
+      "min": 1937,
+      "median": 1937,
+      "max": 2283,
+      "q1": 1937,
+      "q3": 1937
+    },
+    {
+      "family": "1:1",
+      "inches": [
+        60,
+        60
+      ],
+      "cm": [
+        152,
+        152
+      ],
+      "type": "Framed",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca150",
+        "https://www.mesonart.com/products/neutral-painting-lca145",
+        "https://www.mesonart.com/products/neutral-painting-lca139"
+      ],
+      "n": 70,
+      "min": 2249,
+      "median": 2249,
+      "max": 2651,
+      "q1": 2249,
+      "q3": 2249
+    },
+    {
+      "family": "1:1",
+      "inches": [
+        60,
+        60
+      ],
+      "cm": [
+        152,
+        152
+      ],
+      "type": "Rolled",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca150",
+        "https://www.mesonart.com/products/neutral-painting-lca145",
+        "https://www.mesonart.com/products/neutral-painting-lca139"
+      ],
+      "n": 67,
+      "min": 1144,
+      "median": 1144,
+      "max": 1144,
+      "q1": 1144,
+      "q3": 1144
+    },
+    {
+      "family": "1:1",
+      "inches": [
+        60,
+        60
+      ],
+      "cm": [
+        152,
+        152
+      ],
+      "type": "Stretched",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca150",
+        "https://www.mesonart.com/products/neutral-painting-lca145",
+        "https://www.mesonart.com/products/neutral-painting-lca139"
+      ],
+      "n": 70,
+      "min": 2204,
+      "median": 2204,
+      "max": 2597,
+      "q1": 2204,
+      "q3": 2204
+    },
+    {
+      "family": "1:1",
+      "inches": [
+        72,
+        72
+      ],
+      "cm": [
+        183,
+        183
+      ],
+      "type": "Framed",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca150",
+        "https://www.mesonart.com/products/neutral-painting-lca145",
+        "https://www.mesonart.com/products/neutral-painting-lca139"
+      ],
+      "n": 70,
+      "min": 3166,
+      "median": 3166,
+      "max": 3731,
+      "q1": 3166,
+      "q3": 3166
+    },
+    {
+      "family": "1:1",
+      "inches": [
+        72,
+        72
+      ],
+      "cm": [
+        183,
+        183
+      ],
+      "type": "Rolled",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca150",
+        "https://www.mesonart.com/products/neutral-painting-lca145",
+        "https://www.mesonart.com/products/neutral-painting-lca139"
+      ],
+      "n": 67,
+      "min": 1625,
+      "median": 1625,
+      "max": 1625,
+      "q1": 1625,
+      "q3": 1625
+    },
+    {
+      "family": "1:1",
+      "inches": [
+        72,
+        72
+      ],
+      "cm": [
+        183,
+        183
+      ],
+      "type": "Stretched",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca150",
+        "https://www.mesonart.com/products/neutral-painting-lca145",
+        "https://www.mesonart.com/products/neutral-painting-lca139"
+      ],
+      "n": 70,
+      "min": 3088,
+      "median": 3088,
+      "max": 3639,
+      "q1": 3088,
+      "q3": 3088
+    },
+    {
+      "family": "1:2 / 2:1",
+      "inches": [
+        18,
+        36
+      ],
+      "cm": [
+        46,
+        91
+      ],
+      "type": "Framed",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca149",
+        "https://www.mesonart.com/products/silent-earth-horizon-lca148",
+        "https://www.mesonart.com/products/neutral-painting-lca147"
+      ],
+      "n": 145,
+      "min": 507,
+      "median": 507,
+      "max": 598,
+      "q1": 507,
+      "q3": 507
+    },
+    {
+      "family": "1:2 / 2:1",
+      "inches": [
+        18,
+        36
+      ],
+      "cm": [
+        46,
+        91
+      ],
+      "type": "Rolled",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca149",
+        "https://www.mesonart.com/products/silent-earth-horizon-lca148",
+        "https://www.mesonart.com/products/neutral-painting-lca147"
+      ],
+      "n": 126,
+      "min": 266,
+      "median": 266,
+      "max": 266,
+      "q1": 266,
+      "q3": 266
+    },
+    {
+      "family": "1:2 / 2:1",
+      "inches": [
+        18,
+        36
+      ],
+      "cm": [
+        46,
+        91
+      ],
+      "type": "Stretched",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca149",
+        "https://www.mesonart.com/products/silent-earth-horizon-lca148",
+        "https://www.mesonart.com/products/neutral-painting-lca147"
+      ],
+      "n": 145,
+      "min": 488,
+      "median": 488,
+      "max": 574,
+      "q1": 488,
+      "q3": 488
+    },
+    {
+      "family": "1:2 / 2:1",
+      "inches": [
+        24,
+        48
+      ],
+      "cm": [
+        61,
+        122
+      ],
+      "type": "Framed",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca149",
+        "https://www.mesonart.com/products/silent-earth-horizon-lca148",
+        "https://www.mesonart.com/products/neutral-painting-lca147"
+      ],
+      "n": 145,
+      "min": 826,
+      "median": 826,
+      "max": 973,
+      "q1": 826,
+      "q3": 826
+    },
+    {
+      "family": "1:2 / 2:1",
+      "inches": [
+        24,
+        48
+      ],
+      "cm": [
+        61,
+        122
+      ],
+      "type": "Rolled",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca149",
+        "https://www.mesonart.com/products/silent-earth-horizon-lca148",
+        "https://www.mesonart.com/products/neutral-painting-lca147"
+      ],
+      "n": 126,
+      "min": 429,
+      "median": 429,
+      "max": 429,
+      "q1": 429,
+      "q3": 429
+    },
+    {
+      "family": "1:2 / 2:1",
+      "inches": [
+        24,
+        48
+      ],
+      "cm": [
+        61,
+        122
+      ],
+      "type": "Stretched",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca149",
+        "https://www.mesonart.com/products/silent-earth-horizon-lca148",
+        "https://www.mesonart.com/products/neutral-painting-lca147"
+      ],
+      "n": 145,
+      "min": 800,
+      "median": 800,
+      "max": 942,
+      "q1": 800,
+      "q3": 800
+    },
+    {
+      "family": "1:2 / 2:1",
+      "inches": [
+        30,
+        60
+      ],
+      "cm": [
+        76,
+        152
+      ],
+      "type": "Framed",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca149",
+        "https://www.mesonart.com/products/silent-earth-horizon-lca148",
+        "https://www.mesonart.com/products/neutral-painting-lca147"
+      ],
+      "n": 145,
+      "min": 1228,
+      "median": 1228,
+      "max": 1448,
+      "q1": 1228,
+      "q3": 1228
+    },
+    {
+      "family": "1:2 / 2:1",
+      "inches": [
+        30,
+        60
+      ],
+      "cm": [
+        76,
+        152
+      ],
+      "type": "Rolled",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca149",
+        "https://www.mesonart.com/products/silent-earth-horizon-lca148",
+        "https://www.mesonart.com/products/neutral-painting-lca147"
+      ],
+      "n": 126,
+      "min": 644,
+      "median": 644,
+      "max": 644,
+      "q1": 644,
+      "q3": 644
+    },
+    {
+      "family": "1:2 / 2:1",
+      "inches": [
+        30,
+        60
+      ],
+      "cm": [
+        76,
+        152
+      ],
+      "type": "Stretched",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca149",
+        "https://www.mesonart.com/products/silent-earth-horizon-lca148",
+        "https://www.mesonart.com/products/neutral-painting-lca147"
+      ],
+      "n": 145,
+      "min": 1196,
+      "median": 1196,
+      "max": 1410,
+      "q1": 1196,
+      "q3": 1196
+    },
+    {
+      "family": "1:2 / 2:1",
+      "inches": [
+        36,
+        72
+      ],
+      "cm": [
+        91,
+        183
+      ],
+      "type": "Framed",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca149",
+        "https://www.mesonart.com/products/silent-earth-horizon-lca148",
+        "https://www.mesonart.com/products/neutral-painting-lca147"
+      ],
+      "n": 145,
+      "min": 1710,
+      "median": 1710,
+      "max": 2014,
+      "q1": 1710,
+      "q3": 1710
+    },
+    {
+      "family": "1:2 / 2:1",
+      "inches": [
+        36,
+        72
+      ],
+      "cm": [
+        91,
+        183
+      ],
+      "type": "Rolled",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca149",
+        "https://www.mesonart.com/products/silent-earth-horizon-lca148",
+        "https://www.mesonart.com/products/neutral-painting-lca147"
+      ],
+      "n": 126,
+      "min": 890,
+      "median": 890,
+      "max": 890,
+      "q1": 890,
+      "q3": 890
+    },
+    {
+      "family": "1:2 / 2:1",
+      "inches": [
+        36,
+        72
+      ],
+      "cm": [
+        91,
+        183
+      ],
+      "type": "Stretched",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca149",
+        "https://www.mesonart.com/products/silent-earth-horizon-lca148",
+        "https://www.mesonart.com/products/neutral-painting-lca147"
+      ],
+      "n": 145,
+      "min": 1670,
+      "median": 1670,
+      "max": 1969,
+      "q1": 1670,
+      "q3": 1670
+    },
+    {
+      "family": "1:2 / 2:1",
+      "inches": [
+        40,
+        80
+      ],
+      "cm": [
+        102,
+        203
+      ],
+      "type": "Framed",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca149",
+        "https://www.mesonart.com/products/silent-earth-horizon-lca148",
+        "https://www.mesonart.com/products/neutral-painting-lca147"
+      ],
+      "n": 145,
+      "min": 2074,
+      "median": 2074,
+      "max": 2444,
+      "q1": 2074,
+      "q3": 2074
+    },
+    {
+      "family": "1:2 / 2:1",
+      "inches": [
+        40,
+        80
+      ],
+      "cm": [
+        102,
+        203
+      ],
+      "type": "Rolled",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca149",
+        "https://www.mesonart.com/products/silent-earth-horizon-lca148",
+        "https://www.mesonart.com/products/neutral-painting-lca147"
+      ],
+      "n": 126,
+      "min": 1079,
+      "median": 1079,
+      "max": 1079,
+      "q1": 1079,
+      "q3": 1079
+    },
+    {
+      "family": "1:2 / 2:1",
+      "inches": [
+        40,
+        80
+      ],
+      "cm": [
+        102,
+        203
+      ],
+      "type": "Stretched",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca149",
+        "https://www.mesonart.com/products/silent-earth-horizon-lca148",
+        "https://www.mesonart.com/products/neutral-painting-lca147"
+      ],
+      "n": 145,
+      "min": 2028,
+      "median": 2028,
+      "max": 2390,
+      "q1": 2028,
+      "q3": 2028
+    },
+    {
+      "family": "1:2 / 2:1",
+      "inches": [
+        45,
+        90
+      ],
+      "cm": [
+        114,
+        229
+      ],
+      "type": "Framed",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca149",
+        "https://www.mesonart.com/products/silent-earth-horizon-lca148",
+        "https://www.mesonart.com/products/neutral-painting-lca147"
+      ],
+      "n": 145,
+      "min": 2509,
+      "median": 2509,
+      "max": 2957,
+      "q1": 2509,
+      "q3": 2509
+    },
+    {
+      "family": "1:2 / 2:1",
+      "inches": [
+        45,
+        90
+      ],
+      "cm": [
+        114,
+        229
+      ],
+      "type": "Rolled",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca149",
+        "https://www.mesonart.com/products/silent-earth-horizon-lca148",
+        "https://www.mesonart.com/products/neutral-painting-lca147"
+      ],
+      "n": 126,
+      "min": 1274,
+      "median": 1274,
+      "max": 1274,
+      "q1": 1274,
+      "q3": 1274
+    },
+    {
+      "family": "1:2 / 2:1",
+      "inches": [
+        45,
+        90
+      ],
+      "cm": [
+        114,
+        229
+      ],
+      "type": "Stretched",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca149",
+        "https://www.mesonart.com/products/silent-earth-horizon-lca148",
+        "https://www.mesonart.com/products/neutral-painting-lca147"
+      ],
+      "n": 145,
+      "min": 2457,
+      "median": 2457,
+      "max": 2896,
+      "q1": 2457,
+      "q3": 2457
+    },
+    {
+      "family": "1:2 / 2:1",
+      "inches": [
+        50,
+        100
+      ],
+      "cm": [
+        127,
+        254
+      ],
+      "type": "Framed",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca149",
+        "https://www.mesonart.com/products/silent-earth-horizon-lca148",
+        "https://www.mesonart.com/products/neutral-painting-lca147"
+      ],
+      "n": 145,
+      "min": 3062,
+      "median": 3062,
+      "max": 3609,
+      "q1": 3062,
+      "q3": 3062
+    },
+    {
+      "family": "1:2 / 2:1",
+      "inches": [
+        50,
+        100
+      ],
+      "cm": [
+        127,
+        254
+      ],
+      "type": "Rolled",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca149",
+        "https://www.mesonart.com/products/silent-earth-horizon-lca148",
+        "https://www.mesonart.com/products/neutral-painting-lca147"
+      ],
+      "n": 126,
+      "min": 1560,
+      "median": 1560,
+      "max": 1560,
+      "q1": 1560,
+      "q3": 1560
+    },
+    {
+      "family": "1:2 / 2:1",
+      "inches": [
+        50,
+        100
+      ],
+      "cm": [
+        127,
+        254
+      ],
+      "type": "Stretched",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca149",
+        "https://www.mesonart.com/products/silent-earth-horizon-lca148",
+        "https://www.mesonart.com/products/neutral-painting-lca147"
+      ],
+      "n": 145,
+      "min": 2990,
+      "median": 2990,
+      "max": 3524,
+      "q1": 2990,
+      "q3": 2990
+    },
+    {
+      "family": "2:3 / 3:2",
+      "inches": [
+        24,
+        36
+      ],
+      "cm": [
+        61,
+        91
+      ],
+      "type": "Framed",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca146",
+        "https://www.mesonart.com/products/neutral-painting-lca138",
+        "https://www.mesonart.com/products/neutral-painting-lca137"
+      ],
+      "n": 154,
+      "min": 601,
+      "median": 601,
+      "max": 708,
+      "q1": 601,
+      "q3": 601
+    },
+    {
+      "family": "2:3 / 3:2",
+      "inches": [
+        24,
+        36
+      ],
+      "cm": [
+        61,
+        91
+      ],
+      "type": "Rolled",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca146",
+        "https://www.mesonart.com/products/neutral-painting-lca138",
+        "https://www.mesonart.com/products/neutral-painting-lca137"
+      ],
+      "n": 139,
+      "min": 328,
+      "median": 328,
+      "max": 328,
+      "q1": 328,
+      "q3": 328
+    },
+    {
+      "family": "2:3 / 3:2",
+      "inches": [
+        24,
+        36
+      ],
+      "cm": [
+        61,
+        91
+      ],
+      "type": "Stretched",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca146",
+        "https://www.mesonart.com/products/neutral-painting-lca138",
+        "https://www.mesonart.com/products/neutral-painting-lca137"
+      ],
+      "n": 154,
+      "min": 588,
+      "median": 588,
+      "max": 692,
+      "q1": 588,
+      "q3": 588
+    },
+    {
+      "family": "2:3 / 3:2",
+      "inches": [
+        32,
+        48
+      ],
+      "cm": [
+        81,
+        122
+      ],
+      "type": "Framed",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca146",
+        "https://www.mesonart.com/products/neutral-painting-lca138",
+        "https://www.mesonart.com/products/neutral-painting-lca137"
+      ],
+      "n": 154,
+      "min": 1072,
+      "median": 1072,
+      "max": 1264,
+      "q1": 1072,
+      "q3": 1072
+    },
+    {
+      "family": "2:3 / 3:2",
+      "inches": [
+        32,
+        48
+      ],
+      "cm": [
+        81,
+        122
+      ],
+      "type": "Rolled",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca146",
+        "https://www.mesonart.com/products/neutral-painting-lca138",
+        "https://www.mesonart.com/products/neutral-painting-lca137"
+      ],
+      "n": 139,
+      "min": 559,
+      "median": 559,
+      "max": 559,
+      "q1": 559,
+      "q3": 559
+    },
+    {
+      "family": "2:3 / 3:2",
+      "inches": [
+        32,
+        48
+      ],
+      "cm": [
+        81,
+        122
+      ],
+      "type": "Stretched",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca146",
+        "https://www.mesonart.com/products/neutral-painting-lca138",
+        "https://www.mesonart.com/products/neutral-painting-lca137"
+      ],
+      "n": 154,
+      "min": 1034,
+      "median": 1034,
+      "max": 1218,
+      "q1": 1034,
+      "q3": 1034
+    },
+    {
+      "family": "2:3 / 3:2",
+      "inches": [
+        36,
+        54
+      ],
+      "cm": [
+        91,
+        137
+      ],
+      "type": "Framed",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca146",
+        "https://www.mesonart.com/products/neutral-painting-lca138",
+        "https://www.mesonart.com/products/neutral-painting-lca137"
+      ],
+      "n": 154,
+      "min": 1313,
+      "median": 1313,
+      "max": 1547,
+      "q1": 1313,
+      "q3": 1313
+    },
+    {
+      "family": "2:3 / 3:2",
+      "inches": [
+        36,
+        54
+      ],
+      "cm": [
+        91,
+        137
+      ],
+      "type": "Rolled",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca146",
+        "https://www.mesonart.com/products/neutral-painting-lca138",
+        "https://www.mesonart.com/products/neutral-painting-lca137"
+      ],
+      "n": 139,
+      "min": 689,
+      "median": 689,
+      "max": 689,
+      "q1": 689,
+      "q3": 689
+    },
+    {
+      "family": "2:3 / 3:2",
+      "inches": [
+        36,
+        54
+      ],
+      "cm": [
+        91,
+        137
+      ],
+      "type": "Stretched",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca146",
+        "https://www.mesonart.com/products/neutral-painting-lca138",
+        "https://www.mesonart.com/products/neutral-painting-lca137"
+      ],
+      "n": 154,
+      "min": 1261,
+      "median": 1261,
+      "max": 1486,
+      "q1": 1261,
+      "q3": 1261
+    },
+    {
+      "family": "2:3 / 3:2",
+      "inches": [
+        40,
+        60
+      ],
+      "cm": [
+        102,
+        152
+      ],
+      "type": "Framed",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca146",
+        "https://www.mesonart.com/products/neutral-painting-lca138",
+        "https://www.mesonart.com/products/neutral-painting-lca137"
+      ],
+      "n": 154,
+      "min": 1592,
+      "median": 1592,
+      "max": 1877,
+      "q1": 1592,
+      "q3": 1592
+    },
+    {
+      "family": "2:3 / 3:2",
+      "inches": [
+        40,
+        60
+      ],
+      "cm": [
+        102,
+        152
+      ],
+      "type": "Rolled",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca146",
+        "https://www.mesonart.com/products/neutral-painting-lca138",
+        "https://www.mesonart.com/products/neutral-painting-lca137"
+      ],
+      "n": 139,
+      "min": 832,
+      "median": 832,
+      "max": 832,
+      "q1": 832,
+      "q3": 832
+    },
+    {
+      "family": "2:3 / 3:2",
+      "inches": [
+        40,
+        60
+      ],
+      "cm": [
+        102,
+        152
+      ],
+      "type": "Stretched",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca146",
+        "https://www.mesonart.com/products/neutral-painting-lca138",
+        "https://www.mesonart.com/products/neutral-painting-lca137"
+      ],
+      "n": 154,
+      "min": 1547,
+      "median": 1547,
+      "max": 1824,
+      "q1": 1547,
+      "q3": 1547
+    },
+    {
+      "family": "2:3 / 3:2",
+      "inches": [
+        48,
+        72
+      ],
+      "cm": [
+        122,
+        183
+      ],
+      "type": "Framed",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca146",
+        "https://www.mesonart.com/products/neutral-painting-lca138",
+        "https://www.mesonart.com/products/neutral-painting-lca137"
+      ],
+      "n": 154,
+      "min": 2164,
+      "median": 2164,
+      "max": 2551,
+      "q1": 2164,
+      "q3": 2164
+    },
+    {
+      "family": "2:3 / 3:2",
+      "inches": [
+        48,
+        72
+      ],
+      "cm": [
+        122,
+        183
+      ],
+      "type": "Rolled",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca146",
+        "https://www.mesonart.com/products/neutral-painting-lca138",
+        "https://www.mesonart.com/products/neutral-painting-lca137"
+      ],
+      "n": 139,
+      "min": 1105,
+      "median": 1105,
+      "max": 1105,
+      "q1": 1105,
+      "q3": 1105
+    },
+    {
+      "family": "2:3 / 3:2",
+      "inches": [
+        48,
+        72
+      ],
+      "cm": [
+        122,
+        183
+      ],
+      "type": "Stretched",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca146",
+        "https://www.mesonart.com/products/neutral-painting-lca138",
+        "https://www.mesonart.com/products/neutral-painting-lca137"
+      ],
+      "n": 154,
+      "min": 2132,
+      "median": 2132,
+      "max": 2512,
+      "q1": 2132,
+      "q3": 2132
+    },
+    {
+      "family": "2:3 / 3:2",
+      "inches": [
+        53,
+        80
+      ],
+      "cm": [
+        135,
+        203
+      ],
+      "type": "Framed",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca146",
+        "https://www.mesonart.com/products/neutral-painting-lca138",
+        "https://www.mesonart.com/products/neutral-painting-lca137"
+      ],
+      "n": 154,
+      "min": 2632,
+      "median": 2632,
+      "max": 3103,
+      "q1": 2632,
+      "q3": 2632
+    },
+    {
+      "family": "2:3 / 3:2",
+      "inches": [
+        53,
+        80
+      ],
+      "cm": [
+        135,
+        203
+      ],
+      "type": "Rolled",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca146",
+        "https://www.mesonart.com/products/neutral-painting-lca138",
+        "https://www.mesonart.com/products/neutral-painting-lca137"
+      ],
+      "n": 139,
+      "min": 1339,
+      "median": 1339,
+      "max": 1339,
+      "q1": 1339,
+      "q3": 1339
+    },
+    {
+      "family": "2:3 / 3:2",
+      "inches": [
+        53,
+        80
+      ],
+      "cm": [
+        135,
+        203
+      ],
+      "type": "Stretched",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca146",
+        "https://www.mesonart.com/products/neutral-painting-lca138",
+        "https://www.mesonart.com/products/neutral-painting-lca137"
+      ],
+      "n": 154,
+      "min": 2470,
+      "median": 2580,
+      "max": 3042,
+      "q1": 2470,
+      "q3": 2580
+    },
+    {
+      "family": "3:4 / 4:3",
+      "inches": [
+        24,
+        32
+      ],
+      "cm": [
+        61,
+        81
+      ],
+      "type": "Framed",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca146",
+        "https://www.mesonart.com/products/neutral-painting-lca138",
+        "https://www.mesonart.com/products/neutral-painting-lca137"
+      ],
+      "n": 154,
+      "min": 540,
+      "median": 540,
+      "max": 635,
+      "q1": 540,
+      "q3": 540
+    },
+    {
+      "family": "3:4 / 4:3",
+      "inches": [
+        24,
+        32
+      ],
+      "cm": [
+        61,
+        81
+      ],
+      "type": "Rolled",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca146",
+        "https://www.mesonart.com/products/neutral-painting-lca138",
+        "https://www.mesonart.com/products/neutral-painting-lca137"
+      ],
+      "n": 139,
+      "min": 292,
+      "median": 292,
+      "max": 292,
+      "q1": 292,
+      "q3": 292
+    },
+    {
+      "family": "3:4 / 4:3",
+      "inches": [
+        24,
+        32
+      ],
+      "cm": [
+        61,
+        81
+      ],
+      "type": "Stretched",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca146",
+        "https://www.mesonart.com/products/neutral-painting-lca138",
+        "https://www.mesonart.com/products/neutral-painting-lca137"
+      ],
+      "n": 154,
+      "min": 526,
+      "median": 526,
+      "max": 620,
+      "q1": 526,
+      "q3": 526
+    },
+    {
+      "family": "3:4 / 4:3",
+      "inches": [
+        30,
+        40
+      ],
+      "cm": [
+        76,
+        102
+      ],
+      "type": "Framed",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca146",
+        "https://www.mesonart.com/products/neutral-painting-lca138",
+        "https://www.mesonart.com/products/neutral-painting-lca137"
+      ],
+      "n": 154,
+      "min": 806,
+      "median": 806,
+      "max": 950,
+      "q1": 806,
+      "q3": 806
+    },
+    {
+      "family": "3:4 / 4:3",
+      "inches": [
+        30,
+        40
+      ],
+      "cm": [
+        76,
+        102
+      ],
+      "type": "Rolled",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca146",
+        "https://www.mesonart.com/products/neutral-painting-lca138",
+        "https://www.mesonart.com/products/neutral-painting-lca137"
+      ],
+      "n": 139,
+      "min": 448,
+      "median": 448,
+      "max": 448,
+      "q1": 448,
+      "q3": 448
+    },
+    {
+      "family": "3:4 / 4:3",
+      "inches": [
+        30,
+        40
+      ],
+      "cm": [
+        76,
+        102
+      ],
+      "type": "Stretched",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca146",
+        "https://www.mesonart.com/products/neutral-painting-lca138",
+        "https://www.mesonart.com/products/neutral-painting-lca137"
+      ],
+      "n": 154,
+      "min": 774,
+      "median": 774,
+      "max": 912,
+      "q1": 774,
+      "q3": 774
+    },
+    {
+      "family": "3:4 / 4:3",
+      "inches": [
+        36,
+        48
+      ],
+      "cm": [
+        91,
+        122
+      ],
+      "type": "Framed",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca146",
+        "https://www.mesonart.com/products/neutral-painting-lca138",
+        "https://www.mesonart.com/products/neutral-painting-lca137"
+      ],
+      "n": 154,
+      "min": 1190,
+      "median": 1190,
+      "max": 1401,
+      "q1": 1190,
+      "q3": 1190
+    },
+    {
+      "family": "3:4 / 4:3",
+      "inches": [
+        36,
+        48
+      ],
+      "cm": [
+        91,
+        122
+      ],
+      "type": "Rolled",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca146",
+        "https://www.mesonart.com/products/neutral-painting-lca138",
+        "https://www.mesonart.com/products/neutral-painting-lca137"
+      ],
+      "n": 139,
+      "min": 624,
+      "median": 624,
+      "max": 624,
+      "q1": 624,
+      "q3": 624
+    },
+    {
+      "family": "3:4 / 4:3",
+      "inches": [
+        36,
+        48
+      ],
+      "cm": [
+        91,
+        122
+      ],
+      "type": "Stretched",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca146",
+        "https://www.mesonart.com/products/neutral-painting-lca138",
+        "https://www.mesonart.com/products/neutral-painting-lca137"
+      ],
+      "n": 154,
+      "min": 1144,
+      "median": 1144,
+      "max": 1348,
+      "q1": 1144,
+      "q3": 1144
+    },
+    {
+      "family": "3:4 / 4:3",
+      "inches": [
+        40,
+        54
+      ],
+      "cm": [
+        102,
+        137
+      ],
+      "type": "Framed",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca146",
+        "https://www.mesonart.com/products/neutral-painting-lca138",
+        "https://www.mesonart.com/products/neutral-painting-lca137"
+      ],
+      "n": 154,
+      "min": 1443,
+      "median": 1443,
+      "max": 1700,
+      "q1": 1443,
+      "q3": 1443
+    },
+    {
+      "family": "3:4 / 4:3",
+      "inches": [
+        40,
+        54
+      ],
+      "cm": [
+        102,
+        137
+      ],
+      "type": "Rolled",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca146",
+        "https://www.mesonart.com/products/neutral-painting-lca138",
+        "https://www.mesonart.com/products/neutral-painting-lca137"
+      ],
+      "n": 139,
+      "min": 754,
+      "median": 754,
+      "max": 754,
+      "q1": 754,
+      "q3": 754
+    },
+    {
+      "family": "3:4 / 4:3",
+      "inches": [
+        40,
+        54
+      ],
+      "cm": [
+        102,
+        137
+      ],
+      "type": "Stretched",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca146",
+        "https://www.mesonart.com/products/neutral-painting-lca138",
+        "https://www.mesonart.com/products/neutral-painting-lca137"
+      ],
+      "n": 154,
+      "min": 1404,
+      "median": 1404,
+      "max": 1654,
+      "q1": 1404,
+      "q3": 1404
+    },
+    {
+      "family": "3:4 / 4:3",
+      "inches": [
+        48,
+        64
+      ],
+      "cm": [
+        122,
+        163
+      ],
+      "type": "Framed",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca146",
+        "https://www.mesonart.com/products/neutral-painting-lca138",
+        "https://www.mesonart.com/products/neutral-painting-lca137"
+      ],
+      "n": 154,
+      "min": 1996,
+      "median": 1996,
+      "max": 2352,
+      "q1": 1996,
+      "q3": 1996
+    },
+    {
+      "family": "3:4 / 4:3",
+      "inches": [
+        48,
+        64
+      ],
+      "cm": [
+        122,
+        163
+      ],
+      "type": "Rolled",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca146",
+        "https://www.mesonart.com/products/neutral-painting-lca138",
+        "https://www.mesonart.com/products/neutral-painting-lca137"
+      ],
+      "n": 139,
+      "min": 1046,
+      "median": 1046,
+      "max": 1046,
+      "q1": 1046,
+      "q3": 1046
+    },
+    {
+      "family": "3:4 / 4:3",
+      "inches": [
+        48,
+        64
+      ],
+      "cm": [
+        122,
+        163
+      ],
+      "type": "Stretched",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca146",
+        "https://www.mesonart.com/products/neutral-painting-lca138",
+        "https://www.mesonart.com/products/neutral-painting-lca137"
+      ],
+      "n": 154,
+      "min": 1950,
+      "median": 1950,
+      "max": 2298,
+      "q1": 1950,
+      "q3": 1950
+    },
+    {
+      "family": "3:4 / 4:3",
+      "inches": [
+        54,
+        72
+      ],
+      "cm": [
+        137,
+        183
+      ],
+      "type": "Framed",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca146",
+        "https://www.mesonart.com/products/neutral-painting-lca138",
+        "https://www.mesonart.com/products/neutral-painting-lca137"
+      ],
+      "n": 154,
+      "min": 2412,
+      "median": 2412,
+      "max": 2842,
+      "q1": 2412,
+      "q3": 2412
+    },
+    {
+      "family": "3:4 / 4:3",
+      "inches": [
+        54,
+        72
+      ],
+      "cm": [
+        137,
+        183
+      ],
+      "type": "Rolled",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca146",
+        "https://www.mesonart.com/products/neutral-painting-lca138",
+        "https://www.mesonart.com/products/neutral-painting-lca137"
+      ],
+      "n": 139,
+      "min": 1235,
+      "median": 1235,
+      "max": 1235,
+      "q1": 1235,
+      "q3": 1235
+    },
+    {
+      "family": "3:4 / 4:3",
+      "inches": [
+        54,
+        72
+      ],
+      "cm": [
+        137,
+        183
+      ],
+      "type": "Stretched",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca146",
+        "https://www.mesonart.com/products/neutral-painting-lca138",
+        "https://www.mesonart.com/products/neutral-painting-lca137"
+      ],
+      "n": 154,
+      "min": 2366,
+      "median": 2366,
+      "max": 2919,
+      "q1": 2366,
+      "q3": 2476
+    },
+    {
+      "family": "3:4 / 4:3",
+      "inches": [
+        60,
+        80
+      ],
+      "cm": [
+        152,
+        203
+      ],
+      "type": "Framed",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca146",
+        "https://www.mesonart.com/products/neutral-painting-lca138",
+        "https://www.mesonart.com/products/neutral-painting-lca137"
+      ],
+      "n": 154,
+      "min": 2925,
+      "median": 2925,
+      "max": 3448,
+      "q1": 2925,
+      "q3": 2925
+    },
+    {
+      "family": "3:4 / 4:3",
+      "inches": [
+        60,
+        80
+      ],
+      "cm": [
+        152,
+        203
+      ],
+      "type": "Rolled",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca146",
+        "https://www.mesonart.com/products/neutral-painting-lca138",
+        "https://www.mesonart.com/products/neutral-painting-lca137"
+      ],
+      "n": 139,
+      "min": 1495,
+      "median": 1495,
+      "max": 1495,
+      "q1": 1495,
+      "q3": 1495
+    },
+    {
+      "family": "3:4 / 4:3",
+      "inches": [
+        60,
+        80
+      ],
+      "cm": [
+        152,
+        203
+      ],
+      "type": "Stretched",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca146",
+        "https://www.mesonart.com/products/neutral-painting-lca138",
+        "https://www.mesonart.com/products/neutral-painting-lca137"
+      ],
+      "n": 154,
+      "min": 2847,
+      "median": 2847,
+      "max": 3356,
+      "q1": 2847,
+      "q3": 2847
+    },
+    {
+      "family": "3:4 / 4:3",
+      "inches": [
+        75,
+        100
+      ],
+      "cm": [
+        191,
+        254
+      ],
+      "type": "Framed",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca146",
+        "https://www.mesonart.com/products/neutral-painting-lca138",
+        "https://www.mesonart.com/products/neutral-painting-lca137"
+      ],
+      "n": 154,
+      "min": 4134,
+      "median": 4134,
+      "max": 4949,
+      "q1": 4134,
+      "q3": 4199
+    },
+    {
+      "family": "3:4 / 4:3",
+      "inches": [
+        75,
+        100
+      ],
+      "cm": [
+        191,
+        254
+      ],
+      "type": "Rolled",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca146",
+        "https://www.mesonart.com/products/neutral-painting-lca138",
+        "https://www.mesonart.com/products/neutral-painting-lca137"
+      ],
+      "n": 139,
+      "min": 1950,
+      "median": 1950,
+      "max": 2015,
+      "q1": 1950,
+      "q3": 2015
+    },
+    {
+      "family": "3:4 / 4:3",
+      "inches": [
+        75,
+        100
+      ],
+      "cm": [
+        191,
+        254
+      ],
+      "type": "Stretched",
+      "examples": [
+        "https://www.mesonart.com/products/neutral-painting-lca146",
+        "https://www.mesonart.com/products/neutral-painting-lca138",
+        "https://www.mesonart.com/products/neutral-painting-lca137"
+      ],
+      "n": 154,
+      "min": 4056,
+      "median": 4056,
+      "max": 4857,
+      "q1": 4056,
+      "q3": 4121
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+<div class="px-5 py-12 md:px-10 md:py-16">
+  <div class="max-w-2xl">
+    <a href="{{ routes.account_url }}" class="inline-flex items-center gap-2 font-sans text-[14px] text-black underline-offset-4 hover:underline">
+      {% render 'icon', name: 'chevron-left', class: 'h-3.5 w-3.5' %}
+      {{ 'customer.order.back' | t }}
+    </a>
+
+    <h1 class="mt-6 font-serif text-[32px] text-black md:text-[36px]">{{ order.name }}</h1>
+    <p class="mt-2 font-sans text-[14px] text-neutral-500">
+      {{ 'customer.order.placed' | t: date: order.created_at | date: '%B %e, %Y' }}
+    </p>
+
+    <div class="mt-10 space-y-6">
+      {%- for line_item in order.line_items -%}
+        <div class="flex items-center gap-5">
+          {%- if line_item.image -%}
+            <img src="{{ line_item.image | image_url: width: 160 }}" alt="{{ line_item.title | escape }}" class="h-20 w-16 flex-none bg-[#f3f3f3] object-cover" loading="lazy" width="{{ line_item.image.width }}" height="{{ line_item.image.height }}">
+          {%- endif -%}
+          <div class="flex-1">
+            <p class="font-sans text-[14px] text-black">
+              {%- if line_item.product -%}
+                <a href="{{ line_item.product.url }}">{{ line_item.product.title }}</a>
+              {%- else -%}
+                {{ line_item.title }}
+              {%- endif -%}
+            </p>
+            {%- if line_item.variant.title != 'Default Title' -%}
+              <p class="mt-1 font-sans text-[14px] text-neutral-500">{{ line_item.variant.title }}</p>
+            {%- endif -%}
+            <p class="mt-1 font-sans text-[14px] text-neutral-500">× {{ line_item.quantity }}</p>
+          </div>
+          <p class="font-sans text-[14px] text-black">{{ line_item.final_line_price | money }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <div class="mt-8 space-y-3 border-t border-neutral-200 pt-6">
+      <div class="flex items-center justify-between">
+        <span class="font-sans text-[14px] text-black">{{ 'customer.order.subtotal' | t }}</span>
+        <span class="font-sans text-[14px] text-black">{{ order.line_items_subtotal_price | money }}</span>
+      </div>
+      <div class="flex items-center justify-between">
+        <span class="font-sans text-[14px] text-black">{{ 'customer.order.shipping' | t }}</span>
+        <span class="font-sans text-[14px] text-black">{{ order.shipping_price | money }}</span>
+      </div>
+      {%- if order.tax_price > 0 -%}
+        <div class="flex items-center justify-between">
+          <span class="font-sans text-[14px] text-black">{{ 'customer.order.tax' | t }}</span>
+          <span class="font-sans text-[14px] text-black">{{ order.tax_price | money }}</span>
+        </div>
+      {%- endif -%}
+      <div class="flex items-center justify-between border-t border-neutral-200 pt-3">
+        <span class="font-sans text-[14px] text-black">{{ 'customer.order.total' | t }}</span>
+        <span class="font-sans text-[14px] font-medium text-black">{{ order.total_price | money_with_currency }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "订单",
+  "settings": []
+}
+{% endschema %}

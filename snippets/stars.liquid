@@ -1,0 +1,31 @@
+{%- doc -%}
+  Star rating row (5 stars, supports partial fill like 4.7).
+  @param {number} rating - rating value 0-5 (default 0)
+  @param {number} size - star width/height in px (default 14)
+{%- enddoc -%}
+{%- liquid
+  assign rating = rating | default: 0 | times: 1.0
+  assign size = size | default: 14
+  assign frac = rating | modulo: 1
+  assign pct = rating | times: 20.0 | round: 1
+  if pct > 100
+    assign pct = 100
+  endif
+  if pct < 0
+    assign pct = 0
+  endif
+-%}
+<span class="relative inline-block" role="img" aria-label="{% if frac == 0 %}{{ rating | round }}{% else %}{{ rating }}{% endif %} out of 5 stars">
+  <span class="flex gap-px text-neutral-300" aria-hidden="true">
+    {%- for i in (1..5) -%}
+      <svg viewBox="0 0 24 24" fill="currentColor" class="flex-none" style="width: {{ size }}px; height: {{ size }}px" aria-hidden="true"><path d="M12 2l2.9 6.26 6.88.95-5.02 4.76 1.26 6.8L12 17.5l-6.02 3.27 1.26-6.8L2.22 9.21l6.88-.95L12 2z"/></svg>
+    {%- endfor -%}
+  </span>
+  <span class="absolute inset-y-0 left-0 overflow-hidden text-[#d97706]" style="width: {{ pct }}%" aria-hidden="true">
+    <span class="flex gap-px">
+      {%- for i in (1..5) -%}
+        <svg viewBox="0 0 24 24" fill="currentColor" class="flex-none" style="width: {{ size }}px; height: {{ size }}px" aria-hidden="true"><path d="M12 2l2.9 6.26 6.88.95-5.02 4.76 1.26 6.8L12 17.5l-6.02 3.27 1.26-6.8L2.22 9.21l6.88-.95L12 2z"/></svg>
+      {%- endfor -%}
+    </span>
+  </span>
+</span>

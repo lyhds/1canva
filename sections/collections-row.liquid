@@ -1,0 +1,143 @@
+<script src="{{ 'slider.js' | asset_url }}" defer></script>
+
+{%- if section.blocks.size > 0 -%}
+  <section class="pb-16 md:pb-24">
+    <h2 class="px-5 font-serif text-[28px] text-black md:px-10 md:text-[32px]">{{ section.settings.heading }}</h2>
+
+    <slider-component class="group relative mt-8 block">
+      <div data-slider-track class="scrollbar-hide flex gap-5 overflow-x-auto px-5 md:px-10">
+        {%- for block in section.blocks -%}
+          {%- assign col = block.settings.collection -%}
+          {%- assign cover_asset = block.settings.cover_asset -%}
+          {%- assign card_title = block.settings.title | default: col.title | default: 'Collection' -%}
+          {%- assign card_link = block.settings.link | default: col.url | default: routes.all_products_collection_url -%}
+          <div data-slider-item class="w-[70%] flex-none sm:w-[40%] lg:w-[23%]" {{ block.shopify_attributes }}>
+            <a href="{{ card_link }}" class="group block">
+              <div class="aspect-[4/3] w-full overflow-hidden bg-[#f3f3f3]">
+                {%- if block.settings.image -%}
+                  <img
+                    src="{{ block.settings.image | image_url: width: 800 }}"
+                    alt="{{ block.settings.image.alt | default: card_title | escape }}"
+                    class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                    loading="lazy"
+                    width="{{ block.settings.image.width }}"
+                    height="{{ block.settings.image.height }}"
+                  >
+                {%- elsif cover_asset != blank -%}
+                  <img
+                    src="{{ cover_asset | asset_url }}"
+                    alt="{{ card_title | escape }}"
+                    class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                    loading="lazy"
+                    width="1122"
+                    height="842"
+                  >
+                {%- elsif col.image -%}
+                  <img
+                    src="{{ col.image | image_url: width: 800 }}"
+                    alt="{{ col.title | escape }}"
+                    class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                    loading="lazy"
+                    width="{{ col.image.width }}"
+                    height="{{ col.image.height }}"
+                  >
+                {%- elsif col.products.first.featured_media -%}
+                  <img
+                    src="{{ col.products.first.featured_media | image_url: width: 800 }}"
+                    alt="{{ col.title | escape }}"
+                    class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                    loading="lazy"
+                    width="{{ col.products.first.featured_media.width }}"
+                    height="{{ col.products.first.featured_media.height }}"
+                  >
+                {%- else -%}
+                  {{ 'collection-1' | placeholder_svg_tag: 'h-full w-full bg-neutral-100' }}
+                {%- endif -%}
+              </div>
+              <p class="mt-3 font-sans text-[14px] leading-snug text-black">{{ card_title }}</p>
+              {%- if col != blank and col.products_count > 0 -%}
+                <p class="mt-1 font-sans text-[14px] leading-snug text-neutral-500">
+                  {{ 'collections.works_count' | t: count: col.products_count }}
+                </p>
+              {%- endif -%}
+            </a>
+          </div>
+        {%- endfor -%}
+      </div>
+      <button type="button" data-slider-prev aria-label="{{ 'general.previous' | t }}" class="absolute left-3 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-black opacity-0 shadow-sm backdrop-blur-xs transition-opacity duration-200 hover:bg-white group-hover:opacity-100 lg:flex" style="display:none">
+        {% render 'icon', name: 'chevron-left', class: 'h-4 w-4' %}
+      </button>
+      <button type="button" data-slider-next aria-label="{{ 'general.next' | t }}" class="absolute right-3 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-black opacity-0 shadow-sm backdrop-blur-xs transition-opacity duration-200 hover:bg-white group-hover:opacity-100 lg:flex">
+        {% render 'icon', name: 'chevron-right', class: 'h-4 w-4' %}
+      </button>
+    </slider-component>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "合集横排",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "标题",
+      "default": "Shop by collection"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "合集",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "标题",
+          "info": "可选；未填写时使用合集名称。"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "合集",
+          "info": "默认使用合集的特色图片。"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "图片覆盖",
+          "info": "可选，建议使用约 4:3 的横版图。"
+        },
+        {
+          "type": "text",
+          "id": "cover_asset",
+          "label": "主题封面文件",
+          "info": "使用主题 assets 中的图片文件名；上传的图片覆盖优先。"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "链接覆盖",
+          "info": "可选；未设置时链接到所选合集。"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "合集横排",
+      "blocks": [
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,149 @@
+{%- doc -%}
+  Renders collection-backed subjects and Shopify storefront filters.
+  @param {string[]} subject_handles - Subject collection handles.
+  @param {string} active_subject_handle - Selected subject, if any.
+  @param {string} subject_all_url - All paintings collection URL.
+  @example
+  {% render 'collection-filter-groups', subject_handles: subject_handles, active_subject_handle: active_subject_handle, subject_all_url: subject_all_url %}
+{%- enddoc -%}
+{%- if collection.handle == 'all' or collection.handle == 'all-products' or active_subject_handle != blank -%}
+  <details class="border-t border-neutral-200" {% if active_subject_handle != blank %}open{% endif %}>
+    <summary class="flex cursor-pointer list-none items-center justify-between py-4 font-sans text-[14px] text-black [&::-webkit-details-marker]:hidden">
+      {{ 'collections.subject.title' | t }}
+      {%- if active_subject_handle != blank -%}<span class="text-neutral-500">(1)</span>{%- endif -%}
+      {% render 'icon', name: 'chevron-down', class: 'h-3 w-3 transition-transform duration-200 open:rotate-180' %}
+    </summary>
+    <div class="flex flex-col pb-5">
+      <label class="flex cursor-pointer items-center gap-2.5 py-1.5 font-sans text-[14px]">
+        <input type="radio" name="subject" value="{{ subject_all_url }}" data-subject-filter {% if active_subject_handle == blank %}checked{% endif %} class="h-3 w-3 flex-none appearance-none rounded-full border border-neutral-300 bg-white checked:border-[3px] checked:border-black">
+        <span class="{% if active_subject_handle == blank %}text-black{% else %}text-neutral-500{% endif %}">{{ 'collections.subject.all' | t }}</span>
+      </label>
+      {%- for subject_handle in subject_handles -%}
+        {%- assign subject_collection = collections[subject_handle] -%}
+        {%- if subject_collection == blank -%}{%- continue -%}{%- endif -%}
+        {%- assign subject_key = subject_handle | prepend: 'collections.subject.' -%}
+        <label class="flex cursor-pointer items-center gap-2.5 py-1.5 font-sans text-[14px]">
+          <input type="radio" name="subject" value="{{ subject_collection.url }}" data-subject-filter {% if active_subject_handle == subject_handle %}checked{% endif %} class="h-3 w-3 flex-none appearance-none rounded-full border border-neutral-300 bg-white checked:border-[3px] checked:border-black">
+          <span class="{% if active_subject_handle == subject_handle %}text-black{% else %}text-neutral-500{% endif %}">{{ subject_key | t }}</span>
+        </label>
+      {%- endfor -%}
+    </div>
+  </details>
+{%- endif -%}
+{%- for filter in collection.filters -%}
+  {%- liquid
+    assign open_group = false
+    if filter.active_values.size > 0
+      assign open_group = true
+    endif
+    if filter.type == 'price_range'
+      if filter.min_value.value or filter.max_value.value
+        assign open_group = true
+      endif
+    endif
+  -%}
+  <details class="border-t border-neutral-200 last:border-b" {% if open_group %}open{% endif %}>
+    <summary class="flex cursor-pointer list-none items-center justify-between py-4 font-sans text-[14px] text-black [&::-webkit-details-marker]:hidden">
+      {{ filter.label }}
+      {%- if filter.active_values.size > 0 -%}
+        <span class="text-neutral-500">({{ filter.active_values.size }})</span>
+      {%- endif -%}
+      {% render 'icon', name: 'chevron-down', class: 'h-3 w-3 transition-transform duration-200 open:rotate-180' %}
+    </summary>
+
+    {%- case filter.type -%}
+      {%- when 'list' -%}
+        {%- if filter.param_name contains 'orientation' -%}
+          <div data-orientation-filter class="flex flex-wrap items-center gap-2 pb-5 md:flex-nowrap md:justify-between">
+            {%- for value in filter.values -%}
+              {%- assign orientation_value = value.value | downcase -%}
+              <label class="group inline-flex cursor-pointer items-center {% if value.count == 0 and value.active == false %}opacity-40{% endif %}">
+                <input
+                  type="checkbox"
+                  name="{{ value.param_name }}"
+                  value="{{ value.value }}"
+                  {% if value.active %}checked{% endif %}
+                  {% if value.count == 0 and value.active == false %}disabled{% endif %}
+                  class="peer sr-only"
+                >
+                <span class="flex items-center gap-2 border border-neutral-200 px-3 py-2 font-sans text-[14px] text-neutral-500 transition-colors peer-checked:border-black peer-checked:text-black hover:text-black md:flex-col md:gap-2 md:border-0 md:px-0 md:py-0">
+                  {%- case orientation_value -%}
+                    {%- when 'landscape' -%}
+                      <span class="block h-3.5 w-6 flex-none border-[1.5px] border-current md:h-8 md:w-12"></span>
+                    {%- when 'portrait' -%}
+                      <span class="block h-6 w-3.5 flex-none border-[1.5px] border-current md:h-12 md:w-8"></span>
+                    {%- else -%}
+                      <span class="block h-5 w-5 flex-none border-[1.5px] border-current md:h-9 md:w-9"></span>
+                  {%- endcase -%}
+                  <span>{{ value.label }}</span>
+                </span>
+              </label>
+            {%- endfor -%}
+          </div>
+        {%- else -%}
+          <div class="flex flex-col pb-5">
+            {%- for value in filter.values -%}
+              <label class="flex cursor-pointer items-center gap-2.5 py-1.5 font-sans text-[14px] {% if value.count == 0 and value.active == false %}opacity-40{% endif %}">
+                <input
+                  type="checkbox"
+                  name="{{ value.param_name }}"
+                  value="{{ value.value }}"
+                  {% if value.active %}checked{% endif %}
+                  {% if value.count == 0 and value.active == false %}disabled{% endif %}
+                  class="h-3 w-3 flex-none appearance-none border border-neutral-300 bg-white checked:border-black checked:bg-black"
+                >
+                <span class="{% if value.active %}text-black{% else %}text-neutral-500{% endif %}">
+                  {{ value.label }} ({{ value.count }})
+                </span>
+              </label>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      {%- when 'boolean' -%}
+        <div class="flex flex-col pb-5">
+          {%- for value in filter.values -%}
+            <label class="flex cursor-pointer items-center gap-2.5 py-1.5 font-sans text-[14px] {% if value.count == 0 and value.active == false %}opacity-40{% endif %}">
+              <input
+                type="checkbox"
+                name="{{ value.param_name }}"
+                value="{{ value.value }}"
+                {% if value.active %}checked{% endif %}
+                {% if value.count == 0 and value.active == false %}disabled{% endif %}
+                class="h-3 w-3 flex-none appearance-none border border-neutral-300 bg-white checked:border-black checked:bg-black"
+              >
+              <span class="{% if value.active %}text-black{% else %}text-neutral-500{% endif %}">
+                {{ value.label }} ({{ value.count }})
+              </span>
+            </label>
+          {%- endfor -%}
+        </div>
+      {%- when 'price_range' -%}
+        <div class="flex items-center gap-3 pb-5">
+          <input
+            type="number"
+            name="{{ filter.min_value.param_name }}"
+            value="{% if filter.min_value.value != nil %}{{ filter.min_value.value | divided_by: 100.0 }}{% endif %}"
+            min="0"
+            step="0.01"
+            placeholder="0"
+            aria-label="{{ 'collections.filters.from' | t }}"
+            class="h-10 w-full border border-neutral-300 bg-white px-3 font-sans text-[16px] outline-hidden focus:border-black md:text-[16px]"
+          >
+          <span class="font-sans text-[14px] text-neutral-500">–</span>
+          <input
+            type="number"
+            name="{{ filter.max_value.param_name }}"
+            value="{% if filter.max_value.value != nil %}{{ filter.max_value.value | divided_by: 100.0 }}{% endif %}"
+            min="0"
+            step="0.01"
+            placeholder="{{ filter.range_max | divided_by: 100.0 }}"
+            aria-label="{{ 'collections.filters.to' | t }}"
+            class="h-10 w-full border border-neutral-300 bg-white px-3 font-sans text-[16px] outline-hidden focus:border-black md:text-[16px]"
+          >
+          <button type="submit" aria-label="{{ 'collections.filters.apply' | t }}" class="flex h-10 w-10 flex-none items-center justify-center border border-black text-black transition-colors hover:bg-black hover:text-white">
+            {% render 'icon', name: 'arrow-right', class: 'h-3.5 w-3.5' %}
+          </button>
+        </div>
+    {%- endcase -%}
+  </details>
+{%- endfor -%}

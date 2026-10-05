@@ -1,0 +1,60 @@
+<div class="px-5 py-16 md:px-10 md:py-24">
+  <div class="mx-auto max-w-sm">
+    <h1 class="font-serif text-[32px] text-black">{{ 'customer.login.title' | t }}</h1>
+    <p class="mt-4 font-serif text-[17px] leading-[1.5] text-black">{{ 'customer.login.intro' | t }}</p>
+
+    {%- form 'customer_login', class: 'mt-8 space-y-5' -%}
+      {%- if form.errors -%}
+        <p class="border border-neutral-200 bg-neutral-50 p-4 font-sans text-[14px] text-black">
+          {{ form.errors.messages.form }}
+        </p>
+      {%- endif -%}
+      <div>
+        <label for="login-email" class="mb-2 block font-sans text-[14px] text-black">{{ 'customer.email' | t }}</label>
+        <input id="login-email" type="email" name="customer[email]" required autocomplete="email" class="h-12 w-full border border-neutral-300 bg-white px-4 font-sans text-[16px] text-black outline-hidden focus:border-black md:text-[16px]">
+      </div>
+      <div>
+        <label for="login-password" class="mb-2 block font-sans text-[14px] text-black">{{ 'customer.password' | t }}</label>
+        <input id="login-password" type="password" name="customer[password]" required autocomplete="current-password" class="h-12 w-full border border-neutral-300 bg-white px-4 font-sans text-[16px] text-black outline-hidden focus:border-black md:text-[16px]">
+      </div>
+      <button type="submit" class="h-[52px] w-full bg-black font-sans text-[14px] text-white transition-opacity hover:opacity-80">
+        {{ 'customer.login.submit' | t }}
+      </button>
+    {%- endform -%}
+
+    <details class="mt-6">
+      <summary class="cursor-pointer list-none font-sans text-[14px] text-neutral-500 underline-offset-4 hover:underline [&::-webkit-details-marker]:hidden">
+        {{ 'customer.login.forgot' | t }}
+      </summary>
+      <div class="mt-4 border border-neutral-100 p-5">
+        {%- form 'recover_customer_password', class: 'space-y-5' -%}
+          {%- if form.posted_successfully? -%}
+            <p class="font-sans text-[14px] text-black">{{ 'customer.login.recover_success' | t }}</p>
+          {%- else -%}
+            <div>
+              <label for="recover-email" class="mb-2 block font-sans text-[14px] text-black">{{ 'customer.email' | t }}</label>
+              <input id="recover-email" type="email" name="email" required autocomplete="email" class="h-12 w-full border border-neutral-300 bg-white px-4 font-sans text-[16px] text-black outline-hidden focus:border-black md:text-[16px]">
+            </div>
+            <button type="submit" class="h-11 w-full border border-black font-sans text-[14px] text-black transition-colors hover:bg-black hover:text-white">
+              {{ 'customer.login.recover_submit' | t }}
+            </button>
+          {%- endif -%}
+        {%- endform -%}
+      </div>
+    </details>
+
+    <p class="mt-8 font-sans text-[14px] text-neutral-500">
+      {{ 'customer.login.no_account' | t }}
+      <a href="{{ routes.account_register_url }}" class="text-black underline-offset-4 hover:underline">
+        {{ 'customer.login.create' | t }}
+      </a>
+    </p>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "登录",
+  "settings": []
+}
+{% endschema %}

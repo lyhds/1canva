@@ -1,0 +1,32 @@
+{%- doc -%}
+  Canonical float-frame key for any stored Frame option value. This is the
+  single alias table for the storefront: current catalog values
+  ("Oak Float Frame"), legacy aliases ("Oak frame", "wood") and bare colour
+  names ("oak", "white") all resolve here, case- and whitespace-insensitively.
+
+  Outputs oak | black | walnut | white | gold | silver, or nothing for
+  canvas-only delivery (Rolled Canvas, Stretched Canvas, No frame) and for
+  unknown values, so callers can fall back to a no-frame state.
+
+  The JS twin is `window.theme.frameKey` in assets/utils.js; the two lists are
+  kept identical by scripts/frame-aliases.test.js.
+
+  @param frame {string} stored Frame option value
+{%- enddoc -%}
+{%- liquid
+  assign value = frame | default: '' | strip | downcase
+  case value
+    when 'oak float frame', 'oak frame', 'oak', 'wood'
+      echo 'oak'
+    when 'black float frame', 'black frame', 'black'
+      echo 'black'
+    when 'walnut float frame', 'walnut frame', 'walnut'
+      echo 'walnut'
+    when 'white float frame', 'white frame', 'white'
+      echo 'white'
+    when 'gold float frame', 'gold frame', 'gold'
+      echo 'gold'
+    when 'silver float frame', 'silver frame', 'silver'
+      echo 'silver'
+  endcase
+-%}

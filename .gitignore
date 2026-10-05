@@ -1,0 +1,18 @@
+node_modules/
+# pnpm's content-addressable store when the project sits on a non-default drive
+.pnpm-store/
+.shopify/
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+__pycache__/
+*.pyc
+
+# Local competitor scene references; keep setup instructions only.
+/scene-references/*
+!/scene-references/README.md
+
+# Local agent scratch space and memory; never part of the delivered source.
+/.workbuddy/

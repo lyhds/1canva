@@ -1,0 +1,268 @@
+{%- assign brand_name = settings.brand_name | default: 'CANVASRA' -%}
+{%- assign services_menu = section.settings.services_menu -%}
+
+<footer class="bg-[#f2e8d7] shadow-[0_0_0_100vmax_#f2e8d7] [clip-path:inset(0_-100vmax)]">
+  <div class="px-5 py-16 md:px-10 md:py-20">
+    <div class="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
+      {%- comment -%} Column 1: customer services (merchant-managed footer menu) {%- endcomment -%}
+      {%- if services_menu != blank and linklists[services_menu].links.size > 0 -%}
+        <nav aria-label="{{ section.settings.services_heading }}">
+          <p class="font-mono text-[12px] uppercase tracking-[0.08em] text-[#92400e]">{{ section.settings.services_heading }}</p>
+          <ul class="mt-5 space-y-1.5">
+            {%- for link in linklists[services_menu].links -%}
+              <li>
+                <a href="{{ link.url }}" class="font-sans text-[14px] leading-relaxed text-black/80 transition-opacity hover:opacity-50">
+                  {{ link.title }}
+                </a>
+              </li>
+            {%- endfor -%}
+          </ul>
+        </nav>
+      {%- endif -%}
+
+      {%- comment -%} Column 2: explore (existing merchandising collections) {%- endcomment -%}
+      {%- assign explore_handles = section.settings.explore_handles | split: ',' -%}
+      {%- capture explore_items -%}
+        {%- for handle in explore_handles -%}
+          {%- assign key = handle | strip -%}
+          {%- assign col = collections[key] -%}
+          {%- if col != blank -%}
+            <li>
+              <a href="{{ col.url }}" class="font-sans text-[14px] leading-relaxed text-black/80 transition-opacity hover:opacity-50">
+                {{ col.title }}
+              </a>
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endcapture -%}
+      {%- if explore_items != blank -%}
+        <nav aria-label="{{ section.settings.explore_heading }}">
+          <p class="font-mono text-[12px] uppercase tracking-[0.08em] text-[#92400e]">{{ section.settings.explore_heading }}</p>
+          <ul class="mt-5 space-y-1.5">{{ explore_items }}</ul>
+        </nav>
+      {%- endif -%}
+
+      {%- comment -%} Column 3: about (existing pages + journal) {%- endcomment -%}
+      {%- assign about_handles = section.settings.about_handles | split: ',' -%}
+      {%- capture about_items -%}
+        {%- for handle in about_handles -%}
+          {%- assign key = handle | strip -%}
+          {%- assign pg = pages[key] -%}
+          {%- if pg != blank -%}
+            <li>
+              <a href="{{ pg.url }}" class="font-sans text-[14px] leading-relaxed text-black/80 transition-opacity hover:opacity-50">
+                {{ pg.title }}
+              </a>
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+        {%- assign journal = blogs[section.settings.blog_handle] -%}
+        {%- if journal != blank -%}
+          <li>
+            <a href="{{ journal.url }}" class="font-sans text-[14px] leading-relaxed text-black/80 transition-opacity hover:opacity-50">
+              {{ journal.title }}
+            </a>
+          </li>
+        {%- endif -%}
+      {%- endcapture -%}
+      {%- if about_items != blank -%}
+        <nav aria-label="{{ section.settings.about_heading }}">
+          <p class="font-mono text-[12px] uppercase tracking-[0.08em] text-[#92400e]">{{ section.settings.about_heading }}</p>
+          <ul class="mt-5 space-y-1.5">{{ about_items }}</ul>
+        </nav>
+      {%- endif -%}
+
+      {%- comment -%} Column 4: contact (shop data + section settings) {%- endcomment -%}
+      <div>
+        <p class="font-mono text-[12px] uppercase tracking-[0.08em] text-[#92400e]">{{ section.settings.contact_heading }}</p>
+        <div class="mt-5 space-y-3 font-sans text-[14px] leading-relaxed text-black/80">
+        {%- assign contact_email = section.settings.email | default: shop.email -%}
+          {%- if contact_email != blank -%}
+            <p>{{ section.settings.email_label }}: <a href="mailto:{{ contact_email }}" class="underline underline-offset-4 transition-opacity hover:opacity-50">{{ contact_email }}</a></p>
+          {%- endif -%}
+          {%- if section.settings.phone != blank -%}
+            <p>{{ section.settings.phone_label }}: <a href="tel:{{ section.settings.phone | remove: ' ' }}" class="underline underline-offset-4 transition-opacity hover:opacity-50">{{ section.settings.phone }}</a></p>
+          {%- endif -%}
+          {%- if section.settings.address != blank -%}
+            <p>{{ section.settings.address_label }}: {{ section.settings.address }}</p>
+          {%- endif -%}
+          {%- if section.settings.hours != blank -%}
+            <p>{{ section.settings.hours }}</p>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-16 flex flex-col gap-10 border-t border-black/10 pt-10 lg:flex-row lg:items-end lg:justify-between">
+      <div>
+        <p class="font-sans text-[14px] text-[#92400e]">{{ brand_name }}</p>
+        <p class="mt-3 max-w-md font-sans text-[14px] leading-relaxed text-black/80">{{ section.settings.tagline }}</p>
+      </div>
+      <div class="w-full max-w-sm">
+        <p class="font-serif text-[20px] text-black">{{ section.settings.newsletter_heading }}</p>
+        {%- form 'customer' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          {%- if form.posted_successfully? -%}
+            <p class="mt-6 font-sans text-[14px] text-black/80">{{ 'footer.newsletter_success' | t }}</p>
+          {%- else -%}
+            <div class="mt-6 flex items-end">
+              <input
+                type="email"
+                name="contact[email]"
+                required
+                autocomplete="email"
+                placeholder="{{ 'footer.newsletter_placeholder' | t }}"
+                aria-label="{{ 'footer.newsletter_placeholder' | t }}"
+                class="h-11 w-full border-b border-black/70 bg-transparent font-sans text-[16px] text-black outline-hidden placeholder:text-black/50 md:text-[16px]"
+              >
+              <button
+                type="submit"
+                aria-label="{{ 'footer.newsletter_submit' | t }}"
+                class="flex h-11 w-11 flex-none items-center justify-center bg-[#3f2d12] text-white transition-opacity hover:opacity-80"
+              >
+                {% render 'icon', name: 'arrow-right', class: 'h-4 w-4' %}
+              </button>
+            </div>
+            {%- if form.errors -%}
+              <p class="mt-3 font-sans text-[13px] text-black/70">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>
+            {%- endif -%}
+          {%- endif -%}
+        {%- endform -%}
+      </div>
+    </div>
+
+    <p class="mt-12 font-sans text-[13px] text-black/60">&copy; {{ 'now' | date: '%Y' }} {{ brand_name }}</p>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "页脚",
+  "settings": [
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "品牌标语",
+      "default": "Curated art for considered spaces"
+    },
+    {
+      "type": "header",
+      "content": "客户服务栏"
+    },
+    {
+      "type": "text",
+      "id": "services_heading",
+      "label": "栏目标题",
+      "default": "Customer services"
+    },
+    {
+      "type": "link_list",
+      "id": "services_menu",
+      "label": "菜单",
+      "default": "footer",
+      "info": "默认使用「Footer menu」（政策页、联系等），可在导航后台自行调整。"
+    },
+    {
+      "type": "header",
+      "content": "探索栏"
+    },
+    {
+      "type": "text",
+      "id": "explore_heading",
+      "label": "栏目标题",
+      "default": "Explore"
+    },
+    {
+      "type": "text",
+      "id": "explore_handles",
+      "label": "集合 handle 列表（逗号分隔）",
+      "default": "all-products,new-arrivals,best-sellers,oversized-art,curated-sets"
+    },
+    {
+      "type": "header",
+      "content": "关于栏"
+    },
+    {
+      "type": "text",
+      "id": "about_heading",
+      "label": "栏目标题",
+      "default": "About"
+    },
+    {
+      "type": "text",
+      "id": "about_handles",
+      "label": "页面 handle 列表（逗号分隔）",
+      "default": "our-story,our-approach,materials-craft"
+    },
+    {
+      "type": "text",
+      "id": "blog_handle",
+      "label": "博客 handle",
+      "default": "journal"
+    },
+    {
+      "type": "header",
+      "content": "联系栏"
+    },
+    {
+      "type": "text",
+      "id": "contact_heading",
+      "label": "栏目标题",
+      "default": "Contact"
+    },
+    {
+      "type": "text",
+      "id": "email_label",
+      "label": "邮箱标签",
+      "default": "Email"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "邮箱（留空则使用店铺联系邮箱）"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "电话（留空则不显示）"
+    },
+    {
+      "type": "text",
+      "id": "phone_label",
+      "label": "电话标签",
+      "default": "Tel"
+    },
+    {
+      "type": "text",
+      "id": "address",
+      "label": "地址（留空则不显示）"
+    },
+    {
+      "type": "text",
+      "id": "address_label",
+      "label": "地址标签",
+      "default": "Address"
+    },
+    {
+      "type": "text",
+      "id": "hours",
+      "label": "补充信息（营业时间等，留空则不显示）"
+    },
+    {
+      "type": "header",
+      "content": "订阅"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_heading",
+      "label": "订阅标题",
+      "default": "Sign up for updates"
+    }
+  ],
+  "presets": [
+    {
+      "name": "页脚"
+    }
+  ]
+}
+{% endschema %}

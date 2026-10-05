@@ -1,0 +1,31 @@
+{%- assign brand_name = settings.brand_name | default: 'CANVASRA' -%}
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ 'gift_card.title' | t }} &ndash; {{ brand_name }}</title>
+    <link rel="canonical" href="{{ canonical_url }}">
+
+    {{ 'theme.css' | asset_url | stylesheet_tag }}
+
+    {%- style -%}
+      {{ settings.font_sans | font_face: font_display: 'swap' }}
+      {{ settings.font_sans | font_modify: 'weight', '700' | font_face: font_display: 'swap' }}
+      {{ settings.font_serif | font_face: font_display: 'swap' }}
+      {{ settings.font_mono | font_face: font_display: 'swap' }}
+      :root {
+        --font-sans: {{ settings.font_sans.family }}, {{ settings.font_sans.fallback_families }};
+        --font-serif: {{ settings.font_serif.family }}, {{ settings.font_serif.fallback_families }};
+        --font-mono: {{ settings.font_mono.family }}, {{ settings.font_mono.fallback_families }};
+      }
+    {%- endstyle -%}
+
+    {{ content_for_header }}
+  </head>
+  <body class="bg-white text-black">
+    <main role="main">
+      {{ content_for_layout }}
+    </main>
+  </body>
+</html>

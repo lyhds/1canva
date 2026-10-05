@@ -1,0 +1,128 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "accordion-shipping": {
+          "type": "accordion",
+          "settings": {
+            "heading": "Shipping & packaging",
+            "content": "<p>Each painting is securely packed and shipped. Complimentary insured shipping, with applicable import duties and taxes for normal delivery included.</p><p>Allow approximately 2–3 weeks for production and delivery. Timing is estimated, not guaranteed; reviews and revisions may extend it. Tracking is emailed after dispatch.</p><p>Review photos of your finished painting; we revise until you are satisfied. If all 3 emails go unanswered, we ship after 3 days from the first photo email.</p><p><a href=\"/policies/shipping-policy\">Full shipping policy</a>.</p>"
+          }
+        },
+        "accordion-returns": {
+          "type": "accordion",
+          "settings": {
+            "heading": "Returns & order changes",
+            "content": "<p>Request a return within 14 calendar days of delivery. Standard made-to-order artwork is eligible if unused and in its received condition, with original protective packaging. Personalized, non-standard custom, gift-card and final-sale exclusions apply.</p><p>For change-of-mind returns, you pay return shipping. Contact us for approval and instructions before returning anything.</p><p>Standard orders can be cancelled before shipment, including during photo review. Custom-colour or non-standard-size cancellations before shipment incur a US$100 materials fee. After dispatch, cancellation is unavailable; the return policy applies. For damaged, defective or incorrect items, keep the packaging and send photos.</p><p><a href=\"mailto:service@canvasra.com\">Contact us</a> · <a href=\"/policies/refund-policy\">Full return policy</a>.</p>"
+          }
+        },
+        "feature-1": {
+          "type": "feature",
+          "settings": {
+            "icon": "check",
+            "heading": "Preview Before Shipping",
+            "text": "We send photos of your finished painting and revise until you are satisfied.\nIf all 3 emails go unanswered, we ship after 3 days from the first photo email."
+          }
+        },
+        "feature-2": {
+          "type": "feature",
+          "settings": {
+            "icon": "truck",
+            "heading": "Free Insured Shipping",
+            "text": "Insured and tracked delivery to your door.\nDuties and taxes for normal delivery included."
+          }
+        },
+        "feature-3": {
+          "type": "feature",
+          "settings": {
+            "icon": "rotate-ccw",
+            "heading": "14-Day Returns",
+            "text": "Request within 14 days of delivery.\nYou cover change-of-mind return shipping."
+          }
+        },
+        "feature-4": {
+          "type": "feature",
+          "settings": {
+            "icon": "shield-check",
+            "heading": "Safe Payment Options",
+            "text": "Checkout securely with Shopify.\nAvailable payment methods are shown at checkout."
+          }
+        }
+      },
+      "block_order": [
+        "accordion-shipping",
+        "accordion-returns",
+        "feature-1",
+        "feature-2",
+        "feature-3",
+        "feature-4"
+      ],
+      "settings": {
+        "gallery_ratio": "1 / 1",
+        "show_delivery_estimate": true,
+        "delivery_note": "",
+        "production_days_min": 7,
+        "production_days_max": 10,
+        "transit_days_min": 5,
+        "transit_days_max": 8
+      }
+    },
+    "craftsmanship": {
+      "type": "product-craftsmanship",
+      "blocks": {
+        "row-1": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/craftsmanship-hand-painted.png",
+            "layout": "left",
+            "heading": "Painted by hand, never printed",
+            "text": "<p>Every piece begins as a blank Premium Cotton Canvas. Our artists sketch, layer and refine each painting in oils over several days — building the depth and visible brushwork no print can imitate.</p>"
+          }
+        },
+        "row-2": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/craftsmanship-materials.png",
+            "layout": "right",
+            "heading": "Materials built to last",
+            "text": "<p>We work with museum-quality oils and Premium Cotton Canvas, then finish each piece with hand-fitted wooden frames made in our own framing workshop.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "row-1",
+        "row-2"
+      ],
+      "settings": {
+        "eyebrow": "Craftsmanship",
+        "heading": "Hand-painted, from first stroke to last"
+      }
+    },
+    "reviews": {
+      "type": "product-reviews",
+      "settings": {
+        "heading": "Customer reviews"
+      }
+    },
+    "related": {
+      "type": "related-products",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "craftsmanship",
+    "reviews",
+    "related"
+  ]
+}

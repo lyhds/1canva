@@ -1,0 +1,109 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Canvasra",
+    "theme_version": "0.1.0",
+    "theme_author": "CANVASRA",
+    "theme_documentation_url": "https://canvasra.com",
+    "theme_support_url": "https://canvasra.com"
+  },
+  {
+    "name": "品牌",
+    "settings": [
+      {
+        "type": "text",
+        "id": "brand_name",
+        "label": "品牌名称",
+        "default": "CANVASRA"
+      }
+    ]
+  },
+  {
+    "name": "字体",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "font_sans",
+        "label": "无衬线（Logo 与标题）",
+        "default": "archivo_n4"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_serif",
+        "label": "衬线（正文与展示）",
+        "default": "ebgaramond_n4"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_mono",
+        "label": "等宽（界面与标签）",
+        "default": "ibm_plex_mono_n4"
+      }
+    ]
+  },
+  {
+    "name": "网站图标",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "网站图标文件",
+        "info": "正方形 PNG，至少 32 × 32 像素。"
+      }
+    ]
+  },
+  {
+    "name": "功能页面",
+    "settings": [
+      {
+        "type": "page",
+        "id": "wishlist_page",
+        "label": "愿望单页面",
+        "info": "选择使用 page.wishlist 模板的页面；未选择时导航中不显示愿望单入口。"
+      }
+    ]
+  },
+  {
+    "name": "评价",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable_customer_reviews",
+        "label": "显示已核实的买家评价",
+        "info": "只有确认评价真实且获得使用许可后才开启。关闭时不输出评价区块、评分或评价结构化数据。",
+        "default": false
+      }
+    ]
+  },
+  {
+    "name": "展示货币",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable_display_currency",
+        "label": "按访客地区显示参考货币",
+        "info": "仅转换店面显示。订单和结账始终以 USD 收取。",
+        "default": true
+      },
+      {
+        "type": "textarea",
+        "id": "display_currency_rates",
+        "label": "USD 备用汇率（JSON）",
+        "info": "在线汇率不可用时使用。格式为每 1 USD 对应的当地货币金额。",
+        "default": "{\"EUR\":0.92,\"GBP\":0.79,\"CAD\":1.36,\"SGD\":1.28,\"AUD\":1.53,\"CNY\":7.20,\"HKD\":7.82,\"ILS\":3.70,\"JPY\":150,\"NZD\":1.66}"
+      }
+    ]
+  },
+  {
+    "name": "购物车",
+    "settings": [
+      {
+        "type": "number",
+        "id": "free_shipping_threshold",
+        "label": "免邮阈值",
+        "info": "以店铺货币的最小单位计（如美元的美分、日元的円），用于购物车页的免邮进度条，设为 0 可隐藏。",
+        "default": 0
+      }
+    ]
+  }
+]

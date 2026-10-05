@@ -1,0 +1,39 @@
+{%- doc -%}
+  Derives the artwork aspect key (34 | 23 | square | 43 | 32 | 21) from the
+  master image's real dimensions, snapping to the nearest of the six catalog
+  ratios. Replaces the old aspect-* tag lookup — the tag is no longer required
+  anywhere (previews and size dimensions both read the artwork itself).
+
+  When the master has no usable dimensions the key stays "portrait", which
+  frame-preview treats as the theme-wide 0.8 fallback.
+
+  @param product {object}
+{%- enddoc -%}
+{%- liquid
+  assign master = product.media | where: 'alt', 'master' | first
+  if master == blank
+    assign master = product.featured_media
+  endif
+  assign ar = 0.0
+  if master.width and master.height and master.height > 0
+    assign ar = master.width | times: 1.0 | divided_by: master.height
+  endif
+  assign best = 'portrait'
+  assign best_diff = 99.0
+  assign candidates = '34|0.75,23|0.6667,square|1.0,43|1.3333,32|1.5,21|2.0' | split: ','
+  for candidate in candidates
+    assign pair = candidate | split: '|'
+    assign cand_ar = pair[1] | plus: 0.0
+    if ar > 0
+      assign diff = ar | minus: cand_ar
+      if diff < 0
+        assign diff = diff | times: -1.0
+      endif
+      if diff < best_diff
+        assign best_diff = diff
+        assign best = pair[0]
+      endif
+    endif
+  endfor
+  echo best
+-%}

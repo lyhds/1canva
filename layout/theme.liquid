@@ -1,0 +1,151 @@
+{%- liquid
+  assign brand_name = settings.brand_name | default: 'CANVASRA'
+  assign resolved_page_title = page_title
+  assign resolved_page_description = page_description
+  assign resolved_canonical_url = canonical_url
+  if request.page_type == 'collection' and collection.handle == 'all'
+    assign resolved_page_title = 'collections.all_title' | t
+    assign resolved_page_description = 'collections.all_description' | t
+    assign resolved_canonical_url = request.origin | append: '/collections/all-products'
+  elsif request.page_type == 'collection' and collection.handle == 'all-products' and resolved_page_description == blank
+    assign resolved_page_description = 'collections.all_description' | t
+  endif
+  assign display_currency_rates = settings.display_currency_rates | default: '{"EUR":0.92,"GBP":0.79,"CAD":1.36,"SGD":1.28,"AUD":1.53,"CNY":7.20,"HKD":7.82,"ILS":3.70,"JPY":150,"NZD":1.66}'
+-%}
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta name="ochre-media-profile" content="responsive-v1">
+    <meta name="ochre-scene-frame-profile" content="composed-frames-v1">
+    <meta name="ochre-scene-frame-profile" content="baked-frames-v1">
+    <meta name="ochre-mobile-scene-profile" content="clearance-v2">
+    <meta name="canvasra-banner-profile" content="fullbleed-v2">
+    <meta name="ochre-desktop-clearance" content="v3">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+      {{ resolved_page_title }}
+      {%- if current_page != 1 %} &ndash; {{ 'general.page' | t: page: current_page }}{% endif %}
+      {%- unless resolved_page_title contains brand_name %} &ndash; {{ brand_name }}{% endunless %}
+    </title>
+    {%- if resolved_page_description -%}
+      {%- comment -%}escape_once: Shopify's description already contains entities ("Quiet &amp; Neutral"), so escaping it twice surfaced as a literal "&amp;" in search results and shares.{%- endcomment -%}
+      <meta name="description" content="{{ resolved_page_description | escape_once }}">
+    {%- endif -%}
+    <link rel="canonical" href="{{ resolved_canonical_url }}">
+
+    {%- if settings.favicon -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {%- else -%}
+      <link rel="icon" type="image/png" href="{{ 'favicon-canvasra.png' | asset_url }}">
+    {%- endif -%}
+
+    {%- liquid
+      assign og_title = resolved_page_title | default: brand_name
+      assign og_url = resolved_canonical_url | default: request.origin
+      assign og_type = 'website'
+      assign og_description = resolved_page_description | default: shop.description | default: brand_name
+      if request.page_type == 'product'
+        assign og_type = 'product'
+      elsif request.page_type == 'article'
+        assign og_type = 'article'
+      endif
+    -%}
+    <meta property="og:site_name" content="{{ brand_name }}">
+    <meta property="og:url" content="{{ og_url }}">
+    <meta property="og:title" content="{{ og_title | escape }}">
+    <meta property="og:type" content="{{ og_type }}">
+    <meta property="og:description" content="{{ og_description | escape_once }}">
+    {%- if page_image -%}
+      <meta property="og:image" content="http:{{ page_image | image_url: width: 1200 }}">
+      <meta property="og:image:secure_url" content="https:{{ page_image | image_url: width: 1200 }}">
+      <meta property="og:image:width" content="1200">
+    {%- endif -%}
+    {%- if request.page_type == 'product' -%}
+      <meta property="og:price:amount" content="{{ product.selected_or_first_available_variant.price | money_without_currency | strip_html }}">
+      <meta property="og:price:currency" content="{{ cart.currency.iso_code }}">
+    {%- endif -%}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ og_title | escape }}">
+    <meta name="twitter:description" content="{{ og_description | escape }}">
+
+    {%- if request.page_type == 'product' -%}
+      {% render 'json-ld-product', product: product %}
+    {%- endif -%}
+
+    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+
+    {{ 'theme.css' | asset_url | stylesheet_tag }}
+
+    <script>
+      document.documentElement.classList.add('js');
+      window.theme = {
+        moneyFormat: {{ shop.money_format | json }},
+        routes: {
+          root: {{ routes.root_url | json }},
+          search: {{ routes.search_url | json }},
+          predictiveSearch: {{ routes.predictive_search_url | json }},
+          cart: {{ routes.cart_url | json }},
+          cartAdd: {{ routes.cart_add_url | json }},
+          cartChange: {{ routes.cart_change_url | json }}
+        },
+        frameTextures: {
+          oak: {{ 'frame-oak.webp' | asset_url | json }},
+          black: {{ 'frame-black.webp' | asset_url | json }},
+          walnut: {{ 'frame-walnut.webp' | asset_url | json }},
+          white: {{ 'frame-white.webp' | asset_url | json }},
+          gold: {{ 'frame-gold.webp' | asset_url | json }},
+          silver: {{ 'frame-silver.webp' | asset_url | json }}
+        },
+        displayCurrencyConfig: {
+          enabled: {{ settings.enable_display_currency | json }},
+          country: {{ localization.country.iso_code | json }},
+          locale: {{ request.locale.iso_code | json }},
+          rates: {{ display_currency_rates | json }}
+        }
+      };
+    </script>
+    <script src="{{ 'utils.js' | asset_url }}" defer></script>
+    <script src="{{ 'display-currency.js' | asset_url }}" defer></script>
+
+    {%- comment -%} Design fonts via the Shopify font library (CDN-served).
+         Weights used by the design system: sans 500–900, serif 400/500/italic, mono 400/500. {%- endcomment -%}
+    {%- style -%}
+      {{ settings.font_sans | font_face: font_display: 'swap' }}
+      {{ settings.font_sans | font_modify: 'weight', '500' | font_face: font_display: 'swap' }}
+      {{ settings.font_sans | font_modify: 'weight', '600' | font_face: font_display: 'swap' }}
+      {{ settings.font_sans | font_modify: 'weight', '700' | font_face: font_display: 'swap' }}
+      {{ settings.font_sans | font_modify: 'weight', '800' | font_face: font_display: 'swap' }}
+      {{ settings.font_sans | font_modify: 'weight', '900' | font_face: font_display: 'swap' }}
+      {{ settings.font_serif | font_face: font_display: 'swap' }}
+      {{ settings.font_serif | font_modify: 'weight', '500' | font_face: font_display: 'swap' }}
+      {{ settings.font_serif | font_modify: 'style', 'italic' | font_face: font_display: 'swap' }}
+      {{ settings.font_mono | font_face: font_display: 'swap' }}
+      {{ settings.font_mono | font_modify: 'weight', '500' | font_face: font_display: 'swap' }}
+      :root {
+        --font-sans: {{ settings.font_sans.family }}, {{ settings.font_sans.fallback_families }};
+        --font-serif: {{ settings.font_serif.family }}, {{ settings.font_serif.fallback_families }};
+        --font-mono: {{ settings.font_mono.family }}, {{ settings.font_mono.fallback_families }};
+      }
+    {%- endstyle -%}
+
+    {{ content_for_header }}
+  </head>
+
+  <body class="bg-white text-black{% if request.page_type == 'product' and product.media.size > 0 %} product-immersive{% endif %}{% if request.page_type == 'index' %} home-immersive{% endif %}">
+    <a class="sr-only focus:not-sr-only" href="#MainContent">{{ 'general.skip_to_content' | t }}</a>
+
+    {% comment %}Announcement bar disabled by merchant; section content retained for restoration.{% endcomment %}
+
+    {% section 'header' %}
+
+    <main id="MainContent" role="main">
+      {{ content_for_layout }}
+    </main>
+
+    {% section 'footer' %}
+
+    {% section 'cart-drawer' %}
+
+  </body>
+</html>

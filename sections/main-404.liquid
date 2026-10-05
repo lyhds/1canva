@@ -1,0 +1,15 @@
+<div class="flex flex-col items-center px-5 py-24 text-center md:py-32">
+  <p class="font-mono text-[12px] uppercase tracking-[0.14em] text-neutral-500">404</p>
+  <h1 class="mt-4 font-serif text-[36px] text-black md:text-[44px]">{{ '404.title' | t }}</h1>
+  <p class="mt-4 max-w-md font-serif text-[17px] leading-[1.5] text-black">{{ '404.text' | t }}</p>
+  <a href="{{ routes.root_url }}" class="mt-10 border border-black px-8 py-3.5 font-sans text-[14px] text-black transition-colors hover:bg-black hover:text-white">
+    {{ 'cart.continue' | t }}
+  </a>
+</div>
+
+{% schema %}
+{
+  "name": "404",
+  "settings": []
+}
+{% endschema %}

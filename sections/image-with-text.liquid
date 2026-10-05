@@ -1,0 +1,123 @@
+<section class="px-5 py-16 md:px-10 md:py-24">
+  <div class="grid items-center gap-10 md:grid-cols-2 md:gap-16 {% if section.settings.layout == 'right' %}md:[&>*:first-child]:order-2{% endif %}">
+    <div class="aspect-[4/3] w-full overflow-hidden bg-[#f3f3f3]">
+      {%- if section.settings.cover_asset != blank -%}
+        <img
+          src="{{ section.settings.cover_asset | asset_img_url: '1200x' }}"
+          srcset="{{ section.settings.cover_asset | asset_img_url: '600x' }} 600w, {{ section.settings.cover_asset | asset_img_url: '900x' }} 900w, {{ section.settings.cover_asset | asset_img_url: '1200x' }} 1200w"
+          sizes="(min-width: 768px) 50vw, calc(100vw - 2.5rem)"
+          alt="{{ section.settings.image_alt | default: section.settings.heading | escape }}"
+          class="h-full w-full object-cover"
+          loading="lazy"
+          width="1600"
+          height="1200"
+        >
+      {%- elsif section.settings.image -%}
+        <img
+          src="{{ section.settings.image | image_url: width: 1200 }}"
+          alt="{{ section.settings.image.alt | escape }}"
+          class="h-full w-full object-cover"
+          loading="lazy"
+          width="{{ section.settings.image.width }}"
+          height="{{ section.settings.image.height }}"
+        >
+      {%- else -%}
+        {{ 'image' | placeholder_svg_tag: 'h-full w-full bg-neutral-100' }}
+      {%- endif -%}
+    </div>
+    <div>
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="font-mono text-[12px] text-black">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      <h2 class="mt-4 font-serif text-[28px] leading-[1.2] text-black md:text-[32px]">{{ section.settings.heading }}</h2>
+      {%- if section.settings.text != blank -%}
+        <div class="mt-4 max-w-md font-serif text-[17px] leading-[1.5] text-black rte">{{ section.settings.text }}</div>
+      {%- endif -%}
+      {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+        <a
+          href="{{ section.settings.button_link }}"
+          class="mt-6 inline-block border border-black px-7 py-3.5 font-sans text-[14px] text-black transition-colors hover:bg-black hover:text-white"
+        >
+          {{ section.settings.button_label }}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "图文区块",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "图片",
+      "info": "建议使用约 4:3 的横版图。"
+    },
+    {
+      "type": "text",
+      "id": "cover_asset",
+      "label": "主题图片文件",
+      "info": "可选。填写主题 assets 中的图片文件名时，将优先于上方上传的图片。"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "图片替代文字",
+      "info": "用于读屏和图片无法显示时的说明。"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "图片位置",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "左"
+        },
+        {
+          "value": "right",
+          "label": "右"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "眉题",
+      "default": "Our approach"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "标题",
+      "default": "Art chosen for considered spaces"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "正文",
+      "default": "<p>CANVASRA brings together thoughtfully selected art for warm, expressive interiors. Each piece is chosen to live beautifully with the spaces around it.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "按钮文字",
+      "default": "Read our story"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "按钮链接",
+      "info": "必须选择链接后按钮才会显示。"
+    }
+  ],
+  "presets": [
+    {
+      "name": "图文区块"
+    }
+  ]
+}
+{% endschema %}

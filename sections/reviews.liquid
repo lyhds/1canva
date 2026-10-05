@@ -1,0 +1,76 @@
+{%- if settings.enable_customer_reviews and section.blocks.size > 0 -%}
+  <section class="px-5 py-16 md:px-10 md:py-24">
+    <h2 class="font-serif text-[28px] text-black md:text-[32px]">{{ section.settings.heading }}</h2>
+    <div
+      class="scrollbar-hide -mx-5 mt-8 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-px-5 px-5 pb-1 md:mx-0 md:grid md:grid-cols-4 md:overflow-visible md:px-0 md:pb-0"
+      role="region"
+      aria-label="{{ section.settings.heading | escape }}"
+      tabindex="0"
+    >
+      {%- for block in section.blocks -%}
+        <figure class="flex w-[75%] flex-none snap-start flex-col border border-neutral-100 p-6 sm:w-[45%] md:w-auto" {{ block.shopify_attributes }}>
+          <blockquote class="flex-1 font-serif text-[17px] leading-[1.5] text-black">
+            &#8220;{{ block.settings.quote }}&#8221;
+          </blockquote>
+          <figcaption class="mt-5 font-sans text-[14px] text-neutral-500">
+            {{ block.settings.author }}
+          </figcaption>
+        </figure>
+      {%- endfor -%}
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "买家评价",
+  "settings": [
+    {
+      "type": "text",
+        "id": "heading",
+        "label": "标题",
+        "default": "What our customers say"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "quote",
+      "name": "评价",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "引文",
+          "info": "网格中一两句话效果最佳。",
+          "default": "Add a verified customer review"
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "署名",
+          "default": "Customer name"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "买家评价",
+      "blocks": [
+        {
+          "type": "quote"
+        },
+        {
+          "type": "quote"
+        },
+        {
+          "type": "quote"
+        },
+        {
+          "type": "quote"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
