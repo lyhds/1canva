@@ -54,6 +54,12 @@
 - **政策**：填写配送与退款政策，使 `/policies/shipping-policy` 与 `/policies/refund-policy` 可用
   （PDP 政策折叠区与相关测试依赖它们）。
 - **菜单**：主菜单与页脚菜单按新店重排；不要沿用旧店的条目。
+- **首页各区块图片**：`templates/index.json` 里仍有若干指向**上一个店面 CDN 文件**的引用
+  （`shopify://shop_images/home-subject-*.png`、`home-our-approach.png`、`home-space-*.png`），
+  这些文件在新店并不存在。首屏已在迁移时改为仓库内的本地资源，其余区块需要你上传新图后在主题编辑器里重新选中，
+  否则「Shop by subject / Our approach / Shop by space」会退化成占位图。
+  取图优先级：`collections-row` 与 `compositions` 先取 `image`、再取 `cover_asset`；
+  `image-with-text` 相反，先取 `cover_asset`——因此给区块配本地图时，往哪个字段填要按对应区块来。
 - **客服邮箱**：迁移时暂用 `service@canvasra.com`。请确认实际邮箱，
   需要改的地方是 `config/settings_data.json` 与 `templates/product.json` 里的政策文案。
 

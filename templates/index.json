@@ -14,13 +14,13 @@
       "settings": {
         "gallery_campaign": true,
         "image": "",
-        "image_mobile": "shopify://shop_images/home-hero-mobile.png",
+        "image_mobile": "",
         "image_position": "center top",
         "image_zoom": 100,
         "image_zoom_mobile": 100,
         "eyebrow": "Original art, painted by hand",
-        "heading": "Art made to live with",
-        "button_label": "Discover the collection",
+        "heading": "Art worth living with",
+        "button_label": "Shop the collection — 40% off",
         "button_link": "shopify://collections/all-products"
       }
     },
