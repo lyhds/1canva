@@ -73,11 +73,11 @@ Admin API, committing, or pushing.
 
 ## Critical synchronization model
 
-- The live Shopify theme is connected to GitHub branch `origin/shopify`.
+- The live Shopify theme is connected to GitHub branch `origin/main`.
 - Synchronization is bidirectional. GitHub changes deploy to Shopify, and
   changes made through the theme editor, Shopify Admin API, or Theme CLI can
   create an automatic GitHub commit such as `Update from Shopify for theme ...`.
-- Treat Shopify, `origin/shopify`, and the local checkout as three copies of one
+- Treat Shopify, `origin/main`, and the local checkout as three copies of one
   shared state. Never assume the local checkout is current.
 
 ## Mandatory checks before editing
@@ -85,7 +85,7 @@ Admin API, committing, or pushing.
 1. Run `git status --short --branch` and preserve all existing user changes.
 2. Run `git fetch origin`.
 3. Compare local and remote with
-   `git rev-list --left-right --count HEAD...origin/shopify`.
+   `git rev-list --left-right --count HEAD...origin/main`.
 4. If the worktree is clean, synchronize with
    `git pull --rebase origin shopify` before editing.
 5. If the worktree is dirty or histories diverge, inspect both sides first. Do
@@ -153,8 +153,8 @@ unless the user explicitly asks to change them.
 1. Confirm the requested work is complete and tested.
 2. Commit locally if needed, then run `git fetch origin`.
 3. Inspect new Shopify-generated commits and their changed paths.
-4. Run `git rebase origin/shopify`.
-5. Review `git diff --name-status origin/shopify...HEAD` and `git diff --check`.
+4. Run `git rebase origin/main`.
+5. Review `git diff --name-status origin/main...HEAD` and `git diff --check`.
 6. Confirm that no unexpected template, settings, or asset files are included.
 7. Push only after explicit user authorization.
 

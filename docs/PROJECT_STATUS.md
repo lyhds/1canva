@@ -15,7 +15,7 @@
 
 - 创建 Shopify 店铺、自定义应用并签发 `SHOPIFY_CLIENT_ID` / `SHOPIFY_CLIENT_SECRET`
 - 填写 `.env`（`SHOPIFY_STORE` 必须是 `*.myshopify.com`）
-- 新建 GitHub 远端仓库，并建立主题 ↔ `origin/shopify` 的双向同步
+- 新建 GitHub 远端仓库，并建立主题 ↔ `origin/main` 的双向同步
 - 首次把主题推送到线上主题
 - 建立商品集合、导航菜单、页面与政策（主题里的 handle 引用需要与之一致）
 - 配置 Product Studio 的分析与生图模型密钥（`.shopify/product-studio/settings.json`，被忽略，不入库）
@@ -37,5 +37,5 @@
 ## 本地状态与交付边界
 
 `.shopify/` 下的任务、素材、凭据与备份不随 Git 迁移。`scene-references/` 只跟踪 `README.md`，
-其余为本地参考图，需另行准备。远端主题与 `origin/shopify` 双向同步的规则见
+其余为本地参考图，需另行准备。远端主题与 `origin/main` 双向同步的规则见
 [同步与部署](SHOPIFY_GITHUB_WORKFLOW.md)。

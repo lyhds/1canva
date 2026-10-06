@@ -12,7 +12,7 @@ internal identifiers still carry that origin (see [Store identity](#store-identi
 
 Read [AGENTS.md](AGENTS.md) and the
 [Shopify/GitHub runbook](docs/SHOPIFY_GITHUB_WORKFLOW.md) before editing or deploying.
-The live theme and `origin/shopify` synchronize in both directions. Local code
+The live theme and `origin/main` synchronize in both directions. Local code
 changes are not permission to publish. Preserve merchant-owned settings and JSON
 templates, and fetch immediately before rebasing or pushing. Never force-push.
 

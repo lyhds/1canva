@@ -26,7 +26,7 @@
 
 - [ ] **○ 新建 GitHub 空私有仓库**
 - [ ] **○ 绑定远端并推送 `main`**：`git remote add origin <地址>` → `git push -u origin main`
-- [ ] **○ 建立 Shopify ↔ GitHub 双向同步**（分支命名为 `shopify`）
+- [ ] **○ 建立 Shopify ↔ GitHub 双向同步**（分支命名为 `main`）
       首次部署必须**显式授权**，用 `--only` 逐文件上传，见 `docs/SHOPIFY_GITHUB_WORKFLOW.md`。
       主题编辑器与 Admin API 的改动此后会反向生成提交。
 

@@ -26,6 +26,8 @@ test('package commands use pnpm and do not expose unrestricted theme uploads', (
 });
 
 test('theme upload ignores credentials, local state and developer files', () => {
-  const rules=fs.readFileSync('.shopifyignore','utf8').split(/\r?\n/);
-  for(const entry of ['.env','.env.*','.shopify/','scripts/','docs/','pnpm-lock.yaml','pnpm-workspace.yaml']) assert.ok(rules.includes(entry),entry);
+  const rules=fs.readFileSync('.shopifyignore','utf8').split(/\r?\n/).map(line=>line.trim()).filter(line=>line&&!line.startsWith('#'));
+  // Accept both `dir/` and the `dir/*` form that Shopify CLI recommends over it.
+  const ignored=target=>rules.includes(target)||rules.includes(`${target.replace(/\/$/,'')}/*`);
+  for(const entry of ['.env','.env.*','.shopify/','.workbuddy/','scripts/','docs/','pnpm-lock.yaml','pnpm-workspace.yaml']) assert.ok(ignored(entry),entry);
 });

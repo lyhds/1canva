@@ -1,10 +1,10 @@
 # Shopify and GitHub Bidirectional Sync Runbook
 
-This storefront's live Shopify theme is connected to the GitHub `shopify`
+This storefront's live Shopify theme is connected to the GitHub `main`
 branch. The connection works in both directions:
 
 ```text
-Local checkout  <---- fetch/rebase/push ---->  GitHub origin/shopify
+Local checkout  <---- fetch/rebase/push ---->  GitHub origin/main
                                                     ^             |
                                                     |             v
                                            Shopify reverse sync / deploy
@@ -24,7 +24,7 @@ which surface was modified most recently:
 
 - Theme editor, Admin API, or Theme CLI change: wait for Shopify to create its
   GitHub commit, then bring that commit into the local checkout.
-- Local code change: start from the latest `origin/shopify`, test locally, and
+- Local code change: start from the latest `origin/main`, test locally, and
   rebase on the remote branch again immediately before pushing.
 - Concurrent changes: inspect and integrate them deliberately. Never resolve a
   conflict by taking all of one side without understanding the merchant data.
@@ -34,8 +34,8 @@ which surface was modified most recently:
 ```powershell
 git status --short --branch
 git fetch origin
-git rev-list --left-right --count HEAD...origin/shopify
-git log --oneline --decorate -5 origin/shopify
+git rev-list --left-right --count HEAD...origin/main
+git log --oneline --decorate -5 origin/main
 ```
 
 The `rev-list` result is `local-only remote-only` commit counts.
@@ -59,12 +59,12 @@ The Shopify theme editor writes merchant content into files such as:
 - `templates/product.json`
 - other `templates/*.json` files containing section blocks and settings
 
-Before changing any of them, compare the local file with `origin/shopify` and
+Before changing any of them, compare the local file with `origin/main` and
 inspect recent Shopify-generated commits:
 
 ```powershell
-git log --oneline --name-status -5 origin/shopify -- config/settings_data.json templates
-git diff HEAD..origin/shopify -- config/settings_data.json templates
+git log --oneline --name-status -5 origin/main -- config/settings_data.json templates
+git diff HEAD..origin/main -- config/settings_data.json templates
 ```
 
 Do not restore these files from an older commit merely to fix a code regression.
@@ -145,15 +145,15 @@ Record the remote head before the online mutation:
 
 ```powershell
 git fetch origin
-git rev-parse origin/shopify
+git rev-parse origin/main
 ```
 
 After the mutation, allow Shopify to create its automatic commit, then:
 
 ```powershell
 git fetch origin
-git log --oneline --decorate -5 origin/shopify
-git diff --name-status <old-origin-head>..origin/shopify
+git log --oneline --decorate -5 origin/main
+git diff --name-status <old-origin-head>..origin/main
 ```
 
 The automatic commit should contain only the expected paths. If unrelated
@@ -176,9 +176,9 @@ before push:
 
 ```powershell
 git fetch origin
-git log --oneline HEAD..origin/shopify
-git rebase origin/shopify
-git diff --name-status origin/shopify...HEAD
+git log --oneline HEAD..origin/main
+git rebase origin/main
+git diff --name-status origin/main...HEAD
 git diff --check
 git status --short --branch
 ```
@@ -206,7 +206,7 @@ For any online-theme change, verify all of the following:
 - A remote read/pull matches the intended files byte-for-byte or semantically.
 - The live page references the expected assets and fresh CDN version values.
 - Shopify's automatic GitHub commit contains only expected paths.
-- The local checkout has been rebased or fast-forwarded to `origin/shopify`.
+- The local checkout has been rebased or fast-forwarded to `origin/main`.
 - `git status --short --branch` is clean unless intentional local work remains.
 - The user is told what changed, how it was verified, and where backups live.
 
