@@ -142,7 +142,7 @@
                   {% render 'artwork-scene', scene_layouts: product.metafields.custom.scene_layouts.value, room: m, master: master, aspect: aspect, frame: frame_val, alt: product.title %}
                 {%- else -%}
                   <div class="h-full w-full overflow-hidden bg-[#f3f3f3]">
-                    <img src="{{ m | image_url: width: 1200 }}" alt="{{ m.alt | default: product.title | escape }}" class="h-full w-full object-contain" loading="lazy" width="{{ m.width }}" height="{{ m.height }}">
+                    <img src="{{ m | image_url: width: 1600 }}" alt="{{ m.alt | default: product.title | escape }}" class="h-full w-full object-cover object-top" loading="lazy" width="{{ m.width }}" height="{{ m.height }}">
                   </div>
                 {%- endif -%}
               </button>

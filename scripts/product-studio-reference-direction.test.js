@@ -25,6 +25,8 @@ test('each scene receives its selected reference instructions; desktop shares th
   for(let i=0;i<3;i++)if(i!==index)assert.ok(!prompt.includes(job.selection[i].keep));
  }
  assert.equal(referenceDirection({},'scene-1'),'');
+ assert.equal(referenceDirection({selection:[{styleOnly:true}]},'scene-1'),'','style-only selections carry no reference cues');
+ assert.equal(referenceDirection({selection:[{keep:'k',discard:'d'}]},'scene-desktop'),'','missing desktop entry maps to scene-3 and stays empty');
  assert.doesNotThrow(()=>composedPrompt({analysis:{}},'scene-1','4:5'));
 });
 test('direction validation unwraps a single answer envelope like the lighting plan',()=>{

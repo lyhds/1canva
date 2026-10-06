@@ -2,15 +2,16 @@
   <div class="grid items-center gap-10 md:grid-cols-2 md:gap-16 {% if section.settings.layout == 'right' %}md:[&>*:first-child]:order-2{% endif %}">
     <div class="aspect-[4/3] w-full overflow-hidden bg-[#f3f3f3]">
       {%- if section.settings.cover_asset != blank -%}
+        {% comment %} Theme-folder assets are not resizable via asset_img_url on
+           CLI-pushed themes (Shopify serves a no-image placeholder), so the cover
+           is served at its native 1248x936 through asset_url. {% endcomment %}
         <img
-          src="{{ section.settings.cover_asset | asset_img_url: '1200x' }}"
-          srcset="{{ section.settings.cover_asset | asset_img_url: '600x' }} 600w, {{ section.settings.cover_asset | asset_img_url: '900x' }} 900w, {{ section.settings.cover_asset | asset_img_url: '1200x' }} 1200w"
-          sizes="(min-width: 768px) 50vw, calc(100vw - 2.5rem)"
+          src="{{ section.settings.cover_asset | asset_url }}"
           alt="{{ section.settings.image_alt | default: section.settings.heading | escape }}"
           class="h-full w-full object-cover"
           loading="lazy"
-          width="1600"
-          height="1200"
+          width="1248"
+          height="936"
         >
       {%- elsif section.settings.image -%}
         <img

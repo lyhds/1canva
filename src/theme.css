@@ -404,6 +404,16 @@ html.js [data-artwork-scene]:not([data-scene-ready]) > div {
     aspect-ratio: var(--desktop-gallery-ratio, 1);
   }
 }
+/* PDP gallery: room scenes cover the mount instead of letterboxing.
+   The plane takes the larger of "mount width" / "mount height x room ratio"
+   (same cover formula as [data-desktop-product-hero]), anchored to the top so
+   an overflowing plane crops downward and keeps the upper composition. */
+product-gallery [data-gallery-track] [data-artwork-scene] > div {
+  --scene-align: flex-start;
+}
+product-gallery [data-gallery-track] [data-artwork-scene] > div > div {
+  --scene-plane-width: max(100cqw, calc(100cqh * var(--room-ratio)));
+}
 [data-lightbox-stage] {
   container-type: size;
 }

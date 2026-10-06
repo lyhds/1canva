@@ -12,6 +12,7 @@ class SliderComponent extends HTMLElement {
     this.prev?.addEventListener("click", () => this.page(-1));
     this.next?.addEventListener("click", () => this.page(1));
     this.track.addEventListener("scroll", () => this.sync(), { passive: true });
+    window.addEventListener("resize", () => this.sync(), { passive: true });
     this.initDrag();
     this.sync();
   }

@@ -69,6 +69,26 @@ test('scene prompt states the artwork ratio numerically, and still builds withou
  assert.doesNotMatch(withoutMaster,/\d+x\d+ px/);assert.match(withoutMaster,/never stretch, squash, crop or re-proportion/);
 });
  test('composed generation preserves references without any AI quality review',async t=>{const {s,j,art,room}=await fixture(t);let generations=0;const p=new Pipeline(s,{}, {vision:async()=>assert.fail('Generation must not call a reviewer'),generate:async(c,prompt,ratio,refs,options)=>{generations++;assert.deepEqual(refs,[room,art]);assert.equal(options.backgroundOnly,false);assert.doesNotMatch(prompt,/NEVER paint the product/);return {bytes:room};}});p.assessScene=async()=>assert.fail('No empty-room or multi-frame QA');await p.make(j,'scene-1','legacy empty prompt','4:5',[room]);const a=s.active(j,'scene-1');assert.equal(a.sceneWorkflow,COMPOSED_SCENE);assert.equal(a.accepted,true);assert.equal(a.qa,undefined);assert.equal(a.artworkBounds,undefined);await p.make(j,'scene-1','unused','4:5',[room]);assert.equal(generations,1);const html=await sceneHTML(s,j,'scene-1');assert.equal((html.match(/<img /g)||[]).length,1);assert.doesNotMatch(html,/frame-preview|frame-box/);});
+test('style-only scenes design the room themselves when the library is empty',()=>{
+ const styleOnly={analysis:{},sceneStyle:'warm-wood',selection:[{styleOnly:true},{styleOnly:true},{styleOnly:true}]};
+ const p=composedPrompt(styleOnly,'scene-1','4:5');
+ assert.doesNotMatch(p,/Image 1 is the room reference/);
+ assert.match(p,/Image 1 is the exact original artwork/);
+ assert.match(p,/No room reference photo is provided: design the room yourself/);
+ assert.match(p,/walnut or teak/); // the selected style directive drives the room
+ assert.doesNotMatch(p,/Room reference cues may be adapted|image 2 artwork/);
+ assert.match(p,/The artwork must not be redesigned\./);
+ const desktop=composedPrompt({...styleOnly},'scene-desktop','21:9');
+ assert.doesNotMatch(desktop,/Image 1 is the room reference/);
+ assert.doesNotMatch(desktop,/borrow the scene-3 room materials/);
+ // With art direction on, the desktop hero borrows the generated scene-3 room again.
+ const artDirDesktop=composedPrompt({analysis:{},artDirectionProfile:'artwork-led-v1',selection:styleOnly.selection},'scene-desktop','21:9');
+ assert.match(artDirDesktop,/Image 1 is the room reference/);
+ assert.match(artDirDesktop,/borrow the scene-3 room materials/);
+ // Style presets stay optional: without one the room follows the artwork plan alone.
+ const automatic=composedPrompt({analysis:{},selection:styleOnly.selection},'scene-1','4:5');
+ assert.match(automatic,/design a coherent, restrained interior yourself/);
+});
 test('planning and every finished scene use the current master geometry without leaking creation instructions',()=>{
  for(const ratio of ['3:4','2:3','1:1','4:3','3:2','2:1']){
   const [w,h]=ratio.split(':').map(Number);

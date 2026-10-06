@@ -98,6 +98,10 @@ if (!customElements.get('mobile-drawer')) {
     }
 
     setDesktopMenu(menu) {
+      // No-op close: when no menu is open, closing must not touch the
+      // scroll-hide state — clicks/focus elsewhere on the page (gallery
+      // arrows, thumbnails, form controls) funnel through here.
+      if (menu === null && !this.activeDesktopMenu) return;
       window.clearTimeout(this.desktopCloseTimer);
       this.activeDesktopMenu = menu;
       this.toggleAttribute('data-desktop-open', !!menu);

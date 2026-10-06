@@ -5,6 +5,10 @@ export function mediaSlots(job) {
     'scene-1', 'scene-2', 'scene-3', ...(job.mediaProfile === 'responsive-v1' ? ['scene-desktop'] : [])];
 }
 export const bakedScenes = job => job?.sceneWorkflow === 'baked-frames-v1';
+/** The selection entry for a scene slot; scene-desktop shares scene-3's entry. */
+export function sceneSelection(job, slot) {
+  return job.selection?.[['scene-1', 'scene-2', 'scene-3'].indexOf(slot === 'scene-desktop' ? 'scene-3' : slot)];
+}
 /** Scene slots that may use a gentle oblique camera in the baked-frame workflow.
  *  The retired overlay workflow needed a nearly frontal artwork plane to map frame
  *  coordinates; with the frame painted into the scene, the small intimate setting

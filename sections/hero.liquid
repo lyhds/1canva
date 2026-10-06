@@ -22,27 +22,12 @@
       assign campaign_link = campaign_link | default: routes.all_products_collection_url
     -%}
     <h1 class="sr-only">CANVASRA — {{ campaign_heading }}</h1>
-    <a href="{{ campaign_link }}" class="relative block">
+    <a href="{{ campaign_link }}" class="relative block" aria-label="{{ section.settings.button_label | default: campaign_heading }}">
+      {%- comment -%} Campaign copy is baked into the artwork; no HTML overlay. {%- endcomment -%}
       <picture>
-        <source media="(max-width: 767px)" srcset="{{ 'home-gallery-mobile.webp' | asset_url }}" width="1024" height="900">
-        <img src="{{ 'home-gallery-desktop.webp' | asset_url }}" alt="CANVASRA gallery — a sunlit wall of framed, textured paintings." width="1536" height="659" class="block w-full" style="height:auto" fetchpriority="high">
+        <source media="(max-width: 767px)" srcset="{{ 'hero-bf-mobile.webp' | asset_url }}" width="1536" height="1920">
+        <img src="{{ 'hero-bf-desktop.webp' | asset_url }}" alt="Black Friday starts early — 40% off. Shop early, ship early." width="1920" height="822" class="block w-full" style="height:auto" fetchpriority="high">
       </picture>
-      <div class="bg-[#f6f1e9] px-6 py-7 md:absolute md:bottom-10 md:left-10 md:max-w-[410px] md:bg-[#f6f1e9]/90 md:px-8 md:py-8 md:backdrop-blur-sm">
-        {%- if section.settings.eyebrow != blank -%}
-          <p class="font-sans text-[11px] font-medium uppercase tracking-[0.18em] text-neutral-700">{{ section.settings.eyebrow }}</p>
-        {%- endif -%}
-        {%- if campaign_heading != blank -%}
-          <h2 class="mt-3 max-w-[12ch] font-serif text-[32px] leading-[1.08] text-black md:text-[38px]">
-            {{ campaign_heading }}
-          </h2>
-        {%- endif -%}
-        {%- if section.settings.button_label != blank -%}
-          <span class="mt-6 inline-flex items-center gap-2 border-b border-black pb-1 font-sans text-[14px] font-medium text-black">
-            <span>{{ section.settings.button_label }}</span>
-            <span aria-hidden="true">&rarr;</span>
-          </span>
-        {%- endif -%}
-      </div>
     </a>
   {%- else -%}
   <div class="relative">

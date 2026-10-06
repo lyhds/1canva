@@ -12,6 +12,18 @@
 
 - `product-studio/server.js`: local product workflow web app (`pnpm studio`); model calls and Shopify writes occur only when a task is started. See [Product Studio](PRODUCT_STUDIO.md).
 
+- `bootstrap-store-baseline.js`: one-off cold start for a brand-new storefront. The
+  Studio pipeline cannot price anything until `resolveStoreRules()` finds, for the
+  artwork's ratio, one `[RATIO DRAFT]` template *and* an ACTIVE reference covering
+  every template variant — store-side records a migrated store brought along with
+  its catalogue, but a fresh store has none. This derives both from
+  `data/pricing/mesonart-catalog.json`: six zero-priced DRAFT templates and six
+  ACTIVE references kept unpublished (sellable for the rule check, invisible to
+  shoppers; verified `publishedAt: null` with variants still `availableForSale`).
+  Read-only plan by default; `--apply` writes and `--ratio=<r>` limits the scope.
+  Idempotent by handle, so it only fills what is missing. Do not run it against a
+  store that already has a catalogue.
+
 - `ochre-workflow.js`: local Codex task/version/approval/operation ledger (`pnpm canvasra`); no network calls.
 - `ochre-crop.py`: deterministic master crop with hash provenance; requires Python Pillow.
 - `ochre-generate.js`: paid OpenRouter image request only after explicit authorization; journals before request and never auto-retries. See [Codex workflow](CODEX_PRODUCT_WORKFLOW.md).

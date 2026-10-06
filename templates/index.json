@@ -30,29 +30,33 @@
         "quality": {
           "type": "assurance",
           "settings": {
-            "icon": "layers",
-            "text": "Hand-painted oils on Premium Cotton Canvas"
+            "icon": "palette",
+            "title": "Handcrafted Art",
+            "text": "Painted by hand with expertise"
           }
         },
         "made-to-order": {
           "type": "assurance",
           "settings": {
-            "icon": "rotate-ccw",
-            "text": "Made to order by skilled artists"
+            "icon": "package",
+            "title": "Free Shipping",
+            "text": "Insured delivery on every order"
           }
         },
         "framing": {
           "type": "assurance",
           "settings": {
-            "icon": "frame",
-            "text": "Solid wood frames, ready to hang"
+            "icon": "leaf",
+            "title": "Eco Friendly",
+            "text": "Created using eco-friendly materials"
           }
         },
         "delivery": {
           "type": "assurance",
           "settings": {
-            "icon": "bag",
-            "text": "Tracked and insured delivery"
+            "icon": "credit-card",
+            "title": "Safe Payments",
+            "text": "Quick and safe with card or PayPal"
           }
         }
       },
@@ -83,6 +87,7 @@
             "collection": "abstract",
             "image": "",
             "cover_asset": "subject-abstract.webp",
+            "description": "Layered texture and bold, quiet colour for modern rooms.",
             "link": ""
           }
         },
@@ -93,6 +98,7 @@
             "collection": "landscapes",
             "image": "",
             "cover_asset": "subject-landscapes.webp",
+            "description": "Wide horizons and soft light, made for calm walls.",
             "link": ""
           }
         },
@@ -103,6 +109,7 @@
             "collection": "botanicals",
             "image": "",
             "cover_asset": "subject-botanicals.webp",
+            "description": "Leaves and blooms painted close, with gentle detail.",
             "link": ""
           }
         },
@@ -113,6 +120,7 @@
             "collection": "figurative",
             "image": "",
             "cover_asset": "subject-figurative.webp",
+            "description": "The figure suggested in confident, hand-painted strokes.",
             "link": ""
           }
         },
@@ -123,6 +131,7 @@
             "collection": "still-life",
             "image": "",
             "cover_asset": "subject-still-life.webp",
+            "description": "Everyday objects composed with warmth and restraint.",
             "link": ""
           }
         }

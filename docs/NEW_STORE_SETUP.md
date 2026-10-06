@@ -165,9 +165,56 @@
 - **生图模型**：按服务商协议选择 `reference-json` 或 `openai-edit`。
 
 `settings.json` 被 gitignore，**空账本起步**：没有历史任务或图库。
-`scene-references/` 只跟踪了 `README.md`，场景参考图需要另行放入。
+`scene-references/` 只跟踪了 `README.md`。**图库为空不阻塞**：任务会自动降级为
+「风格直出」——按所选场景风格（未选则按作品场景方案）纯文生图出场景图；
+日后把房间参考图放入 `scene-references/`（大尺寸参考放 `bigsize/` 子目录），
+对场景重做即可回到参考驱动流程（效果更可控）。
 
-## 5. 上线前自检
+## 5. 商品冷启动：先铺基准资产
+
+**新店在建第一个商品之前，必须先在店里铺 12 件「基准资产」**，否则 Product Studio
+的流水线会卡在「读取店铺规则」这一步。这不是故障，是它自己的设计。
+
+Studio 给商品定价之前，会为**该画作的比例**解析两组**店铺记录**：
+
+| 需要什么 | 提供什么 | 存放在 |
+| --- | --- | --- |
+| 一件 `[RATIO DRAFT] <比例>` **草稿**商品 | 该比例的 Size × Frame **组合清单** | 线上商品 |
+| 一件同比例 **在售（ACTIVE）** 参照商品 | 每个组合的**可售状态、库存策略、配送规则** | 线上商品 |
+
+本地价表 `data/pricing/mesonart-catalog.json` 只提供**价格数字**；上面两项是店铺侧记录，
+代码推不出来。旧店搬迁时它们随商品目录一起带了过来，全新店铺必须自己补。
+
+代码位置：`scripts/product-studio/pipeline.js` 的「读取店铺规则」步骤拿不到规则就
+`throw`，后面的主图、场景、文案、上架全都不会执行；`scripts/product-studio/rules.js`
+要求参照商品 `status === 'ACTIVE'`。
+
+铺法（一次性，幂等）：
+
+```sh
+node scripts/bootstrap-store-baseline.js            # 只读计划，先看清楚
+node scripts/bootstrap-store-baseline.js --apply    # 执行
+```
+
+会按 6 个比例 × 2 件 = **12 件** 基准资产：
+
+- `[RATIO DRAFT] <比例> baseline template` —— **草稿**、零价，变体 = 该比例全部尺寸 × 7 种装裱
+- `[RATIO BASELINE] <比例> baseline reference` —— **ACTIVE**、非零价，同上组合
+
+⚠️ 四个容易误解的点：
+
+1. **参照商品是 ACTIVE，但【不发布到任何销售渠道】**（实测 `publishedAt: null`、
+   `resourcePublications` 为空）。规则只检查状态字段，所以这样既能让检查通过、
+   **又让顾客看不到**。实测这类商品的变体 `availableForSale` 仍为 `true`。
+2. **每个比例各需要一件参照** —— 参照按 `productRatio` 匹配，不能跨比例共用。
+3. **它们不是商品**：不要上架、不要当库存、不要定价。都带 `canvasra-baseline` 标签，
+   用这个标签查得到。重跑脚本只会补缺，不会重复创建。
+4. **首个商品就是旧店「在售参照」的等价物** —— 一旦店里有了真实的 ACTIVE 商品，
+   它同样可以充当参照；基准资产只是把这条链在零商品时先接上。
+
+跑完在 `pnpm studio` → 「模型与店铺」应显示 **六种比例规则已就绪 6 / 6**。
+
+## 6. 上线前自检
 
 - `pnpm css` 后 `assets/theme.css` 无差异（改了样式才需要）。
 - `pnpm verify`：Theme Check + 离线测试，**2026-10-05 起两者均全绿**：

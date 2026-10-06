@@ -77,3 +77,11 @@ export function styleFidelityClause(job) {
   if (!style) return '';
   return `Stay close to image 1's furniture style, materials and palette: the user chose the "${style.label}" style and this reference speaks it. Adapt the reference only where the artwork's own ratio, the clearance band, light coherence or the output format require it; the room must remain recognizably the reference's room.`;
 }
+
+/** Generation layer without a room reference: the selected style alone drives the room.
+ *  Used when the reference library is empty and the job falls back to style-only scenes. */
+export function styleOnlyClause(job) {
+  const style = getSceneStyle(job?.sceneStyle);
+  if (!style) return 'No room reference photo is provided: design a coherent, restrained interior yourself, led by the artwork and the styling direction above.';
+  return `No room reference photo is provided: design the room yourself in the "${style.label}" style — ${style.directive}`;
+}

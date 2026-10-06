@@ -55,6 +55,21 @@ test('desktop menus expose only their branch and close on escape, outside click 
  assert.ok(document.querySelector('.header-desktop-nav > a[href="/journal"]'));assert.equal(document.querySelector('.header-desktop-nav [data-drawer-open]'),null);
 });
 
+test('clicks and focus outside the header keep the scroll-hidden state', () => {
+  const {window,document}=parseHTML('<html><body><mobile-drawer></mobile-drawer><button id="page">Gallery arrow</button></body></html>');
+  window.scrollY=0;window.innerWidth=1440;
+  window.theme={lockScroll(){},trapFocus(){}};
+  vm.runInNewContext(fs.readFileSync('assets/header.js','utf8'),{window,document,HTMLElement:window.HTMLElement,customElements:window.customElements});
+  const header=document.querySelector('mobile-drawer');
+  const scroll=y=>{window.scrollY=y;window.dispatchEvent(new window.Event('scroll'));};
+  scroll(200);assert.ok(header.hasAttribute('data-scroll-down'));
+  document.querySelector('#page').click();
+  assert.ok(header.hasAttribute('data-scroll-down'),'outside click must not reveal the header');
+  document.querySelector('#page').dispatchEvent(new window.Event('focusin',{bubbles:true}));
+  assert.ok(header.hasAttribute('data-scroll-down'),'outside focus must not reveal the header');
+  scroll(180);assert.equal(header.hasAttribute('data-scroll-down'),false,'scrolling up must still reveal the header');
+});
+
 test('mouse hover opens desktop branches and cancels delayed closing when moving between menus',async()=>{
  const menu={links:['Shop','Collections'].map(title=>({title,url:'/',links:[{title:'Child',url:'/child'}]}))};
  const {window,document}=parseHTML('<html><body>'+await renderSection('header',context(),{menu})+'</body></html>');

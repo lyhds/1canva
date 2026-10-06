@@ -54,7 +54,8 @@ test("Liquid cards show strikethrough compare-at while on sale", async () => {
   const { document } = parseHTML(html);
   const p = document.querySelector(".space-y-1 > p:last-child");
   assert.equal(p.querySelector("s [data-display-money]").dataset.cents, "20000");
-  assert.equal(p.textContent.trim(), "$200.00 From $80.00");
+  assert.match(p.textContent.trim(), /-60%$/, "discount badge should render after the price");
+  assert.equal(p.textContent.trim().replace(/-\d+%$/, "").trim(), "$200.00 From $80.00");
 });
 
 test("wishlist cards show strikethrough compare-at from variant prices", async () => {

@@ -1,10 +1,15 @@
 {%- if section.blocks.size > 0 -%}
   <section class="px-3 md:px-6">
-    <div class="grid grid-cols-2 gap-x-6 gap-y-10 border-y border-neutral-100 py-10 md:flex md:items-center md:justify-between md:py-12">
+    <div class="grid grid-cols-2 gap-x-4 gap-y-9 px-4 py-9 md:grid-cols-4 md:gap-x-6 md:px-10 md:py-11">
       {%- for block in section.blocks -%}
-        <div class="flex items-start gap-3.5" {{ block.shopify_attributes }}>
-          {% render 'icon', name: block.settings.icon, class: 'h-5 w-5 flex-none text-black' %}
-          <p class="font-sans text-[14px] leading-[1.6] text-black">{{ block.settings.text }}</p>
+        <div class="flex flex-col items-center text-center" {{ block.shopify_attributes }}>
+          {% render 'icon', name: block.settings.icon, class: 'h-6 w-6 flex-none text-black' %}
+          {%- if block.settings.title != blank -%}
+            <p class="mt-3.5 font-sans text-[13px] font-medium text-black">{{ block.settings.title }}</p>
+          {%- endif -%}
+          {%- if block.settings.text != blank -%}
+            <p class="mt-1.5 font-sans text-[12px] leading-[1.6] text-neutral-600">{{ block.settings.text }}</p>
+          {%- endif -%}
         </div>
       {%- endfor -%}
     </div>
@@ -25,35 +30,61 @@
           "type": "select",
           "id": "icon",
           "label": "图标",
-          "default": "shield-check",
+          "default": "palette",
           "options": [
             {
+              "value": "palette",
+              "label": "调色板（手工绘制）"
+            },
+            {
+              "value": "package",
+              "label": "包裹（包邮）"
+            },
+            {
+              "value": "leaf",
+              "label": "树叶（环保）"
+            },
+            {
+              "value": "credit-card",
+              "label": "银行卡（支付）"
+            },
+            {
               "value": "shield-check",
-              "label": "品质"
+              "label": "盾牌（品质）"
             },
             {
               "value": "rotate-ccw",
-              "label": "手工绘制"
+              "label": "回转（定制）"
             },
             {
               "value": "frame",
-              "label": "装裱"
+              "label": "画框（装裱）"
             },
             {
               "value": "layers",
               "label": "肌理"
             },
             {
+              "value": "truck",
+              "label": "卡车（物流）"
+            },
+            {
               "value": "bag",
-              "label": "物流"
+              "label": "购物袋"
             }
           ]
         },
         {
           "type": "text",
+          "id": "title",
+          "label": "标题",
+          "default": "Handcrafted Art"
+        },
+        {
+          "type": "text",
           "id": "text",
-          "label": "正文",
-          "default": "Museum-quality oils on Premium Cotton Canvas"
+          "label": "描述",
+          "default": "Painted by hand with expertise"
         }
       ]
     }
@@ -68,22 +99,25 @@
         {
           "type": "assurance",
           "settings": {
-            "icon": "rotate-ccw",
-            "text": "Hand-painted to order"
+            "icon": "package",
+            "title": "Free Shipping",
+            "text": "Insured delivery on every order"
           }
         },
         {
           "type": "assurance",
           "settings": {
-            "icon": "frame",
-            "text": "Expert framing service"
+            "icon": "leaf",
+            "title": "Eco Friendly",
+            "text": "Created using eco-friendly materials"
           }
         },
         {
           "type": "assurance",
           "settings": {
-            "icon": "bag",
-            "text": "Tracked, insured shipping"
+            "icon": "credit-card",
+            "title": "Safe Payments",
+            "text": "Quick and safe with card or PayPal"
           }
         }
       ]

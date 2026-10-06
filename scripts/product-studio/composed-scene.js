@@ -1,9 +1,10 @@
 import {validateBackground} from './background.js';
 import {referenceDirection} from './reference-direction.js';
-import {OBLIQUE_VIEW_SLOTS} from './media.js';
+import {OBLIQUE_VIEW_SLOTS,sceneSelection} from './media.js';
+import {usesArtDirection} from './art-direction.js';
 import {artworkGeometry,artworkShape} from './artwork-geometry.js';
 import {FRAME_SELECTION_POLICY,sceneFrameGuidance} from './frame-finish.js';
-import {styleFidelityClause} from './scene-styles.js';
+import {styleFidelityClause,styleOnlyClause} from './scene-styles.js';
 export const COMPOSED_SCENE='composed-unframed-v1';
 export const composedScenes=j=>j.sceneWorkflow===COMPOSED_SCENE;
 // The overlay workflow maps frame coordinates onto the scene, so every composed scene
@@ -35,8 +36,17 @@ const SCENE_SCALE = {
 };
 export function composedPrompt(job,slot,ratio){
   const portrait=(artworkGeometry(job)?.ratio??1)<1;
+  // Style-only fallback: when the reference library was empty, the selection carries
+  // styleOnly entries. The artwork is then the only image sent to the generator (image 1)
+  // and the room is designed from the selected style instead of a photo. Exception: with
+  // art direction on, the desktop hero borrows the generated scene-3 room as image 1, so
+  // it keeps the normal two-image wording.
+  const styleOnly=sceneSelection(job,slot)?.styleOnly&&!(slot==='scene-desktop'&&usesArtDirection(job));
+  const opening=styleOnly
+    ?`Create ONE finished interior scene, native ${ratio}. This ratio applies ONLY to the whole output photograph. No room reference photo is provided: design the room yourself from the styling direction below. Image 1 is the exact original artwork to display and the sole source for the painting's shape, orientation and content.`
+    :`Create ONE finished interior scene, native ${ratio}. This ratio applies ONLY to the whole output photograph. Image 1 is the room reference; image 2 is the exact original artwork to display. Image 2 is the sole source for the painting's shape, orientation and content. Any artwork or frame visible in image 1 is only part of the room reference: ignore its proportions and replace it with image 2. ${slot==='scene-desktop'?'For this desktop companion, borrow the scene-3 room materials, lighting and atmosphere from image 1; rebuild the painting from image 2 so a proportion error in the earlier scene is not carried forward.':''}`;
   const desktopPlacement=slot==='scene-desktop'?`The room carries the wide composition: keep the complete canvas at its true ratio inside the middle 60% of the image height, with the upper and lower bands left for interface clearance — never widen the canvas to fill the frame.${portrait?' For a portrait canvas in this wide room, hang it on open wall and place the low seating and consoles to the left and right sides of the artwork instead of directly beneath it, so the furniture never forces the canvas to shrink, squash or lose its true proportions.':''}`:null;
-  return `Create ONE finished interior scene, native ${ratio}. This ratio applies ONLY to the whole output photograph. Image 1 is the room reference; image 2 is the exact original artwork to display. Image 2 is the sole source for the painting's shape, orientation and content. Any artwork or frame visible in image 1 is only part of the room reference: ignore its proportions and replace it with image 2. ${slot==='scene-desktop'?'For this desktop companion, borrow the scene-3 room materials, lighting and atmosphere from image 1; rebuild the painting from image 2 so a proportion error in the earlier scene is not carried forward.':''}
+  return `${opening}
 ${artworkShape(job)} Render its canvas at exactly that width-to-height ratio and no other — the scene ratio is not the artwork ratio; never stretch, squash, crop or re-proportion the artwork to suit the wall, camera, sofa or furniture.
 Place the artwork ONCE on the wall as an unframed stretched canvas, with NO external decorative frame, wood/metal rails, mat or border. Preserve the full artwork content, subject and colour relationships; no duplicate painting or extra wall art.${landscapeCue(job,ratio)}
 This scene is ${SCENE_SCALE[slot]??SCENE_SCALE['scene-1']}. The painting is the visual focus; arrange camera and furniture so the canvas size stays legible against real objects at human scale, and no furniture may overlap the painting or its contact/cast shadow. ${slot==='scene-3'?'Do not shrink the artwork to accommodate a sofa; move or lower furniture instead.':desktopPlacement??'Keep the canvas at the size described above — do not enlarge it to fill the wall.'} ${CAMERA_FRONTAL_CANVAS} Leave clean wall around every edge for a future thin external frame and its shadow; do not draw that frame or a placeholder. Keep a clear band around the canvas on every side for the future frame rail and its shadow: at least 4% of the image height clear below the canvas, and clear wall to the sides and above it. Judge occlusion from the camera's viewpoint, not from the floor plan: anything standing in front of the wall can visually cross into the canvas or that band, so no plant, vase, lamp, chair back, tabletop object or their shadows may rise in front of a canvas edge, clip it, or read as passing behind it. Each edge must also separate in lightness from the wall: the room's own wall colour must read clearly lighter or darker than the artwork along every edge, so a dark passage of the painting is never set against an equally dark wall. Reach that contrast with the wall colour, materials and lighting themselves — never by painting a separate panel, rectangle, border, mat or outline on the wall behind the canvas. Edge contrast and frame clearance outrank palette matching.
@@ -44,7 +54,7 @@ Solve lighting IN THIS IMAGE: one coherent soft room light source, matching illu
 ${referenceDirection(job,slot)}
 ${slot==='scene-desktop'?'Independently compose a wide PC hero. Keep artwork and shadow in the central crop-safe region; top space for a header and bottom space for a product label. For 16:9 output, keep the complete canvas and future frame within the middle 60% of image height, leaving the upper and lower 20% for ultrawide cover cropping and interface clearance. Preserve side breathing room for 16:10 and 3:2 windows. Compose natively at the requested ratio; never stretch or crop an existing scene to manufacture that ratio.':'Portrait scene with clear top space; complete artwork and furniture remain visible.'}
 Artwork context: ${JSON.stringify({title:job.analysis?.title,palette:job.analysis?.palette})}. Room styling direction: ${JSON.stringify(job.artDirection?.scenes?.find(s=>s.slot===(slot==='scene-desktop'?'scene-3':slot))||null)}. User scene brief: ${job.sceneBrief||''}.
-Priority when arranging this scene: preserve image 2's complete rectangle and content first; adapt room styling, apparent size and furniture around it. Medium, small and large describe proportional scale, never a new width-to-height ratio. The ${ratio} output format changes the room composition only. ${styleFidelityClause(job)||'Room reference cues may be adapted;'} image 2 artwork must not be redesigned.`;
+Priority when arranging this scene: preserve ${styleOnly?"the artwork's complete rectangle and content first":"image 2's complete rectangle and content first"}; adapt room styling, apparent size and furniture around it. Medium, small and large describe proportional scale, never a new width-to-height ratio. The ${ratio} output format changes the room composition only. ${styleOnly?styleOnlyClause(job)+' The artwork must not be redesigned.':(styleFidelityClause(job)||'Room reference cues may be adapted;')+' image 2 artwork must not be redesigned.'}`;
 }
 /** Prompt for the baked-frame workflow.
  *  Derived from the proven overlay prompt on purpose: only the sentences that talk about

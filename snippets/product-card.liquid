@@ -72,6 +72,9 @@
       {%- if product.compare_at_price > product.price -%}<s class="mr-1 font-normal text-neutral-400"><span data-display-money data-cents="{{ product.compare_at_price }}">{{ product.compare_at_price | money }}</span></s> {% endif -%}
       {%- if product.price_varies -%}{{ 'products.product.from_price_html' | t: price: '' | strip_html }}{% endif -%}
       <span data-display-money data-cents="{{ product.price }}">{{ product.price | money }}</span>
+      {%- if product.compare_at_price > product.price -%}
+        <span class="ml-2 bg-neutral-100 px-1.5 py-0.5 align-middle font-sans text-[12px] font-normal text-black">-{{ product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round }}%</span>
+      {%- endif -%}
     </p>
   </div>
 </div>
