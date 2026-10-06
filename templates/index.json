@@ -79,9 +79,9 @@
         "c1": {
           "type": "collection",
           "settings": {
-            "title": "",
+            "title": "Abstract",
             "collection": "abstract",
-            "image": "shopify://shop_images/home-subject-1.png",
+            "image": "",
             "cover_asset": "subject-abstract.webp",
             "link": ""
           }
@@ -89,40 +89,40 @@
         "c2": {
           "type": "collection",
           "settings": {
-            "title": "",
+            "title": "Landscapes",
             "collection": "landscapes",
-            "image": "shopify://shop_images/home-subject-2.png",
-            "cover_asset": "",
+            "image": "",
+            "cover_asset": "subject-landscapes.webp",
             "link": ""
           }
         },
         "c3": {
           "type": "collection",
           "settings": {
-            "title": "",
+            "title": "Botanicals",
             "collection": "botanicals",
-            "image": "shopify://shop_images/home-subject-3.png",
-            "cover_asset": "",
+            "image": "",
+            "cover_asset": "subject-botanicals.webp",
             "link": ""
           }
         },
         "c5": {
           "type": "collection",
           "settings": {
-            "title": "",
+            "title": "Figurative",
             "collection": "figurative",
-            "image": "shopify://shop_images/home-subject-5.jpg",
-            "cover_asset": "",
+            "image": "",
+            "cover_asset": "subject-figurative.webp",
             "link": ""
           }
         },
         "c4": {
           "type": "collection",
           "settings": {
-            "title": "",
+            "title": "Still Life",
             "collection": "still-life",
-            "image": "shopify://shop_images/home-subject-4.png",
-            "cover_asset": "",
+            "image": "",
+            "cover_asset": "subject-still-life.webp",
             "link": ""
           }
         }
@@ -141,8 +141,8 @@
     "studio": {
       "type": "image-with-text",
       "settings": {
-        "image": "shopify://shop_images/home-our-approach.png",
-        "cover_asset": "",
+        "image": "",
+        "cover_asset": "approach-studio.webp",
         "image_alt": "",
         "layout": "left",
         "eyebrow": "Our approach",
@@ -159,8 +159,8 @@
           "type": "slide",
           "settings": {
             "collection": "living-room",
-            "image": "shopify://shop_images/home-space-1.png",
-            "cover_asset": "",
+            "image": "",
+            "cover_asset": "room-living-room.webp",
             "link_label": "Shop Living Room",
             "link": ""
           }
@@ -169,8 +169,8 @@
           "type": "slide",
           "settings": {
             "collection": "bedroom",
-            "image": "shopify://shop_images/home-space-2.png",
-            "cover_asset": "",
+            "image": "",
+            "cover_asset": "room-bedroom.webp",
             "link_label": "Shop Bedroom",
             "link": ""
           }
@@ -179,9 +179,9 @@
           "type": "slide",
           "settings": {
             "collection": "dining-room",
-            "image": "shopify://shop_images/home-space-3.png",
-            "cover_asset": "",
-            "link_label": "",
+            "image": "",
+            "cover_asset": "room-dining-room.webp",
+            "link_label": "Shop Dining Room",
             "link": ""
           }
         },
@@ -189,8 +189,8 @@
           "type": "slide",
           "settings": {
             "collection": "entryway",
-            "image": "shopify://shop_images/home-space-4.png",
-            "cover_asset": "",
+            "image": "",
+            "cover_asset": "room-entryway.webp",
             "link_label": "Shop Entryway",
             "link": ""
           }

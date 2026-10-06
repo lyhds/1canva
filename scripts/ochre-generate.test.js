@@ -1,17 +1,52 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import os from 'node:os';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { execute } from './ochre-workflow.js';
 
+const REPO = path.resolve(import.meta.dirname, '..');
+const RELATIVE_IMPORT = /(?:^|\n)\s*import[^'"]*['"]([^'"]+)['"]/g;
+
+/**
+ * The workflow is spawned from an isolated copy so a run can never read the
+ * repository .env or write into its state directory. Two properties matter:
+ * the copy carries the whole relative import graph (the workflow pulls store
+ * identity in, which in turn pulls the store module graph), and it lives inside
+ * the checkout so bare dependencies such as sharp still resolve from the
+ * repository node_modules. The scratch parent is gitignored.
+ */
+function isolatedRoot() {
+  const scratch = path.join(REPO, '.shopify', 'tmp');
+  fs.mkdirSync(scratch, { recursive: true });
+  return fs.mkdtempSync(path.join(scratch, 'canvasra-generation-'));
+}
+
+function copyImportGraph(root, entries) {
+  const copied = new Set();
+  const copy = source => {
+    const absolute = path.resolve(source);
+    if (copied.has(absolute)) return;
+    copied.add(absolute);
+    const target = path.join(root, path.relative(REPO, absolute));
+    fs.mkdirSync(path.dirname(target), { recursive: true });
+    fs.copyFileSync(absolute, target);
+    const text = fs.readFileSync(absolute, 'utf8');
+    for (const match of text.matchAll(RELATIVE_IMPORT)) {
+      const spec = match[1];
+      if (!spec.startsWith('.')) continue;
+      const base = path.resolve(path.dirname(absolute), spec);
+      copy(fs.existsSync(base) ? base : `${base}.js`);
+    }
+  };
+  for (const entry of entries) copy(path.join(REPO, entry));
+}
+
 for (const provider of ['openrouter', 'custom-api', 'codex']) for (const uncertain of [false, true]) test(`${provider} generation ${uncertain ? 'timeout is uncertain' : 'saves response and actual cost'} without retry`, t => {
-  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'canvasra-generation-'));
+  const root = isolatedRoot();
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));
-  fs.mkdirSync(path.join(root, 'scripts'));
   fs.writeFileSync(path.join(root, 'package.json'), '{"type":"module"}');
-  for (const file of ['ochre-workflow.js', 'ochre-generate.js']) fs.copyFileSync(`scripts/${file}`, path.join(root, 'scripts', file));
+  copyImportGraph(root, ['scripts/ochre-workflow.js', 'scripts/ochre-generate.js']);
   const base = path.join(root, '.shopify/canvasra-workflow');
   execute(base, 'init', 'test');
   const config = path.join(root, 'request.json');

@@ -195,7 +195,7 @@ test("media and shell routes only serve whitelisted files", async () => {
     // the shell is served, anything else in the web folder or the repo is not
     const shell = await fetch(`${base}/`);
     assert.equal(shell.status, 200);
-    assert.match(await shell.text(), /OCHRE · Product Studio/);
+    assert.match(await shell.text(), /CANVASRA · Product Studio/);
     for (const notServed of ["/server.js", "/store.js", "/package.json"]) {
       assert.equal((await fetch(`${base}${notServed}`)).status, 404, notServed);
     }

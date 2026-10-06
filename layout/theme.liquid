@@ -6,7 +6,13 @@
   if request.page_type == 'collection' and collection.handle == 'all'
     assign resolved_page_title = 'collections.all_title' | t
     assign resolved_page_description = 'collections.all_description' | t
-    assign resolved_canonical_url = request.origin | append: '/collections/all-products'
+    # Canonicalising the built-in all collection onto the curated one only helps once that
+    # collection exists; pointing a canonical at a missing handle would advertise a 404 to
+    # crawlers on the store's most important product listing.
+    assign curated_collection = collections['all-products']
+    if curated_collection != blank
+      assign resolved_canonical_url = request.origin | append: curated_collection.url
+    endif
   elsif request.page_type == 'collection' and collection.handle == 'all-products' and resolved_page_description == blank
     assign resolved_page_description = 'collections.all_description' | t
   endif
@@ -56,10 +62,22 @@
     <meta property="og:title" content="{{ og_title | escape }}">
     <meta property="og:type" content="{{ og_type }}">
     <meta property="og:description" content="{{ og_description | escape_once }}">
-    {%- if page_image -%}
-      <meta property="og:image" content="http:{{ page_image | image_url: width: 1200 }}">
-      <meta property="og:image:secure_url" content="https:{{ page_image | image_url: width: 1200 }}">
+    {%- liquid
+      # Social previews need an image even when the page owns none: the home hero is a
+      # local asset rather than an image_picker, so page_image stays empty on #index.
+      assign og_image_src = ''
+      if page_image
+        assign og_image_path = page_image | image_url: width: 1200
+      else
+        assign og_image_path = 'og-default.webp' | asset_url
+      endif
+      assign og_image_src = 'https:' | append: og_image_path
+    -%}
+    {%- if og_image_src != '' -%}
+      <meta property="og:image" content="{{ og_image_src }}">
+      <meta property="og:image:secure_url" content="{{ og_image_src }}">
       <meta property="og:image:width" content="1200">
+      <meta name="twitter:image" content="{{ og_image_src }}">
     {%- endif -%}
     {%- if request.page_type == 'product' -%}
       <meta property="og:price:amount" content="{{ product.selected_or_first_available_variant.price | money_without_currency | strip_html }}">

@@ -33,7 +33,33 @@ export function engine(globals = {}) {
   liquid.registerFilter("money_without_currency", (value) => (Number(value) / 100).toFixed(2));
   liquid.registerFilter("money_with_currency", (value) => `$${(Number(value) / 100).toFixed(2)} USD`);
   liquid.registerFilter("asset_url", (name) => `/assets/${name}`);
+  liquid.registerFilter("asset_img_url", (name) => `/assets/${name}`);
   liquid.registerFilter("image_url", (image) => typeof image === "string" ? image : image?.src);
+  // Presentation-only stand-in so sections that show an editor placeholder can render offline.
+  liquid.registerFilter("placeholder_svg_tag", (name, className) => `<svg class="${className}" data-placeholder="${name}"></svg>`);
+  // Shopify's {% form %} tag has no liquidjs equivalent, which is why sections carrying one
+  // (footer's newsletter, the account/contact flows) could never be rendered offline. The stub
+  // emits a non-submitting element and keeps the block body so the markup and its styling
+  // stay reviewable. It never posts anywhere.
+  liquid.registerTag("form", {
+    parse(tagToken, remainTokens) {
+      this.className = tagToken.args.match(/class:\s*'([^']*)'/)?.[1] ?? "";
+      this.templates = [];
+      const stream = this.liquid.parser.parseStream(remainTokens);
+      stream
+        .on("tag:endform", () => stream.stop())
+        .on("template", (template) => this.templates.push(template))
+        .on("end", () => {
+          throw new Error("{% form %} was never closed with {% endform %}");
+        });
+      stream.start();
+    },
+    *render(ctx, emitter) {
+      emitter.write(`<form method="post" action="#" class="${this.className}" data-offline-form>`);
+      yield this.liquid.renderer.renderTemplates(this.templates, ctx, emitter);
+      emitter.write("</form>");
+    },
+  });
   return liquid;
 }
 

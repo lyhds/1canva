@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Canvasra 建店清单</title>
+<style>
+  :root{
+    --bg:#faf9f7; --panel:#ffffff; --ink:#1b1a18; --muted:#6f6a63; --line:#e6e2dc;
+    --accent:#8a6b4f; --block:#a8442f; --ok:#3f6b4a; --chip:#f2efe9;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Helvetica Neue",Helvetica,Arial,"PingFang SC","Microsoft YaHei",sans-serif;
+    font-size:15px; line-height:1.6; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:900px;margin:0 auto;padding:0 24px 120px}
+  header.top{padding:48px 0 28px;border-bottom:1px solid var(--line);margin-bottom:8px}
+  h1{font-family:Georgia,"Songti SC",serif;font-size:30px;font-weight:400;margin:0 0 8px;letter-spacing:.01em}
+  .sub{color:var(--muted);font-size:14px;margin:0}
+  .bar-wrap{position:sticky;top:0;z-index:20;background:rgba(250,249,247,.94);backdrop-filter:blur(6px);
+    padding:16px 0 14px;border-bottom:1px solid var(--line);margin-bottom:8px}
+  .bar-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .track{flex:1;min-width:180px;height:6px;background:var(--line);border-radius:99px;overflow:hidden}
+  .fill{height:100%;width:0;background:var(--ok);border-radius:99px;transition:width .25s ease}
+  .count{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .count b{color:var(--ink);font-weight:600}
+  .btns{display:flex;gap:8px;flex-wrap:wrap}
+  button{
+    font:inherit;font-size:13px;padding:5px 12px;border:1px solid var(--line);background:#fff;
+    color:var(--muted);border-radius:6px;cursor:pointer;transition:.15s
+  }
+  button:hover{color:var(--ink);border-color:#cdc7be}
+  button.on{background:var(--ink);border-color:var(--ink);color:#fff}
+  h2{font-family:Georgia,"Songti SC",serif;font-size:19px;font-weight:400;margin:38px 0 6px;
+     padding-top:18px;border-top:1px solid var(--line)}
+  h2:first-of-type{border-top:0}
+  .note{color:var(--muted);font-size:13.5px;margin:0 0 16px;max-width:70ch}
+  .items{display:flex;flex-direction:column;gap:10px}
+  .item{
+    position:relative;background:var(--panel);border:1px solid var(--line);border-radius:9px;
+    padding:13px 15px 13px 15px;display:flex;gap:12px;transition:.15s
+  }
+  .item:hover{border-color:#d8d2c9}
+  .item.done{background:#f6f5f2;border-color:#e9e5df}
+  .item.done .title{color:var(--muted);text-decoration:line-through;text-decoration-color:#c9c2b8}
+  .item.hide{display:none}
+  input[type=checkbox]{
+    appearance:none;-webkit-appearance:none;flex:none;width:17px;height:17px;margin:3px 0 0;
+    border:1.5px solid #c3bcb1;border-radius:4px;background:#fff;cursor:pointer;position:relative;transition:.15s
+  }
+  input[type=checkbox]:hover{border-color:var(--ink)}
+  input[type=checkbox]:checked{background:var(--ok);border-color:var(--ok)}
+  input[type=checkbox]:checked::after{
+    content:"";position:absolute;left:4.5px;top:1px;width:5px;height:9px;
+    border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)
+  }
+  .body{flex:1;min-width:0}
+  .title{font-size:15px;transition:.15s}
+  .row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .tag{font-size:11px;padding:1.5px 7px;border-radius:99px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+  .tag.block{color:var(--block);border-color:#e8cfc8;background:#fdf5f3}
+  .tag.opt{color:#7a746b;border-style:dashed}
+  .tag.group{color:var(--accent);border-color:#e3d8cd;background:#fbf8f5}
+  code.h{
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;
+    background:var(--chip);border:1px solid var(--line);border-radius:5px;padding:1.5px 7px;cursor:pointer;
+    color:var(--ink);transition:.15s
+  }
+  code.h:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+  code.h.copied{background:var(--ok);border-color:var(--ok);color:#fff}
+  .meta{margin-top:7px;font-size:13px;color:var(--muted);display:flex;flex-direction:column;gap:3px}
+  .meta .k{color:#9c968d;margin-right:5px}
+  .meta .warn{color:var(--block)}
+  .empty{display:none;padding:36px 0;color:var(--muted);font-size:14px;text-align:center}
+  footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+  pre{background:#f4f2ee;border:1px solid var(--line);border-radius:7px;padding:11px 13px;overflow-x:auto;
+      font-size:12.5px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;margin:10px 0 0}
+  a{color:var(--accent)}
+  @media print{
+    body{background:#fff}
+    .bar-wrap .btns,.empty{display:none}
+    .bar-wrap{position:static}
+    .wrap{padding-bottom:0}
+    .item{break-inside:avoid;page-break-inside:avoid}
+    h2{break-after:avoid}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <h1>Canvasra 建店清单</h1>
+    <p class="sub">主题代码已就绪，上线只差店铺侧的内容与设置。勾选进度自动保存在本机浏览器。</p>
+  </header>
+
+  <div class="bar-wrap">
+    <div class="bar-row">
+      <div class="track"><div class="fill" id="fill"></div></div>
+      <div class="count" id="count"><b>0</b> / 0 完成</div>
+    </div>
+    <div class="bar-row" style="margin-top:12px">
+      <div class="btns">
+        <button data-filter="all" class="on">全部</button>
+        <button data-filter="todo">未完成</button>
+        <button data-filter="blocking">仅阻塞项</button>
+        <button data-filter="handle">仅填 handle</button>
+      </div>
+      <div class="btns">
+        <button id="print">打印 / 存 PDF</button>
+        <button id="reset">重置</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="phases"></div>
+  <div class="empty" id="empty">这个筛选下没有条目。</div>
+
+  <footer>
+    <p>清单对应的静态审计脚本（都在 <code class="h">.shopify/audit/</code>，已 gitignore，不进交付包）：</p>
+    <pre>node .shopify/audit/readiness.js   # 扫出「引用了但店铺里还不存在」的资源
+node .shopify/audit/i18n.js        # 确认没有 translation missing</pre>
+    <p style="margin-top:16px">handle 点一下即可复制。带 <span class="tag block">阻塞</span> 标记的条目未完成时，页面会出现可见的语义错位（不是 404，而是点进去内容不对）。</p>
+  </footer>
+
+</div>
+
+<script>
+const PHASES = [
+  { title: "阶段 1 · 建店与凭据", items: [
+    { id: "shop", title: "注册 Shopify 店铺，确定内部域名（形如 xx.myshopify.com）",
+      risk: "Product Studio 用 .env 里的域名做断言，不一致会直接拒绝写入。" },
+    { id: "app", title: "创建开发应用并授权 Admin API 权限范围",
+      refs: "read_products / write_products / read_files / write_files / read_publications / write_publications / read_inventory / write_inventory / read_content / write_content" },
+    { id: "env", title: "创建 .env 并填入 5 项",
+      refs: "SHOPIFY_STORE · SHOPIFY_CLIENT_ID · SHOPIFY_CLIENT_SECRET · SHOPIFY_STOREFRONT_HOST · SHOPIFY_CURRENCY",
+      risk: ".env 已 gitignore，不要提交。" },
+    { id: "envverify", title: "验证连接：pnpm studio → 「模型与店铺」→ 刷新店铺规则" }
+  ]},
+
+  { title: "阶段 2 · 代码远端与主题同步", items: [
+    { id: "gh", title: "新建 GitHub 空私有仓库" },
+    { id: "gpush", title: "绑定远端并推送 main",
+      refs: "git remote add origin <地址>" },
+    { id: "gsync", title: "建立 Shopify ↔ GitHub 双向同步（分支命名为 shopify）",
+      risk: "首次部署必须显式授权，用 --only 逐文件上传。此后主题编辑器与 Admin API 的改动会反向生成提交。" }
+  ]},
+
+  { title: "阶段 3 · 集合（13 必做 + 3 可选）",
+    note: "建议全部用「智能合集」，新商品自动纳入，不必手工维护。下列 handle 必须逐字一致（区分大小写）。",
+    items: [
+    { id: "c-all", title: "全站商品合集", handle: "all-products", tag: "阻塞", group: "关键",
+      refs: "templates/index.json（首屏最大按钮）· config/settings_data.json（页脚 Explore）",
+      hint: "建议条件：Product price is greater than 0",
+      risk: "首屏 CTA 与 /collections/all 的 canonical 会自动回退到内置 all（不会 404），但页脚 Explore 第一项失去去处、「New in」区块静默退化成「全部商品」。" },
+
+    { id: "c-abs", title: "收藏卡片 · Abstract", handle: "abstract", group: "Subject",
+      hint: "封面已内置 subject-abstract.webp" },
+    { id: "c-lan", title: "收藏卡片 · Landscapes", handle: "landscapes", group: "Subject" },
+    { id: "c-bot", title: "收藏卡片 · Botanicals", handle: "botanicals", group: "Subject" },
+    { id: "c-fig", title: "收藏卡片 · Figurative", handle: "figurative", group: "Subject" },
+    { id: "c-sti", title: "收藏卡片 · Still Life", handle: "still-life", group: "Subject",
+      risk: "以上五个缺失时：卡片封面照常显示（已在主题内），但点击会落到内置 all 合集 —— 名称写着 Abstract、点进去是全站商品；合集页的 Subject 筛选也会少一项。" },
+
+    { id: "c-liv", title: "房间卡片 · Living Room", handle: "living-room", group: "Space",
+      hint: "建议条件：Product tag equals living-room" },
+    { id: "c-bed", title: "房间卡片 · Bedroom", handle: "bedroom", group: "Space" },
+    { id: "c-din", title: "房间卡片 · Dining Room", handle: "dining-room", group: "Space",
+      hint: "角标已填「Shop Dining Room」" },
+    { id: "c-ent", title: "房间卡片 · Entryway", handle: "entryway", group: "Space" },
+
+    { id: "c-new", title: "页脚 Explore · New Arrivals", handle: "new-arrivals", group: "页脚",
+      hint: "建议：Product created date is in the last 30 days，排序「最新」" },
+    { id: "c-bes", title: "页脚 Explore · Best Sellers", handle: "best-sellers", group: "页脚",
+      hint: "建议：排序「最畅销」" },
+    { id: "c-ove", title: "页脚 Explore · Oversized Art", handle: "oversized-art", group: "页脚",
+      hint: "建议：按尺寸条件或 tag = oversized",
+      risk: "以上三个缺失时，页脚 Explore 列对应条目无去处。" },
+
+    { id: "c-coa", title: "筛选面板（可选）· Coastal", handle: "coastal", tag: "可选", group: "筛选" },
+    { id: "c-arc", title: "筛选面板（可选）· Architecture", handle: "architecture", tag: "可选", group: "筛选" },
+    { id: "c-ani", title: "筛选面板（可选）· Animals", handle: "animals", tag: "可选", group: "筛选",
+      risk: "这三个 handle 已列在 snippets/collection-subject-handles.liquid，翻译键也备好了 —— 建了就自动出现在合集页筛选面板，不会显示 translation missing；不建则整条跳过，不影响其它页面。" }
+  ]},
+
+  { title: "阶段 4 · 页面（6）",
+    note: "后台「在线商店 → 页面」创建，handle 必须一致。正文可以后续再补，先建出来避免按钮 404。",
+    items: [
+    { id: "p-story", title: "Our Story", handle: "our-story",
+      refs: "首页 Our approach 区块按钮 · 页脚 About 列",
+      risk: "缺失时该按钮整个不渲染（文案照常显示），不会点进 404。" },
+    { id: "p-approach", title: "Our Approach", handle: "our-approach", refs: "页脚 About 列" },
+    { id: "p-craft", title: "Materials & Craft", handle: "materials-craft", refs: "页脚 About 列" },
+    { id: "p-contact", title: "Contact", handle: "contact",
+      refs: "snippets/size-guide.liquid 的尺码弹窗「联系」入口" },
+    { id: "p-wish", title: "Wishlist", handle: "wishlist",
+      refs: "sections/header.liquid 的页头心愿单图标",
+      hint: "handle 为 wishlist 即自动生效；也可在主题设置 wishlist_page 里显式选中" },
+    { id: "p-custom", title: "Custom Painting", handle: "custom-painting",
+      refs: "尺码弹窗的「定制」入口，优先于 contact",
+      risk: "缺失时自动回退到 contact，不报错。" }
+  ]},
+
+  { title: "阶段 5 · 博客（1）", items: [
+    { id: "b-journal", title: "Journal 博客，≥ 3 篇已发布文章", handle: "journal",
+      refs: "首页专栏区块（sections/editorial.liquid）· 页脚 blog_handle",
+      risk: "缺失时首页专栏整块不输出（2026-10-05 起不再露灰占位卡）；页脚文章链接无去处。" }
+  ]},
+
+  { title: "阶段 6 · 菜单（2）", items: [
+    { id: "m-main", title: "主菜单", handle: "main-menu",
+      hint: "建议条目：Shop（→ /collections 或 all-products）、分类若干、Journal、About",
+      risk: "缺失时页头导航空白。" },
+    { id: "m-foot", title: "页脚菜单", handle: "footer",
+      hint: "建议条目：Shipping、Returns、Contact、FAQ（对应页脚「Customer services」列）" }
+  ]},
+
+  { title: "阶段 7 · 政策（2 必做）",
+    note: "后台「设置 → 政策」。Shopify 预置的是模板占位文案，必须替换成你的实际条款。",
+    items: [
+    { id: "pol-ship", title: "配送政策", handle: "shipping-policy",
+      hint: "URL 由后台自动生成，无需也不能自定义 handle。",
+      refs: "templates/product.json 的「Full shipping policy」链接" },
+    { id: "pol-ref", title: "退款政策", handle: "refund-policy",
+      hint: "同上，URL 由后台自动生成。",
+      refs: "templates/product.json 的「Full return policy」链接" },
+    { id: "pol-more", title: "隐私政策 / 服务条款 / 联系信息", tag: "可选" }
+  ]},
+
+  { title: "阶段 8 · 商品（≥ 1，建议 6 个以上）", items: [
+    { id: "prod", title: "上架商品", tag: "阻塞",
+      refs: "PDP · 购物车 · 集合页 · 搜索结果 · 筛选器 · 尺码弹窗",
+      risk: "零商品状态下这些页面全部无法真机验证。首次上架前按 docs/PRODUCT_IMAGE_RULES.md 核对素材与定价。" }
+  ]},
+
+  { title: "阶段 9 · Product Studio 模型（2）",
+    note: "在 pnpm studio → 「模型与店铺」中配置。密钥只存本机 settings.json，不入库。",
+    items: [
+    { id: "st-a", title: "作品分析与画作定位模型",
+      hint: "需要支持图片输入、返回 JSON 的 Chat Completions 兼容接口" },
+    { id: "st-b", title: "生图模型", hint: "按服务商协议选择 reference-json 或 openai-edit" }
+  ]},
+
+  { title: "阶段 10 · 店铺设置（主题之外，但属上线）", items: [
+    { id: "s-dom", title: "域名解析到 Shopify" },
+    { id: "s-pay", title: "支付方式开通" },
+    { id: "s-ship", title: "运费区域配置" },
+    { id: "s-tax", title: "税务配置" },
+    { id: "s-mail", title: "确认客服邮箱",
+      refs: "暂用 service@canvasra.com",
+      risk: "实际邮箱需在 config/settings_data.json 与 templates/product.json 的政策文案里同步。" }
+  ]},
+
+  { title: "阶段 11 · 上线自检", items: [
+    { id: "g-pol", title: "替换 Shopify 默认政策文案" },
+    { id: "g-craft", title: "确认商品页工艺图文案与实际生产方式相符", tag: "阻塞",
+      risk: "区块文案声称「our artists sketch and refine」「frames made in our own framing workshop」，而配图是生成图、不是真实生产记录。若实际链路不同，连文案一起改。" },
+    { id: "g-cover", title: "全站占位图走查",
+      hint: "首页与商品页封面当前用的是替代素材（母版在 .shopify/gen/originals/）。拿到实拍后在主题编辑器中覆盖即可，不必改代码。" },
+    { id: "g-og", title: "替换 assets/og-default.webp",
+      hint: "当前由首屏图裁出（1200×630）。拿到正式品牌图后覆盖同名文件即可，无需改代码。" },
+    { id: "g-test", title: "跑 pnpm verify",
+      hint: "Theme Check 84 文件 0 error / 1 warning（无害）；离线测试 366 项 → 365 通过 / 1 跳过 / 0 失败。" }
+  ]}
+];
+
+const KEY = "canvasra-store-checklist-v1";
+const state = new Set(JSON.parse(localStorage.getItem(KEY) || "[]"));
+let filter = "all";
+const phasesEl = document.getElementById("phases");
+const emptyEl = document.getElementById("empty");
+
+function esc(s){ return String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+
+function build(){
+  phasesEl.innerHTML = PHASES.map(p => `
+    <h2>${esc(p.title)}</h2>
+    ${p.note ? `<p class="note">${esc(p.note)}</p>` : ""}
+    <div class="items">
+      ${p.items.map(it => `
+        <label class="item${state.has(it.id) ? " done" : ""}" data-id="${it.id}"
+               data-blocking="${it.tag === "阻塞" ? 1 : 0}" data-handle="${it.handle ? 1 : 0}">
+          <input type="checkbox" ${state.has(it.id) ? "checked" : ""}>
+          <div class="body">
+            <div class="row">
+              <span class="title">${esc(it.title)}</span>
+              ${it.tag ? `<span class="tag ${it.tag === "阻塞" ? "block" : "opt"}">${esc(it.tag)}</span>` : ""}
+              ${it.group ? `<span class="tag group">${esc(it.group)}</span>` : ""}
+              ${it.handle ? `<code class="h" data-copy="${esc(it.handle)}" title="点击复制">${esc(it.handle)}</code>` : ""}
+            </div>
+            ${(it.hint || it.refs || it.risk) ? `<div class="meta">
+              ${it.hint ? `<div><span class="k">要点</span>${esc(it.hint)}</div>` : ""}
+              ${it.refs ? `<div><span class="k">引用</span>${esc(it.refs)}</div>` : ""}
+              ${it.risk ? `<div class="warn"><span class="k">影响</span>${esc(it.risk)}</div>` : ""}
+            </div>` : ""}
+          </div>
+        </label>`).join("")}
+    </div>`).join("");
+  refresh();
+}
+
+function refresh(){
+  const all = phasesEl.querySelectorAll(".item");
+  let done = 0, visible = 0;
+  all.forEach(el => {
+    const isDone = state.has(el.dataset.id);
+    const blocking = el.dataset.blocking === "1";
+    const hasHandle = el.dataset.handle === "1";
+    let show = true;
+    if (filter === "todo") show = !isDone;
+    else if (filter === "blocking") show = blocking;
+    else if (filter === "handle") show = hasHandle;
+    el.classList.toggle("hide", !show);
+    el.classList.toggle("done", isDone);
+    el.querySelector("input").checked = isDone;
+    if (isDone) done++;
+    if (show) visible++;
+  });
+  document.getElementById("count").innerHTML = `<b>${done}</b> / ${all.length} 完成`;
+  document.getElementById("fill").style.width = (all.length ? done / all.length * 100 : 0) + "%";
+  emptyEl.style.display = visible ? "none" : "block";
+  // 阶段标题在筛选后若整组为空则隐藏
+  phasesEl.querySelectorAll("h2").forEach(h => {
+    const box = h.nextElementSibling && h.nextElementSibling.classList.contains("note")
+      ? h.nextElementSibling.nextElementSibling : h.nextElementSibling;
+    if (!box || !box.classList.contains("items")) return;
+    const any = [...box.querySelectorAll(".item")].some(el => !el.classList.contains("hide"));
+    h.style.display = any ? "" : "none";
+    const note = h.nextElementSibling;
+    if (note && note.classList.contains("note")) note.style.display = any ? "" : "none";
+    box.style.display = any ? "" : "none";
+  });
+}
+
+phasesEl.addEventListener("change", e => {
+  const box = e.target.closest(".item");
+  if (!box) return;
+  if (e.target.checked) state.add(box.dataset.id); else state.delete(box.dataset.id);
+  localStorage.setItem(KEY, JSON.stringify([...state]));
+  refresh();
+});
+
+phasesEl.addEventListener("click", async e => {
+  const chip = e.target.closest("code.h");
+  if (!chip) return;
+  e.preventDefault();
+  const text = chip.dataset.copy;
+  try { await navigator.clipboard.writeText(text); }
+  catch {
+    const ta = document.createElement("textarea");
+    ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand("copy"); } catch {}
+    ta.remove();
+  }
+  const old = chip.textContent;
+  chip.textContent = "已复制";
+  chip.classList.add("copied");
+  setTimeout(() => { chip.textContent = old; chip.classList.remove("copied"); }, 900);
+});
+
+document.querySelectorAll("[data-filter]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll("[data-filter]").forEach(b => b.classList.remove("on"));
+    btn.classList.add("on");
+    filter = btn.dataset.filter;
+    refresh();
+  });
+});
+
+document.getElementById("print").addEventListener("click", () => window.print());
+
+document.getElementById("reset").addEventListener("click", () => {
+  if (!confirm("清空所有勾选记录？")) return;
+  state.clear();
+  localStorage.removeItem(KEY);
+  document.querySelectorAll("[data-filter]").forEach(b => b.classList.remove("on"));
+  document.querySelector('[data-filter="all"]').classList.add("on");
+  filter = "all";
+  build();
+});
+
+build();
+</script>
+</body>
+</html>

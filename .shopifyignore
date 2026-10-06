@@ -1,13 +1,18 @@
-.git/
-.agents/
+# 目录一律写成 `dir/*`：Shopify CLI 对 `dir/` 形式会输出
+# "Directory pattern may be misleading" 警告（2026-10-06 首次推送时报了 7 条）。
+.git/*
+.agents/*
+.shopify/*
+.workbuddy/*
+node_modules/*
+src/*
+scripts/*
+docs/*
+
+# 单个文件
 .gitignore
-.shopify/
 .env
 .env.*
-node_modules/
-src/
-scripts/
-docs/
 AGENTS.md
 README.md
 PRODUCT_PUBLISH_API.md

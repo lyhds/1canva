@@ -1,5 +1,5 @@
 /**
- * Create & publish a painting product via the Admin API (2025-07).
+ * Create & publish a painting product via the Admin API (2026-01).
  *
  * Usage:
  *   node scripts/create-product.js --dir "<image folder>" --title "<title>" \
@@ -99,7 +99,7 @@ for (const key of ["SHOPIFY_STORE", "SHOPIFY_CLIENT_ID", "SHOPIFY_CLIENT_SECRET"
   }
 }
 const STORE = env.SHOPIFY_STORE.replace(/^https?:\/\//, "").replace(/\/$/, "");
-const API_VERSION = env.SHOPIFY_API_VERSION || "2025-07";
+const API_VERSION = env.SHOPIFY_API_VERSION || "2026-01";
 const API = `https://${STORE}/admin/api/${API_VERSION}/graphql.json`;
 
 const FRAMES = ["Oak frame", "Black frame", "Walnut frame", "No frame"];

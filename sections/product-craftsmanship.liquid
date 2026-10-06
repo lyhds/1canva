@@ -31,6 +31,15 @@
                   width="{{ block.settings.image.width }}"
                   height="{{ block.settings.image.height }}"
                 >
+              {%- elsif block.settings.cover_asset != blank -%}
+                <img
+                  src="{{ block.settings.cover_asset | asset_url }}"
+                  alt="{{ block.settings.heading | escape }}"
+                  class="h-full w-full object-cover"
+                  loading="lazy"
+                  width="1248"
+                  height="936"
+                >
               {%- else -%}
                 {{ 'image' | placeholder_svg_tag: 'h-full w-full bg-neutral-100' }}
               {%- endif -%}
@@ -80,6 +89,12 @@
           "id": "image",
           "label": "图片",
           "info": "建议约 4:3 横版：画室场景、笔触特写、装裱过程等。"
+        },
+        {
+          "type": "text",
+          "id": "cover_asset",
+          "label": "主题封面文件",
+          "info": "使用主题 assets 中的图片文件名；上传的图片覆盖优先。"
         },
         {
           "type": "select",

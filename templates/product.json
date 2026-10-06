@@ -83,7 +83,8 @@
         "row-1": {
           "type": "row",
           "settings": {
-            "image": "shopify://shop_images/craftsmanship-hand-painted.png",
+            "image": "",
+            "cover_asset": "craft-studio.webp",
             "layout": "left",
             "heading": "Painted by hand, never printed",
             "text": "<p>Every piece begins as a blank Premium Cotton Canvas. Our artists sketch, layer and refine each painting in oils over several days — building the depth and visible brushwork no print can imitate.</p>"
@@ -92,7 +93,8 @@
         "row-2": {
           "type": "row",
           "settings": {
-            "image": "shopify://shop_images/craftsmanship-materials.png",
+            "image": "",
+            "cover_asset": "craft-materials.webp",
             "layout": "right",
             "heading": "Materials built to last",
             "text": "<p>We work with museum-quality oils and Premium Cotton Canvas, then finish each piece with hand-fitted wooden frames made in our own framing workshop.</p>"

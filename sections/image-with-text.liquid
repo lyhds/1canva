@@ -26,6 +26,19 @@
       {%- endif -%}
     </div>
     <div>
+      {%- liquid
+        # The default block points at the our-story page. Until the merchant creates that page an
+        # unresolved reference would render a button straight into a 404, so suppress the button
+        # instead. A page reference is normalised onto that page's own storefront path, which is
+        # blank while the page does not exist. An external absolute URL is never rewritten.
+        assign block_link = section.settings.button_link
+        if block_link contains 'pages/'
+          unless block_link contains 'http'
+            assign block_page_handle = block_link | split: 'pages/' | last | split: '/' | first | split: '?' | first | split: '#' | first
+            assign block_link = pages[block_page_handle].url
+          endunless
+        endif
+      -%}
       {%- if section.settings.eyebrow != blank -%}
         <p class="font-mono text-[12px] text-black">{{ section.settings.eyebrow }}</p>
       {%- endif -%}
@@ -33,9 +46,9 @@
       {%- if section.settings.text != blank -%}
         <div class="mt-4 max-w-md font-serif text-[17px] leading-[1.5] text-black rte">{{ section.settings.text }}</div>
       {%- endif -%}
-      {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+      {%- if section.settings.button_label != blank and block_link != blank -%}
         <a
-          href="{{ section.settings.button_link }}"
+          href="{{ block_link }}"
           class="mt-6 inline-block border border-black px-7 py-3.5 font-sans text-[14px] text-black transition-colors hover:bg-black hover:text-white"
         >
           {{ section.settings.button_label }}

@@ -13,7 +13,8 @@
     "check": "shopify theme check",
     "test": "node --test scripts/*.test.js",
     "verify": "pnpm check && pnpm test",
-    "preview:shopping": "node scripts/preview-shopping.js"
+    "preview:shopping": "node scripts/preview-shopping.js",
+    "preview:home": "node scripts/preview-home.js"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.3.3",

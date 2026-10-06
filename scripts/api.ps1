@@ -22,7 +22,7 @@ Options:
   -Help      Show this help without connecting to Shopify
 
 Configuration is read from .env: SHOPIFY_STORE, SHOPIFY_CLIENT_ID,
-SHOPIFY_CLIENT_SECRET, and optional SHOPIFY_API_VERSION (default: 2025-07).
+SHOPIFY_CLIENT_SECRET, and optional SHOPIFY_API_VERSION (default: 2026-01).
 '@
 
 if ($Help) {
@@ -65,7 +65,7 @@ foreach ($key in @('SHOPIFY_STORE', 'SHOPIFY_CLIENT_ID', 'SHOPIFY_CLIENT_SECRET'
 }
 
 $store = $envValues['SHOPIFY_STORE'] -replace '^https?://', '' -replace '/$', ''
-$apiVersion = if ($envValues['SHOPIFY_API_VERSION']) { $envValues['SHOPIFY_API_VERSION'] } else { '2025-07' }
+$apiVersion = if ($envValues['SHOPIFY_API_VERSION']) { $envValues['SHOPIFY_API_VERSION'] } else { '2026-01' }
 $cacheDirectory = Join-Path $repoRoot '.shopify'
 $cachePath = Join-Path $cacheDirectory 'admin-api-token.json'
 

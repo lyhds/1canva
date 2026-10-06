@@ -1,5 +1,5 @@
 /**
- * Set up the no-app review system via the Admin API (2025-07).
+ * Set up the no-app review system via the Admin API (2026-01).
  *
  * Creates (idempotent, safe to re-run):
  *  1. metaobject definition "review"  — rating, author, title, body, date, verified, photo
@@ -80,7 +80,7 @@ for (const key of ["SHOPIFY_STORE", "SHOPIFY_CLIENT_ID", "SHOPIFY_CLIENT_SECRET"
   }
 }
 const STORE = env.SHOPIFY_STORE.replace(/^https?:\/\//, "").replace(/\/$/, "");
-const API_VERSION = env.SHOPIFY_API_VERSION || "2025-07";
+const API_VERSION = env.SHOPIFY_API_VERSION || "2026-01";
 const API = `https://${STORE}/admin/api/${API_VERSION}/graphql.json`;
 
 async function token() {

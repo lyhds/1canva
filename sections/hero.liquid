@@ -1,7 +1,26 @@
 <section data-home-hero class="px-3 pt-3 md:px-6 md:pt-4">
   {%- if section.settings.gallery_campaign -%}
     {%- assign campaign_heading = section.settings.heading | default: 'Art worth living with' -%}
-    {%- assign campaign_link = section.settings.button_link | default: routes.all_products_collection_url -%}
+    {%- liquid
+      # The campaign banner ships pointing at the curated all-products collection. Until the
+      # merchant creates it that reference would 404 on the most prominent button on the site,
+      # so fall back to the built-in all collection. Resource references are normalised onto
+      # the collection's own storefront path, so the rendered href is a real path rather than
+      # a shopify:// reference. An external absolute URL is never rewritten.
+      assign campaign_link = section.settings.button_link
+      if campaign_link contains 'collections/'
+        unless campaign_link contains 'http'
+          assign campaign_handle = campaign_link | split: 'collections/' | last | split: '/' | first | split: '?' | first | split: '#' | first
+          assign campaign_collection = collections[campaign_handle]
+          if campaign_collection != blank
+            assign campaign_link = campaign_collection.url
+          else
+            assign campaign_link = routes.all_products_collection_url
+          endif
+        endunless
+      endif
+      assign campaign_link = campaign_link | default: routes.all_products_collection_url
+    -%}
     <h1 class="sr-only">CANVASRA — {{ campaign_heading }}</h1>
     <a href="{{ campaign_link }}" class="relative block">
       <picture>
