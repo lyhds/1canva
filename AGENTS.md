@@ -87,7 +87,7 @@ Admin API, committing, or pushing.
 3. Compare local and remote with
    `git rev-list --left-right --count HEAD...origin/main`.
 4. If the worktree is clean, synchronize with
-   `git pull --rebase origin shopify` before editing.
+   `git pull --rebase origin main` before editing.
 5. If the worktree is dirty or histories diverge, inspect both sides first. Do
    not reset, discard, overwrite, or blindly stash user work.
 

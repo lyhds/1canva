@@ -43,7 +43,7 @@ The `rev-list` result is `local-only remote-only` commit counts.
 If the worktree is clean:
 
 ```powershell
-git pull --rebase origin shopify
+git pull --rebase origin main
 ```
 
 If the worktree is dirty, first identify whether changes belong to the user or
@@ -162,7 +162,7 @@ templates or settings appear, stop and investigate before continuing.
 When the local worktree is clean, synchronize:
 
 ```powershell
-git pull --rebase origin shopify
+git pull --rebase origin main
 git status --short --branch
 ```
 
@@ -192,7 +192,7 @@ Inspect every changed path. Pay special attention to:
 Push only when the user has explicitly authorized it:
 
 ```powershell
-git push origin shopify
+git push origin main
 ```
 
 Never force-push. If another Shopify commit appears between the final fetch and
